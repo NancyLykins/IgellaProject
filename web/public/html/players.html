@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script type="module" src="../src/index/createCharacterList.js" defer></script>
+    <script src="../src/index/colapsedMenu.js" defer></script>
+</head>
+<body>
+    <div id="charactersMenu">
+        <h1 class="listTitle">PERSONAGENS</h1>
+        <ul id="charactersList">
+        </ul>
+        <button id="characterMenuControl">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+        </button>
+    </div>
+    <div id="characterInfos">
+        <div id="characterStatus">
+            <div id="imgContainer">
+                <img src="#" id="characterImg">
+            </div>
+            <p id="characterName">NICKNAME</p>
+            <div id="statusBars">
+                <div class="statusBar">
+                    <div id="hpValues"></div>
+                    <div class="barFill" id="restHp"></div>
+                </div>
+                <div class="statusBar">
+                    <div id="manaValues"></div>
+                    <div class="barFill" id="restMana"></div>
+                </div>
+                <div class="statusBar">
+                    <div id="xpValues"></div>
+                    <div class="barFill" id="totalXp"></div>
+                </div>
+            </div>
+            <div class="stts" id="sttsStr">
+                <div id="level"></div>
+                <div id="power"></div>
+            </div>
+            <div class="stts" id="personalInfos">
+                <div id="age"></div>
+                <div id="gender"></div>
+            </div>
+            <p class="stts" id="class"></p>
+            <p class="stts" id="race"></p>
+            <ol id="attributes">
+                <li>AGI <span class="attrValue" id="agi"></span></li>
+                <li>FOR <span class="attrValue" id="for"></span></li>
+                <li>INT <span class="attrValue" id="int"></span></li>
+                <li>PRE <span class="attrValue" id="pre"></span></li>
+                <li>VIG <span class="attrValue" id="vig"></span></li>
+                <li>ARMO <span class="attrValue" id="armo"></span></li>
+                <li>Pontos <span class="attrValue" id="points"></span></li>
+            </ol>
+        </div>
+        <div id="characterOptions">
+            <div class="optionButton"><button></button></div>
+            <div class="optionButton"><button></button></div>
+            <div class="optionButton"><button></button></div>
+            <div class="optionButton"><button></button></div>
+        </div>
+    </div>
+</body>
+</html>
