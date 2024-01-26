@@ -1,16 +1,9 @@
-const conn = require("./connection");
+const conn = require("./connection")
 const query = require("./query")
 
 async function selectCharacters(){
-    return new Promise((res, rej) => {
-        conn.all('SELECT * FROM character', (err, result) => {
-            if(err){
-                rej(err)
-            } else{
-                res(result)
-            }
-        })
-    })
+    sql = 'SELECT * FROM character'
+    return await query.execute(sql)
 }
 async function selectNames(){
     return new Promise((res, rej) => {
@@ -70,7 +63,27 @@ async function selectCharacterSkills(id){
     return await query.execute(sql)
 }
 async function selectCharacterHands(id){
-    let sql = `SELECT * FROM characterHands WHERE characterId='${id}'`
+    let sql = `SELECT name, emoji, slot FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId='${id}'`
+    return await query.execute(sql)
+}
+
+async function selectItens(id){
+    let sql = `SELECT * FROM itens`
+    return await query.execute(sql)
+}
+
+async function selectTypedItens(id){
+    let sql = `SELECT * FROM itens WHERE type='${id}' or rowId='${id}' or name='${id}'`
+    return await query.execute(sql)
+}
+
+async function selectCharacterInventarySorted(id, type){
+    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId='${id}' AND type='${type}'`
+    return await query.execute(sql)
+}
+
+async function selectCharacterEffects(id){
+    let sql = `SELECT * FROM characterEffects WHERE characterId = '${id}'`
     return await query.execute(sql)
 }
 
@@ -83,4 +96,8 @@ module.exports = {
   selectCharacterAbilitys,
   selectCharacterSkills,
   selectCharacterHands,
+  selectItens,
+  selectTypedItens,
+  selectCharacterInventarySorted,
+  selectCharacterEffects
 }

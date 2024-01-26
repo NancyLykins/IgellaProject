@@ -33,7 +33,25 @@ async function getCharacterHands(req, res){
     return res.status(200).json(hands)
 }
 
+async function getItens(req, res){
+    const itens = await getModeles.selectItens(req.params.id)
+    return res.status(200).json(itens)
+}
 
+async function getTypedItens(req, res){
+    const itens = await getModeles.selectTypedItens(req.params.id)
+    return res.status(200).json(itens)
+}
+
+async function getCharacterInventarySorted(req, res){
+    const itens = await getModeles.selectCharacterInventarySorted(req.params.id, req.params.type)
+    return res.status(200).json(itens)
+}
+
+async function getCharacterEffects(req, res){
+    const effects = await getModeles.selectCharacterEffects(req.params.id)
+    return res.status(200).json((effects == "")? null: effects)
+}
 
 module.exports = {
     getAll,
@@ -44,4 +62,8 @@ module.exports = {
     getCharacterAbilitys,
     getCharacterSkills,
     getCharacterHands,
+    getItens,
+    getTypedItens,
+    getCharacterInventarySorted,
+    getCharacterEffects,
 }
