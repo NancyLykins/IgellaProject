@@ -6,6 +6,7 @@ from commands.status.embeds.createEquipsEmbed import createEquipsEmbed
 from commands.status.embeds.createInventaryEmbed import showInventaryEmbed
 from commands.status.embeds.createSkillsEmbed import createSkillsEmbed
 from commands.status.embeds.createAbilitysEmbed import createAbilitysEmbed
+from commands.status.embeds.equipedArmoEmbed import equipedArmoEmbed
 
 
 class equipamentsButtons(discord.ui.View):
