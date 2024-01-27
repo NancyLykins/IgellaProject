@@ -53,6 +53,11 @@ async function getCharacterEffects(req, res){
     return res.status(200).json((effects == "")? null: effects)
 }
 
+async function getCharacterEquipsSlot(req, res){
+    const item = await getModeles.selectCharacterEquipsSlot(req.params.id, req.params.slot)
+    return res.status(200).json((item == "")? null: item)
+}
+
 module.exports = {
     getAll,
     getNames,
@@ -61,6 +66,7 @@ module.exports = {
     getCharacterInventary,
     getCharacterAbilitys,
     getCharacterSkills,
+    getCharacterEquipsSlot,
     getCharacterHands,
     getItens,
     getTypedItens,

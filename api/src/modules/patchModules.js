@@ -19,11 +19,36 @@ async function updateCharacter(id, data){
 }
 
 async function updateCharacterInventary(id, item, data){
-    sql = buildUpdateSql(id, data, "inventary").replace('id', 'characterId') + ` AND itemId='${item}'`
+    let sql = buildUpdateSql(id, data, "inventary").replace('id', 'characterId') + ` AND itemId='${item}'`
     return await query.execute(sql)
+}
+
+async function updateCharacterHands(id, itemId){
+    let sql = `
+    UPDATE characterHands
+    SET
+    rightH = CASE WHEN rightH IS NULL THEN ${itemId} ELSE rightH END,
+    leftH = CASE WHEN leftH IS NULL AND rightH IS NOT NULL THEN ${itemId} ELSE leftH END 
+    WHERE characterId=${id}
+    `
+    await query.execute(sql)
+}
+
+async function updateCharacterEquips(id, slot, itemId){
+    let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId=${playerId}`
+    await query.execute(sql)
+}
+
+
+async function updateCharacterStatus(id, data){
+    let sql = buildUpdateSql(id, data, "character")
+    query.execute(sql)
 }
 
 module.exports = {
     updateCharacter,
-    updateCharacterInventary
+    updateCharacterInventary,
+    updateCharacterHands,
+    updateCharacterEquips,
+    updateCharacterStatus
 }

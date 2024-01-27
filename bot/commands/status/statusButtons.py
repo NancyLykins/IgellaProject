@@ -82,7 +82,6 @@ class infosButtons(discord.ui.View):
         embed = await createAbilitysEmbed(interaction.user.id)
         await interaction.response.edit_message(embed=embed, view=showAbility())
 
-
 class showAbility(discord.ui.View):
     def _init_(self):
         super()._init_()

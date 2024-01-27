@@ -17,27 +17,8 @@ async function selectNames(){
     })
 }
 async function selectCharacter(id){
-    if(!isNaN(id)){
-        return new Promise((res, rej) => {
-            conn.all(`SELECT * FROM character WHERE id=${id}`, (err, result) =>{
-                if(err){
-                    rej(err)
-                } else{
-                    res(result)
-                }
-            })
-        })
-    } else {
-        return new Promise((res, rej) => {
-            conn.all(`SELECT * FROM character WHERE nome='${id}'`, (err, result)=>{
-                if(err){
-                    rej(err)
-                } else {
-                    res(result)
-                }
-            })
-        })
-    }
+    let sql = `SELECT * FROM character WHERE id='${id}' or nome='${id}'rest`
+    return query.execute(sql)
 }
 async function selectCharacterEquips(id){
     return new Promise((res, rej) => {
@@ -73,17 +54,22 @@ async function selectItens(id){
 }
 
 async function selectTypedItens(id){
-    let sql = `SELECT * FROM itens WHERE type='${id}' or rowId='${id}' or name='${id}'`
+    let sql = `SELECT * FROM itens WHERE type='${id}' or itemId='${id}' or name='${id}'`
     return await query.execute(sql)
 }
 
 async function selectCharacterInventarySorted(id, type){
-    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId='${id}' AND type='${type}'`
+    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId='${id}' AND type='${type}' or itemId='${type}'`
     return await query.execute(sql)
 }
 
 async function selectCharacterEffects(id){
     let sql = `SELECT * FROM characterEffects WHERE characterId = '${id}'`
+    return await query.execute(sql)
+}
+
+async function selectCharacterEquipsSlot(id, slot){
+    let sql = `select '${slot}' from characterBody where characterId='${playerId}'`
     return await query.execute(sql)
 }
 
@@ -99,5 +85,6 @@ module.exports = {
   selectItens,
   selectTypedItens,
   selectCharacterInventarySorted,
-  selectCharacterEffects
+  selectCharacterEffects,
+  selectCharacterEquipsSlot
 }

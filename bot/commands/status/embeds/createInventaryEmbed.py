@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 import commands.status.statusButtons
 from commands.status.embeds.createStatusEmbed import createStatusEmbed
 from commands.status.useMenu import useMenu
-# from commands.status.equipMenu import equipMenu
+from commands.status.equipMenu import equipMenu
 
 load_dotenv()
 url = os.getenv("API_URL")

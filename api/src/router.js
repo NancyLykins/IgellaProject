@@ -11,6 +11,7 @@ router.get("/characters/names", getController.getNames)
 
 router.get("/characters/:id", getController.getCharacter)
 router.get("/characters/:id/equips", getController.getCharacterEquips)
+router.get("/characters/:id/equips/:slot", getController.getCharacterEquipsSlot)
 router.get("/characters/:id/inventary", getController.getCharacterInventary)
 router.get("/characters/:id/inventary/:type", getController.getCharacterInventarySorted)
 router.get("/characters/:id/abilitys", getController.getCharacterAbilitys)
@@ -24,6 +25,9 @@ router.get("/itens/:id", getController.getTypedItens)
 
 router.patch("/characters/:id", patchController.patchCharacter)
 router.patch("/characters/:id/inventary/:item", patchController.patchCharacterInventary)
+router.patch("/characters/:id/hands/:itemId", patchController.patchCharacterHands)
+router.patch("/characters/:id/equips/:slot/:itemId", patchController.patchCharacterEquips)
+router.patch("/characters/:id/status", patchController.patchCharacterStatus)
 
 router.delete("/characters/:id/inventary/:item", deleteController.deleteInventaryItem)
 

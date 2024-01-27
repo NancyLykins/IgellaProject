@@ -1,5 +1,6 @@
 export default function loadCharacter(data){
     data = data[0]
+    console.log(data)
     document.getElementById("characterInfos").style.display = "flex"
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])

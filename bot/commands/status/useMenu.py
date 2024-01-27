@@ -37,11 +37,10 @@ async def useMenu(interaction: discord.Interaction):
                 await useMenu(interaction)
             
             effect = {
-                "id": id,
                 "effectId": roleId,
                 "time": time
             }
-            requests.post(f"{url}/characters/effects", json=effect, headers=header)
+            requests.post(f"{url}/characters/{id}/effects", json=effect, headers=header)
             
 
         else:
