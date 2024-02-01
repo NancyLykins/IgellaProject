@@ -69,22 +69,34 @@ async function selectCharacterEffects(id){
 }
 
 async function selectCharacterEquipsSlot(id, slot){
-    let sql = `select '${slot}' from characterBody where characterId='${playerId}'`
+    let sql = `select '${slot}' from characterBody where characterId='${id}'`
+    return await query.execute(sql)
+}
+async function selectCharacterArmo(id, slot){
+    let sql = `SELECT itens.rowId, name, emoji FROM characterBody JOIN itens ON head = itens.rowId OR chest = itens.rowId OR legs = itens.rowId OR feets = itens.rowId WHERE characterId='${id}''`
+    return await query.execute(sql)
+}
+
+
+async function selectEffect(id){
+    let sql = `SELECT * FROM effects WHERE effectId='${id}'`
     return await query.execute(sql)
 }
 
 module.exports = {
-  selectCharacters,
-  selectNames,
   selectCharacter,
-  selectCharacterEquips,
-  selectCharacterInventary,
   selectCharacterAbilitys,
-  selectCharacterSkills,
-  selectCharacterHands,
-  selectItens,
-  selectTypedItens,
-  selectCharacterInventarySorted,
+  selectCharacterArmo,
   selectCharacterEffects,
-  selectCharacterEquipsSlot
+  selectCharacterEquips,
+  selectCharacterEquipsSlot,
+  selectCharacterHands,
+  selectCharacterInventary,
+  selectCharacterInventarySorted,
+  selectCharacters,
+  selectCharacterSkills,
+  selectItens,
+  selectNames,
+  selectTypedItens,
+  selectEffect,
 }

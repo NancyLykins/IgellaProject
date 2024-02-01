@@ -16,6 +16,10 @@ async function getCharacterEquips(req, res){
     const equips = await getModeles.selectCharacterEquips(req.params.id)
     return res.status(200).json(equips)
 }
+async function getCharacterArmo(req, res){
+    const equips = await getModeles.selectCharacterArmo(req.params.id)
+    return res.status(200).json(equips)
+}
 async function getCharacterInventary(req, res){
     const inv = await getModeles.selectCharacterInventary(req.params.id)
     return res.status(200).json(inv)
@@ -58,6 +62,12 @@ async function getCharacterEquipsSlot(req, res){
     return res.status(200).json((item == "")? null: item)
 }
 
+async function getEffect(req, res){
+    const effect = await getModeles.selectEffect(req.params.id)
+    return res.status(200).json(effect)
+}
+
+
 module.exports = {
     getAll,
     getNames,
@@ -72,4 +82,5 @@ module.exports = {
     getTypedItens,
     getCharacterInventarySorted,
     getCharacterEffects,
+    getEffect,
 }

@@ -35,7 +35,7 @@ async function updateCharacterHands(id, itemId){
 }
 
 async function updateCharacterEquips(id, slot, itemId){
-    let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId=${playerId}`
+    let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId=${id}`
     await query.execute(sql)
 }
 

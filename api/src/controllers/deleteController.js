@@ -5,6 +5,12 @@ async function deleteInventaryItem(req, res){
     return res.status(200)
 }
 
+async function deleteCharacterEffect(req, res){
+    await deleteModules.deleteCharacterEffect(req.params.id, req.params.effectId)
+    return req.status(200)
+}
+
 module.exports = {
     deleteInventaryItem,
+    deleteCharacterEffect,
 }
