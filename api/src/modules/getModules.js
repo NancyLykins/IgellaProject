@@ -17,12 +17,12 @@ async function selectNames(){
     })
 }
 async function selectCharacter(id){
-    let sql = `SELECT * FROM character WHERE id='${id}' or nome='${id}'rest`
-    return query.execute(sql)
+    let sql = `SELECT * FROM character WHERE id LIKE '%${id}%' or nome LIKE '%${id}%'`
+    return await query.execute(sql)
 }
 async function selectCharacterEquips(id){
     return new Promise((res, rej) => {
-        conn.all(`SELECT * FROM characterBody WHERE characterId='${id}'`, (err, result) =>{
+        conn.all(`SELECT * FROM characterBody WHERE characterId LIKE '%${id}%'`, (err, result) =>{
             if(err){
                 rej(err)
             } else{
@@ -32,11 +32,11 @@ async function selectCharacterEquips(id){
     })
 }
 async function selectCharacterInventary(id){
-    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId='${id}'`
+    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
 async function selectCharacterAbilitys(id){
-    let sql = `SELECT * FROM abilitys WHERE characterId=${id}`
+    let sql = `SELECT * FROM abilitys WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
 async function selectCharacterSkills(id){
@@ -44,7 +44,7 @@ async function selectCharacterSkills(id){
     return await query.execute(sql)
 }
 async function selectCharacterHands(id){
-    let sql = `SELECT name, emoji, slot FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId='${id}'`
+    let sql = `SELECT name, emoji, slot FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
 
@@ -54,12 +54,13 @@ async function selectItens(id){
 }
 
 async function selectTypedItens(id){
-    let sql = `SELECT * FROM itens WHERE type='${id}' or itemId='${id}' or name='${id}'`
+    console.log(id)
+    let sql = `SELECT * FROM itens WHERE type='${id}' or rowId='${id}' or name='${id}'`
     return await query.execute(sql)
 }
 
 async function selectCharacterInventarySorted(id, type){
-    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId='${id}' AND type='${type}' or itemId='${type}'`
+    let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId LIKE '%${id}%' AND type='${type}' or itemId='${type}'`
     return await query.execute(sql)
 }
 
@@ -69,11 +70,11 @@ async function selectCharacterEffects(id){
 }
 
 async function selectCharacterEquipsSlot(id, slot){
-    let sql = `select '${slot}' from characterBody where characterId='${id}'`
+    let sql = `select '${slot}' from characterBody where characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
-async function selectCharacterArmo(id, slot){
-    let sql = `SELECT itens.rowId, name, emoji FROM characterBody JOIN itens ON head = itens.rowId OR chest = itens.rowId OR legs = itens.rowId OR feets = itens.rowId WHERE characterId='${id}''`
+async function selectCharacterArmo(id){
+    let sql = `SELECT itens.rowId, name, emoji FROM characterBody JOIN itens ON head = itens.rowId OR chest = itens.rowId OR legs = itens.rowId OR feets = itens.rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
 

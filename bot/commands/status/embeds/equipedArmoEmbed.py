@@ -2,6 +2,7 @@ import discord, os, requests
 from dotenv import load_dotenv
 load_dotenv()
 url = os.getenv('API_URL')
+header = {'Content-type': 'application/json'}
 
 async def unequipItem(interaction: discord.Interaction):
     itemId = int(interaction.data["custom_id"])
@@ -30,16 +31,22 @@ async def unequipItem(interaction: discord.Interaction):
             effectKeys = list(effectBuff.keys())
             for effect in effectKeys:
                 if effectBuff[effect] != 0:
-                    resetBuffs(characterId, effect, effectBuff[effect])
+                    body = {
+                        effect: effectBuff[effect]
+                    }
+                    requests.patch(f"{url}/characters/{id}/effects", headers=header, json=body)
             await interaction.user.remove_roles(role)
         else:
-            resetBuffs(characterId, buff[0], int(buff[1]))
+            body = {
+                buff[0]: f"-{buff[1]}"
+            }
+            requests.patch(f"{url}/characters/{id}/effects", headers=header, json=body)
     
     
     await interaction.response.edit_message(embed=None, content=">>> Desequipado com sucesso", view=None)
     
 
-def equipedArmoEmbed(playerId):
+def equipedArmoEmbed(id):
     response = requests.get(f"{url}/characters/{id}/equips")
     equips = response.json()[0]
     if(equips != [] ^ isinstance(equips, type(None))):
@@ -48,10 +55,12 @@ def equipedArmoEmbed(playerId):
             colour = 128743
         )
         view = discord.ui.View(timeout=180)
-        for item in takeEquipArmo(playerId):
-            itemId = item[0]
-            itemName = item[1].title()
-            itemEmoji = item[2]
+        response = requests.get(f"{url}/characters/{id}/armor")
+        equips = response.json()
+        for item in equips:
+            itemId = item["rowId"]
+            itemName = item["name"].title()
+            itemEmoji = item["emoji"]
             
             embed.add_field(name=f"{itemName} {itemEmoji}", value="", inline=False)
             button = discord.ui.Button(label=itemName, style=discord.ButtonStyle.primary)

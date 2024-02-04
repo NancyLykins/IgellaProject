@@ -11,7 +11,7 @@ router.get("/characters/names", getController.getNames)
 
 router.get("/characters/:id", getController.getCharacter)
 router.get("/characters/:id/equips", getController.getCharacterEquips)
-router.get("/characters/:id/armor", getController.getCharacterArmor)
+router.get("/characters/:id/armor", getController.getCharacterArmo)
 router.get("/characters/:id/equips/:slot", getController.getCharacterEquipsSlot)
 router.get("/characters/:id/inventary", getController.getCharacterInventary)
 router.get("/characters/:id/inventary/:type", getController.getCharacterInventarySorted)

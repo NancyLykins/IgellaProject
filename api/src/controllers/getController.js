@@ -77,6 +77,7 @@ module.exports = {
     getCharacterAbilitys,
     getCharacterSkills,
     getCharacterEquipsSlot,
+    getCharacterArmo,
     getCharacterHands,
     getItens,
     getTypedItens,
