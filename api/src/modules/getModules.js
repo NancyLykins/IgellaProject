@@ -84,9 +84,18 @@ async function selectEffect(id){
     return await query.execute(sql)
 }
 
+async function selectCharacterStatus(id, status){
+    let sql = `SELECT ${status}, ${status}Buff FROM character WHERE id LIKE '%${id}%'`
+    let result = await query.execute(sql)
+    values = Object.values(result[0])
+    return values[0] + values[1]
+    
+}
+
 module.exports = {
   selectCharacter,
   selectCharacterAbilitys,
+  selectCharacterStatus,
   selectCharacterArmo,
   selectCharacterEffects,
   selectCharacterEquips,

@@ -1,7 +1,7 @@
-import discord, os
+import discord, os, dotenv
 from discord.ext import commands
-from key import TOKEN
-
+dotenv.load_dotenv
+TOKEN = os.getenv("BOT_TOKEN")
 
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
 

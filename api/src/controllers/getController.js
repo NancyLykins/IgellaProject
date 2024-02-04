@@ -67,10 +67,15 @@ async function getEffect(req, res){
     return res.status(200).json(effect)
 }
 
+async function getCharacterStatus(req, res){
+    const status = await getModeles.selectCharacterStatus(req.params.id, req.params.status)
+    return res.status(200).json(status)
+}
 
 module.exports = {
     getAll,
     getNames,
+    getCharacterStatus,
     getCharacter,
     getCharacterEquips,
     getCharacterInventary,
