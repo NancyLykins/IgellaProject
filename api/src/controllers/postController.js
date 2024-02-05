@@ -11,7 +11,13 @@ async function postInventaryIten(req, res){
     return res.status(200)
 }
 
+async function postCharacterSkill(req, res){
+    await postModeles.insertCharacterSkill(req.params.id, req.body)
+    return res.status(200)
+}
+
 module.exports = {
     postCharacterEffect,
     postInventaryIten,
+    postCharacterSkill,
 }

@@ -39,10 +39,7 @@ async function selectCharacterAbilitys(id){
     let sql = `SELECT * FROM abilitys WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
-async function selectCharacterSkills(id){
-    let sql = `SELECT * FROM characterSkills WHERE user=${id}`
-    return await query.execute(sql)
-}
+
 async function selectCharacterHands(id){
     let sql = `SELECT name, emoji, slot FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
@@ -73,6 +70,7 @@ async function selectCharacterEquipsSlot(id, slot){
     let sql = `select '${slot}' from characterBody where characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
+
 async function selectCharacterArmo(id){
     let sql = `SELECT itens.rowId, name, emoji FROM characterBody JOIN itens ON head = itens.rowId OR chest = itens.rowId OR legs = itens.rowId OR feets = itens.rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
@@ -89,13 +87,34 @@ async function selectCharacterStatus(id, status){
     let result = await query.execute(sql)
     values = Object.values(result[0])
     return values[0] + values[1]
-    
+}
+
+async function selectSkillRank(id){
+    let sql = `select * FROM skillRankValues WHERE rank = '${id}'`
+    return await query.execute(sql)
+}
+
+async function selectSkill(skillName){
+    let sql = `SELECT * FROM skills WHERE name='${skillName}'`
+    return await query.execute(sql)
+}
+
+async function selectCharacterSkill(id, skill){
+    let sql = `
+    SELECT * FROM characterSkills
+    JOIN skillRankValues ON characterSkills.rank = skillRankValues.rank
+    JOIN skills ON characterSkills.pericia = skills.name
+    WHERE user LIKE '%${id}%' AND pericia LIKE '%${skill}%'
+    `
+    return await query.execute(sql)
 }
 
 module.exports = {
   selectCharacter,
+  selectSkill,
   selectCharacterAbilitys,
   selectCharacterStatus,
+  selectSkillRank,
   selectCharacterArmo,
   selectCharacterEffects,
   selectCharacterEquips,
@@ -104,7 +123,7 @@ module.exports = {
   selectCharacterInventary,
   selectCharacterInventarySorted,
   selectCharacters,
-  selectCharacterSkills,
+  selectCharacterSkill,
   selectItens,
   selectNames,
   selectTypedItens,

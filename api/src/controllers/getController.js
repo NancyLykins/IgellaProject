@@ -59,7 +59,7 @@ async function getCharacterEffects(req, res){
 
 async function getCharacterEquipsSlot(req, res){
     const item = await getModeles.selectCharacterEquipsSlot(req.params.id, req.params.slot)
-    return res.status(200).json((item == "")? null: item)
+    return res.status(200).json((updateSkillRankitem == "")? null: item)
 }
 
 async function getEffect(req, res){
@@ -72,12 +72,32 @@ async function getCharacterStatus(req, res){
     return res.status(200).json(status)
 }
 
+async function getCharacterSkill(req, res){
+    const skill = await getModeles.selectCharacterSkill(req.params.id, req.params.skillId)
+    return res.status(200).json(skill)
+}
+
+async function getSkillRank(req, res){
+    const skill = await getModeles.selectSkillRank(req.params.id)
+    return res.status(200).json(skill)
+}
+
+async function getSkill(req, res){
+    const skill = await getModeles.selectSkill(req.params.skillName)
+    return res.status(200).json(skill)
+}
+
+
+
 module.exports = {
     getAll,
+    getSkill,
     getNames,
+    getSkillRank,
     getCharacterStatus,
     getCharacter,
     getCharacterEquips,
+    getCharacterSkill,
     getCharacterInventary,
     getCharacterAbilitys,
     getCharacterSkills,

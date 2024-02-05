@@ -45,8 +45,18 @@ async function updateCharacterStatus(id, data){
     query.execute(sql)
 }
 
+async function updateCharacterSkills(id, data){
+    let sql = "UPDATE characterSkills SET"
+    for (let key in data) {
+        sql += ` ${key} = '${data[key]}',`;
+    }
+    sql = sql.substring(0, sql.length - 1) + ` WHERE user = '${id}'`
+    await query.execute(sql)
+}
+
 module.exports = {
     updateCharacter,
+    updateCharacterSkills,
     updateCharacterInventary,
     updateCharacterHands,
     updateCharacterEquips,

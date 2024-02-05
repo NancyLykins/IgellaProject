@@ -15,6 +15,10 @@ async function insetInventaryItem(id, itemId){
     await query.execute(sql)
 }
 
+async function insertCharacterSkill(id, data){
+    let sql = `INSERT INTO characterSkills (user, pericia, rank) VALUES('${id}', '${Object.keys(data)[0]}', 'F')`
+    await query.execute(sql)
+}
 
 module.exports = {
     insertCharacterEffect,

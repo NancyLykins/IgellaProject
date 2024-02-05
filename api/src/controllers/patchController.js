@@ -26,8 +26,13 @@ async function patchCharacterStatus(req, res){
     return res.status(200)
 }
 
+async function patchCharacterSkills(req, res){
+    await patchModules.updateCharacterSkills(req.params.id, req.body)
+    return res.status(200)
+}
 
 module.exports = {
+    patchCharacterSkills,
     patchCharacter,
     patchCharacterInventary,
     patchCharacterHands,

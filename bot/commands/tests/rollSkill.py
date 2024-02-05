@@ -1,41 +1,45 @@
-from Commands.sql.character.select.takeSkillBuffAndAttr import takeSkillBuffAndAttr
-from Commands.sql.tests.takeAttr import takeAttr
-from Commands.sql.skills.select.takeSkillAttr import takeSkillAttr
+import requests, os
+from dotenv import load_dotenv
 from commands.tests.calcAdvantage import calcAdvantage
 from commands.tests.dices import d20
 from commands.tests.calculateSkillUses import calculateSkillUses
 
+load_dotenv()
+url = os.getenv("API_URL")
+
 async def rollSkill(ctx, skill):
     difficultoToUp = 17
     skill = skill.lower()
-    playerId = ctx.author.id
+    id = ctx.author.id
     buff = ctx.message.content.split(skill)[1]
-    result = takeSkillBuffAndAttr(playerId, skill)
-    if result != "0":
-        skillBuff, attr = result
+    response = requests.get(f"{url}/characters/{id}/skills/{skill}")
+    data = response.json()[0]
+    if data != []:
+        skillBuff = data["buff"]
+        attr = data["attr"]
     
     else:
         skillBuff = -1
-        attr = takeSkillAttr(skill)
+        response = requests.get(f"{url}/skills/{skill}")
+        attr = response.json[0]['attr']
         if attr == False:
             await ctx.send("Essa pericia não existe")
             return False
     
     match attr:
         case "AGI":
-            atributes = ["agilidade", "agilidadeBuff"]
+            atributes ="agilidade"
         case "FOR":
-            atributes = ["forca", "forcaBuff"]
+            atributes ="forca"
         case "INT":
-            atributes = ["inteligencia", "inteligenciaBuff"]
+            atributes ="inteligencia"
         case "PRE":
-            atributes = ["presenca", "presencaBuff"]
+            atributes ="presenca"
         case "VIG":
-            atributes = ["vigor", "vigorBuff"]
+            atributes = "vigor"
     
-    attr, attrBuff = await takeAttr(playerId, atributes)
-    attr = attr + attrBuff
-    advantage = calcAdvantage(attr)
+    response = requests.get(f"{url}/characters/{id}/{atributes}")
+    advantage = calcAdvantage(int(response.json()[0]))
     diceResult = d20()
 
     total = diceResult + advantage + skillBuff 
