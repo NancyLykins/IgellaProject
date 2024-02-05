@@ -78,23 +78,4 @@ async def VIG(ctx):
     except:
         pass
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 client.run(TOKEN)

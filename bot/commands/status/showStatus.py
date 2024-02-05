@@ -1,4 +1,4 @@
-import discord, requests, os
+import discord, os
 from commands.status.embeds.createStatusEmbed import createStatusEmbed
 from commands.status.statusButtons import *
 from dotenv import load_dotenv

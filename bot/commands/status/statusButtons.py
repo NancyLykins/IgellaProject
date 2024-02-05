@@ -7,7 +7,7 @@ from commands.status.embeds.createInventaryEmbed import showInventaryEmbed
 from commands.status.embeds.createSkillsEmbed import createSkillsEmbed
 from commands.status.embeds.createAbilitysEmbed import createAbilitysEmbed
 from commands.status.embeds.equipedArmoEmbed import equipedArmoEmbed
-
+from commands.status.embeds.equipedHandsEmbed import equipedHandsEmbed
 
 class equipamentsButtons(discord.ui.View):
     def _init_(self):
@@ -26,7 +26,7 @@ class equipamentsButtons(discord.ui.View):
 
     @discord.ui.button(label="Desequipar", style=discord.ButtonStyle.red)
     async def desequipBody(self, interaction, button):
-        embed, view = equipedArmoEmbed(interaction.user.id)
+        embed, view = await equipedArmoEmbed(interaction.user.id)
         await interaction.response.edit_message(embed=embed, view=view)
 
 class handsButtons(discord.ui.View):
