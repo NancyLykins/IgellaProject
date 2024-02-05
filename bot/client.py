@@ -38,20 +38,17 @@ async def roll(ctx):
 
 @client.command()
 async def usar(ctx, skill=None):
-    try:
-        if skill is not None:
-            await rollSkill(ctx, skill)
-        else:
-            await ctx.send("Escolha uma perícia e tente novamente")
-    except:
-        pass
+    if skill is not None:
+        await rollSkill(ctx, skill)
+    else:
+        await ctx.send("Escolha uma perícia e tente novamente")
         
 @client.command(name="agi")
 async def AGI(ctx):
     try:
         await rollAttr(ctx, "agilidade")
     except:
-        pass
+        print("error")
 
 @client.command(name="for")
 async def FOR(ctx):

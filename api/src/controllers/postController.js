@@ -7,7 +7,7 @@ async function postCharacterEffect(req, res){
 }
 
 async function postInventaryIten(req, res){
-    await postModeles.insetInventaryItem(req.params.id, req.params.itemId)
+    await postModeles.insertInventaryItem(req.params.id, req.params.itemId)
     return res.status(200)
 }
 

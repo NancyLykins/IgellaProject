@@ -13,15 +13,16 @@ async def rollSkill(ctx, skill):
     id = ctx.author.id
     buff = ctx.message.content.split(skill)[1]
     response = requests.get(f"{url}/characters/{id}/skills/{skill}")
-    data = response.json()[0]
+    data = response.json()
     if data != []:
+        data = data[0]
         skillBuff = data["buff"]
         attr = data["attr"]
     
     else:
         skillBuff = -1
         response = requests.get(f"{url}/skills/{skill}")
-        attr = response.json[0]['attr']
+        attr = response.json()[0]["attr"]
         if attr == False:
             await ctx.send("Essa pericia não existe")
             return False
@@ -39,11 +40,10 @@ async def rollSkill(ctx, skill):
             atributes = "vigor"
     
     response = requests.get(f"{url}/characters/{id}/{atributes}")
-    advantage = calcAdvantage(int(response.json()[0]))
+    advantage = calcAdvantage(int(response.json()))
     diceResult = d20()
 
     total = diceResult + advantage + skillBuff 
-    print(buff)
     if buff != "":
         buff = int(eval(buff))
         total += buff

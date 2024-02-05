@@ -99,6 +99,11 @@ async function selectSkill(skillName){
     return await query.execute(sql)
 }
 
+async function selectCharacterSkills(id){
+    let sql = `SELECT * FROM characterSkills WHERE user LIKE '%${id}%'`
+    return await query.execute(sql)
+}
+
 async function selectCharacterSkill(id, skill){
     let sql = `
     SELECT * FROM characterSkills
@@ -118,6 +123,7 @@ module.exports = {
   selectCharacterArmo,
   selectCharacterEffects,
   selectCharacterEquips,
+  selectCharacterSkills,
   selectCharacterEquipsSlot,
   selectCharacterHands,
   selectCharacterInventary,

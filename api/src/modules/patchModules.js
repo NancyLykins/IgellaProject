@@ -31,18 +31,18 @@ async function updateCharacterHands(id, itemId){
     leftH = CASE WHEN leftH IS NULL AND rightH IS NOT NULL THEN ${itemId} ELSE leftH END 
     WHERE characterId=${id}
     `
-    await query.execute(sql)
+    return await query.execute(sql)
 }
 
 async function updateCharacterEquips(id, slot, itemId){
     let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId=${id}`
-    await query.execute(sql)
+    return await query.execute(sql)
 }
 
 
 async function updateCharacterStatus(id, data){
     let sql = buildUpdateSql(id, data, "character")
-    query.execute(sql)
+    return await query.execute(sql)
 }
 
 async function updateCharacterSkills(id, data){
@@ -51,7 +51,7 @@ async function updateCharacterSkills(id, data){
         sql += ` ${key} = '${data[key]}',`;
     }
     sql = sql.substring(0, sql.length - 1) + ` WHERE user = '${id}'`
-    await query.execute(sql)
+    return await query.execute(sql)
 }
 
 module.exports = {

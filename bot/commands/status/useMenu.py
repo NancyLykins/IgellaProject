@@ -26,7 +26,7 @@ async def useMenu(interaction: discord.Interaction):
         role = discord.utils.get(interaction.guild.roles, id=roleId)
         if(userHasRole == None):
             await interaction.user.add_roles(role)
-            itemId = item['itemId']
+            itemId = item['rowId']
             quant = quantidade[itemId] - 1
             if(quant <= 0):
                 requests.delete(f"{url}/characters/{id}/inventary/{itemId}")
@@ -50,7 +50,7 @@ async def useMenu(interaction: discord.Interaction):
             except discord.errors.HTTPException:
                 await interaction.channel.send(f"` Você já está sobre o efeito: {role} `")
 
-    response = requests.get(f"{url}/characters/{id}/usable")
+    response = requests.get(f"{url}/characters/{id}/inventary/usable")
     useItens = response.json()
     for item in useItens:
         itemName = item['name'].title()
