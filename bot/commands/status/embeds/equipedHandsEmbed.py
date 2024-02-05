@@ -1,4 +1,7 @@
-import discord
+import discord, os, aiohttp
+from dotenv import load_dotenv
+load_dotenv()
+url = os.getenv("API_URL")
 
 async def unequipItem(interaction: discord.Interaction):
     id = int(interaction.data["custom_id"])
