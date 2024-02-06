@@ -33,13 +33,13 @@ async def unequipItem(interaction: discord.Interaction):
                         body = {
                             effect: effectBuff[effect]
                         }
-                        await session.patch(f"{url}/characters/{id}/effects", headers=header, json=body)
+                        await session.patch(f"{url}/characters/{id}/status", headers=header, json=body)
                 await interaction.user.remove_roles(role)
             elif(buff != ['']):
                 body = {
                     buff[0]: f"-{buff[1]}"
                 }
-                await session.patch(f"{url}/characters/{id}/effects", headers=header, json=body)
+                await session.patch(f"{url}/characters/{id}/status", headers=header, json=body)
         await session.post(f"{url}/characters/{id}/inventary/{itemId}")
         await interaction.response.edit_message(embed=None, content=">>> Desequipado com sucesso", view=None)
 
