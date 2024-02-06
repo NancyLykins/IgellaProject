@@ -13,22 +13,22 @@ async function patchCharacterInventary(req, res){
 
 async function patchCharacterHands(req, res){
     await patchModules.updateCharacterHands(req.params.id, req.params.itemId)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 async function patchCharacterEquips(req, res){
     await patchModules.updateCharacterEquips(req.params.id, req.params.slot, req.params.itemId)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 async function patchCharacterStatus(req, res){
     await patchModules.updateCharacterStatus(req.params.id, req.body)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 async function patchCharacterSkills(req, res){
     await patchModules.updateCharacterSkills(req.params.id, req.body)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 module.exports = {

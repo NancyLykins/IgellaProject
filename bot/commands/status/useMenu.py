@@ -55,7 +55,7 @@ async def useMenu(interaction: discord.Interaction):
 
     async with aiohttp.ClientSession() as session:
         async with session.get(f"{url}/characters/{id}/inventary/usable") as response:
-            useItens = response.json()
+            useItens = await response.json()
             for item in useItens:
                 itemName = item['name'].title()
                 quantidade[item['itemId']] = item['quant']

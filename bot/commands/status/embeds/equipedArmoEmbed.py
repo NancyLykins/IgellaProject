@@ -6,13 +6,13 @@ header = {'Content-type': 'application/json'}
 
 async def unequipItem(interaction: discord.Interaction):
     itemId = int(interaction.data["custom_id"])
-    playerId = interaction.user.id
+    id = interaction.user.id
     effectBuff = {}
     async with aiohttp.ClientSession() as session:
         response = await session.get(f"{url}/itens/{itemId}")
         itemSlot = (await response.json())[0]["slot"]
-        await session.patch(f"{url}/characters/{playerId}/equips/{itemSlot}/{None}")
-        await session.post(f"{url}/characters/{playerId}/inventary/{itemId}")
+        response = await session.patch(f"{url}/characters/{id}/equips/{itemSlot}/{None}")
+        await session.post(f"{url}/characters/{id}/inventary/{itemId}")
         response = await session.get(f"{url}/itens/{itemId}")
         action = (await response.json())[0]["action"]
         allBonusList = action[1:].split("-")
@@ -21,7 +21,7 @@ async def unequipItem(interaction: discord.Interaction):
             if(buff[0] == 'effect'):
                 roleId = int(buff[1].split("&")[1][:-1])
                 role = discord.utils.get(interaction.guild.roles, id=roleId)
-                await session.delete(f"{url}/characters/{playerId}/effects/{roleId}")
+                await session.delete(f"{url}/characters/{id}/effects/{roleId}")
                 response = await session.get(f"{url}/effects/{roleId}")
                 effect = (await response.json())[0]
                 effectBuff["agilidadeBuff"] = effect["agiBuff"]
@@ -48,15 +48,15 @@ async def unequipItem(interaction: discord.Interaction):
 async def equipedArmoEmbed(id):
     async with aiohttp.ClientSession() as session:
         async with session.get(f"{url}/characters/{id}/equips") as response:
-            equips = response.json()[0]
-        if(equips != [] ^ isinstance(equips, type(None))):
+            equips = await response.json()
+        if(equips != []):
             embed = discord.Embed(
                 title="Qual item quer desequipar?",
                 colour = 128743
             )
             view = discord.ui.View(timeout=180)
             async with session.get(f"{url}/characters/{id}/armor") as response:
-                equips = response.json()
+                equips = await response.json()
             for item in equips:
                 itemId = item["rowId"]
                 itemName = item["name"].title()

@@ -1,7 +1,9 @@
 const query = require("./query")
 
 async function deleteInventaryItem(id, item){
-    let sql = `DELETE FROM inventary WHERE characterId='${id}' AND itemId=${item}`
+    let sql = `UPDATE inventary SET quant = quant - 1 WHERE characterId='${id}' AND itemId=${item}`
+    await query.execute(sql)
+    sql = `DELETE FROM inventary WHERE characterId='${id}' AND itemId='${item}' AND quant=0`
     await query.execute(sql)
 }
 

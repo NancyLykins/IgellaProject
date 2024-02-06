@@ -21,15 +21,16 @@ async function selectCharacter(id){
     return await query.execute(sql)
 }
 async function selectCharacterEquips(id){
-    return new Promise((res, rej) => {
-        conn.all(`SELECT * FROM characterBody WHERE characterId LIKE '%${id}%'`, (err, result) =>{
-            if(err){
-                rej(err)
-            } else{
-                res(result)
-            }
-        })
-    })
+    let sql = `
+SELECT * FROM characterBody
+JOIN itens ON itens.rowId = characterBody.head
+OR itens.rowId = characterBody.chest
+OR itens.rowId = characterBody.legs
+OR itens.rowId = characterBody.feets
+WHERE characterId LIKE '%${id}%'
+    `
+    return await query.execute(sql)
+    
 }
 async function selectCharacterInventary(id){
     let sql = `SELECT * FROM inventary JOIN itens ON itemId = rowId WHERE characterId LIKE '%${id}%'`
@@ -51,7 +52,6 @@ async function selectItens(id){
 }
 
 async function selectTypedItens(id){
-    console.log(id)
     let sql = `SELECT * FROM itens WHERE type='${id}' or rowId='${id}' or name='${id}'`
     return await query.execute(sql)
 }
@@ -67,8 +67,9 @@ async function selectCharacterEffects(id){
 }
 
 async function selectCharacterEquipsSlot(id, slot){
-    let sql = `select '${slot}' from characterBody where characterId LIKE '%${id}%'`
-    return await query.execute(sql)
+    let sql = `select ${slot} from characterBody where characterId LIKE '%${id}%'`
+    item = await query.execute(sql)
+    return ((item[0][slot] == "" || item[0][slot] == null)? null: item)
 }
 
 async function selectCharacterArmo(id){

@@ -35,7 +35,8 @@ async function updateCharacterHands(id, itemId){
 }
 
 async function updateCharacterEquips(id, slot, itemId){
-    let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId=${id}`
+    //Error: SQLITE_ERROR: no such column: chest
+    let sql = `UPDATE characterBody SET ${slot} = '${itemId}' WHERE characterId='${id}'`
     return await query.execute(sql)
 }
 

@@ -59,7 +59,7 @@ async function getCharacterEffects(req, res){
 
 async function getCharacterEquipsSlot(req, res){
     const item = await getModeles.selectCharacterEquipsSlot(req.params.id, req.params.slot)
-    return res.status(200).json((updateSkillRankitem == "")? null: item)
+    return res.status(200).json(item)
 }
 
 async function getEffect(req, res){

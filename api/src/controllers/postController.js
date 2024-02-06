@@ -8,12 +8,12 @@ async function postCharacterEffect(req, res){
 
 async function postInventaryIten(req, res){
     await postModeles.insertInventaryItem(req.params.id, req.params.itemId)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 async function postCharacterSkill(req, res){
     await postModeles.insertCharacterSkill(req.params.id, req.body)
-    return res.status(200)
+    return res.status(200).json({"status": "200"})
 }
 
 module.exports = {

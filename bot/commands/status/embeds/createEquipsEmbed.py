@@ -15,10 +15,21 @@ async def createEquipsEmbed(id):
         colour = 151515
     )
     response = requests.get(f"{url}/characters/{id}/equips")
-    equips = response.json()[0]
+    equips = response.json()
     for item in equips:
-        if item[2] is not None:
-            slots[item[2]] = item
+        if(item["head"] is not None and item["head"] == item["rowId"]):
+            slots["head"][0] = item["name"]
+            slots["head"][1] = item["emoji"]
+        elif(item["chest"] is not None and item["chest"] == item["rowId"]):
+            slots["chest"][0] = item["name"]
+            slots["chest"][1] = item["emoji"]
+        elif(item["legs"] is not None and item["legs"] == item["rowId"]):
+            slots["legs"][0] = item["name"]
+            slots["legs"][1] = item["emoji"]
+        elif(item["feets"] is not None and item["feets"] == item["rowId"]):
+            slots["feets"][0] = item["name"]
+            slots["feets"][1] = item["emoji"]
+            
     embed.add_field(name="------------------", value="", inline=False)
     embed.add_field(name=f"Cabeça {slots['head'][1]}", value=(slots['head'][0]), inline=False)
     embed.add_field(name=f"Peito {slots['chest'][1]}", value=(slots['chest'][0]), inline=False)

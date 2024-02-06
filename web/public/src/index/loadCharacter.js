@@ -1,6 +1,5 @@
 export default function loadCharacter(data){
     data = data[0]
-    console.log(data)
     document.getElementById("characterInfos").style.display = "flex"
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])
@@ -19,7 +18,6 @@ export default function loadCharacter(data){
     document.getElementById("vig").innerText = `${data['vigor']} + ${data['vigorBuff']}`
     document.getElementById("armo").innerText = data['armo']
     document.getElementById("points").innerText = data['pontosRestantes']
-    console.log(data)
 }
 
 

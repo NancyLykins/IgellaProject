@@ -24,7 +24,6 @@ async def createInventaryEmbed(id):
         title= "Inventário",
         colour= 119911 
     )
-    print(embed)
     response = requests.get(f"{url}/characters/{id}/inventary")
     inventary = response.json()
     for item in inventary:

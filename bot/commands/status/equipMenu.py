@@ -9,22 +9,16 @@ trigget = 0
 async def equipMenu(interaction: discord.Interaction):
     global trigget
     id = interaction.user.id
-    if trigget == 0:
-        trigget += 1
-        embed, view = await createEquipMenu(id)
-        await interaction.response.edit_message(embed=embed, view=view)
-    else:
-        await interaction.message.delete()
-        msg = await interaction.channel.send(">>> Item equipado com sucesso")
-        await sleep(5)
-        await msg.delete()
+    embed, view = await createEquipMenu(id)
+    await interaction.response.edit_message(embed=embed, view=view)
+
 
 async def equipThisItem(interaction: discord.Interaction):
     global trigget
-    await notInterupt(interaction)
     async with aiohttp.ClientSession() as session:
         async with session.get(f"{url}/itens/{interaction.data['custom_id']}") as response:
-            item = await response.json()[0]
+            data = await response.json()
+            item = data[0]
             itemId = item['rowId']
             id = interaction.user.id
             slot = item['slot']
@@ -53,49 +47,28 @@ async def equipThisItem(interaction: discord.Interaction):
                     await giveBonus(interaction, interaction.user.id, item['action'])        
                 
                 else:
-                    await notInterupt(interaction)
                     msg = await interaction.channel.send(">>> Você já tem um item equipado")
                     await sleep(5)
                     await msg.delete()
     else:
         async with aiohttp.ClientSession() as session:
-            async with session.get(f"{url}/characters/equips/{slot}") as response:
-                item = await response.json()[0]
-                if item is not None:
+            async with session.get(f"{url}/characters/{id}/equips/{slot}") as response:
+                item = (await response.json())[0][slot]
+                if item is None or item == "None":
                     tasks = [
-                        session.patch(f"{url}/characters/equips/{slot}/{itemId}"),
+                        session.patch(f"{url}/characters/{id}/equips/{slot}/{itemId}"),
                         session.delete(f"{url}/characters/{id}/inventary/{itemId}")
                     ]
+                    await interaction.response.edit_message(content=">>> Item equipado com sucesso", embed=None, view=None)
                     await asyncio.gather(*tasks)
                     await giveBonus(interaction, interaction.user.id, item['action'])
                 else:
-                    await notInterupt(interaction)
-                    msg = await interaction.channel.send(">>> Você já tem um item equipado")
-                    await asyncio.sleep(5)
-                    await msg.delete()
+                    await interaction.response.send_message(">>> Você já tem um item equipado", ephemeral=True)
+
         trigget = 0
+
     
-async def notInterupt(interaction):
-    try:
-        await interaction.response.send_message()   
-    except:
-        pass
-    
-async def removeItem(interaction, id, itemId):
-    await notInterupt(interaction)
-    async with aiohttp.ClientSession() as session:
-        async with session.get(f"{url}/characters/{id}/inventary/{itemId}") as response:
-            quant = int(await response.json()[0]) - 1
-                
-        if quant <= 0:
-            async with session.delete(f"{url}/characters/{id}/inventary/{itemId}"):
-                await interaction.message.delete()
-        else:
-            body = {"quant": quant}
-            async with session.patch(f"{url}/characters/{id}/inventary/{itemId}", json=body, headers=header):
-                pass
-    await equipMenu(interaction)
-    
+   
 async def createEquipMenu(id):
     embed = discord.Embed(
         title="Qual item deseja equipar?"
