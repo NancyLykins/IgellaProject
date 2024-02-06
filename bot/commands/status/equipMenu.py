@@ -27,8 +27,15 @@ async def equipThisItem(interaction: discord.Interaction):
         async with aiohttp.ClientSession() as session:
             async with session.get(f"{url}/characters/{id}/hands") as response:
                 handSlots = await response.json()
-                handOne = handSlots[0] or None
-                handTwo = handSlots[1] or None
+                try:
+                    handOne = handSlots["rowId"]
+                except:
+                    handOne = None
+                try:
+                    handTwo = handSlots["rowId"]
+                except:
+                    handTwo = None                   
+                
                 if slot == "twoH" and handOne is None and handTwo is None:
                     tasks = [
                         session.patch(f"{url}/characters/{id}/hands/{itemId}"),
@@ -37,7 +44,7 @@ async def equipThisItem(interaction: discord.Interaction):
                     ]
                     await asyncio.gather(*tasks)
                     await giveBonus(interaction, interaction.user.id, item['action'])
-                    
+                    await interaction.response.edit_message(content="Item equipado com sucesso", view=None, embed=None)
                 elif slot != "towH" and (handOne is None or handTwo is None):
                     tasks = [
                         session.patch(f"{url}/characters/{id}/hands/{itemId}"),
@@ -45,11 +52,10 @@ async def equipThisItem(interaction: discord.Interaction):
                     ]
                     await asyncio.gather(*tasks)
                     await giveBonus(interaction, interaction.user.id, item['action'])        
-                
+                    await interaction.response.edit_message(content="Item equipado com sucesso", view=None, embed=None)
                 else:
-                    msg = await interaction.channel.send(">>> Você já tem um item equipado")
-                    await sleep(5)
-                    await msg.delete()
+                    msg = await interaction.response.edit_message(content=">>> Você já tem um item equipado", view=None, embed=None)
+
     else:
         async with aiohttp.ClientSession() as session:
             async with session.get(f"{url}/characters/{id}/equips/{slot}") as response:
