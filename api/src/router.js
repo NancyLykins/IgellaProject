@@ -38,6 +38,7 @@ router.patch("/characters/:id/equips/:slot/:itemId", patchController.patchCharac
 router.patch("/characters/:id/status", patchController.patchCharacterStatus)
 router.patch("/characters/:id/skills", patchController.patchCharacterSkills)
 
+router.delete("/characters/:id/hands/:slot/:itemId", deleteController.deleteHandEquips)
 router.delete("/characters/:id/inventary/:item", deleteController.deleteInventaryItem)
 router.delete("/characters/:id/effects/:effectId", deleteController.deleteCharacterEffect)
 

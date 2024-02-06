@@ -4,7 +4,7 @@ export default function loadCharacter(data){
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])
     mpBar(data["mp"], data["maxMp"])
-    xpBar(data["xpAtual"], data["xpNextLvl"])
+    xpBar(data["xpAtual"], data["level"]*10)
     document.getElementById("level").innerText = `Level: ${data['level']}`
     document.getElementById("power").innerText = `Magia: ${data['magia']}`
     document.getElementById("age").innerText = `Idade: ${data['idade']}`

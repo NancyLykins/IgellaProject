@@ -61,16 +61,17 @@ async def equipThisItem(interaction: discord.Interaction):
             async with session.get(f"{url}/characters/{id}/equips/{slot}") as response:
                 item = (await response.json())[0][slot]
                 if item is None or item == "None":
+                    response = await session.get(f"{url}/itens/{itemId}")
+                    action = (await response.json())[0]["action"]
                     tasks = [
                         session.patch(f"{url}/characters/{id}/equips/{slot}/{itemId}"),
                         session.delete(f"{url}/characters/{id}/inventary/{itemId}")
                     ]
                     await interaction.response.edit_message(content=">>> Item equipado com sucesso", embed=None, view=None)
                     await asyncio.gather(*tasks)
-                    await giveBonus(interaction, interaction.user.id, item['action'])
+                    await giveBonus(interaction, interaction.user.id, action)
                 else:
                     await interaction.response.send_message(">>> Você já tem um item equipado", ephemeral=True)
-
         trigget = 0
 
     
@@ -94,7 +95,7 @@ async def createEquipMenu(id):
 
     return embed, view
         
-async def giveBonus(interaction, characterId, bonus):
+async def giveBonus(interaction, id, bonus):
     allBonusList = bonus[1:].split("-")
     async with aiohttp.ClientSession() as session:
         for element in allBonusList:
@@ -107,11 +108,10 @@ async def giveBonus(interaction, characterId, bonus):
                     "effectId": roleId,
                     "time": "99999"
                 }
-                async with session.post(f"{url}/characters/effects", json=effect, headers=header):
-                    pass
-            else:
+                await session.post(f"{url}/characters/{id}/effects", json=effect, headers=header)
+            elif(buff != ['']):
                 buff = {
                     buff[0]: f"+{buff[1]}"
                 }
-                async with session.patch(f"{url}/characters/{id}/status", json=buff, headers=header):
-                    pass
+                await session.patch(f"{url}/characters/{id}/status", json=buff, headers=header)
+            

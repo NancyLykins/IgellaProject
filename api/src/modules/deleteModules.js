@@ -12,7 +12,25 @@ async function deleteCharacterEffect(id, effectId){
     await query.execute(sql)
 }
 
+async function deleteHandEquips(id, slot, itemId){
+    let sql
+    if (slot == "twoH") {
+        sql = `UPDATE characterHands SET rightH=Null, leftH=Null WHERE characterId='${id}'`
+    } else {
+        sql = `
+        UPDATE characterHands 
+        SET 
+        leftH = CASE WHEN leftH = '${itemId}' THEN NULL ELSE leftH END,
+        rightH = CASE WHEN rightH = '${itemId}' THEN NULL ELSE rightH END
+        WHERE characterId='${id}'
+        `
+    }
+    console.log(sql)
+    await query.execute(sql)
+}
+
 module.exports = {
     deleteInventaryItem,
     deleteCharacterEffect,
+    deleteHandEquips,
 }

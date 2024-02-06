@@ -8,7 +8,7 @@ async function insertCharacterEffect(id, data){
 async function insertInventaryItem(id, itemId){
     sql = `
     INSERT INTO inventary (characterId, itemId, quant) 
-    VALUES ('${id}', '${itemId}', 1)
+    VALUES ('${id}', '${itemId}', '1')
     ON CONFLICT(characterId, itemId)
     DO UPDATE SET quant = quant + 1;
     `

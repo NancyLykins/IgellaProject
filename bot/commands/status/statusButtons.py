@@ -46,7 +46,7 @@ class handsButtons(discord.ui.View):
 
     @discord.ui.button(label="Desequipar", style=discord.ButtonStyle.red)
     async def desequipBody(self, interaction, button):
-        embed, view = equipedHandsEmbed(interaction.user.id)
+        embed, view = await equipedHandsEmbed(interaction.user.id)
         await interaction.response.edit_message(embed=embed, view=view)
 
 class skillsButton(discord.ui.View):

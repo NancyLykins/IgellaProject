@@ -42,7 +42,7 @@ async function selectCharacterAbilitys(id){
 }
 
 async function selectCharacterHands(id){
-    let sql = `SELECT name, emoji, slot FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId LIKE '%${id}%'`
+    let sql = `SELECT * FROM characterHands JOIN itens ON rightH = itens.rowId OR leftH = itens.rowId WHERE characterId LIKE '%${id}%'`
     return await query.execute(sql)
 }
 
