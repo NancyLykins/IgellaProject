@@ -10,7 +10,7 @@ async function getNames(req, res){
 }
 async function getCharacter(req, res){
     const character = await getModeles.selectCharacter(req.params.id)
-    return res.status(200).json(character)
+    return res.status((character != "")? 200: 404).json(character)
 }
 async function getCharacterEquips(req, res){
     const equips = await getModeles.selectCharacterEquips(req.params.id)
@@ -87,11 +87,31 @@ async function getSkill(req, res){
     return res.status(200).json(skill)
 }
 
+async function getRace(req, res){
+    const races = await getModeles.selectRaces()
+    return res.status(200).json(races)
+}
 
+async function getClasses(req, res){
+    const classes = await getModeles.selectClasses()
+    return res.status(200).json(classes)
+}
+
+async function getClasse(req, res){
+    const classe = await getModeles.selectClasse(req.params.name)
+    return res.status(200).json(classe)
+}
+
+async function getSkills(req, res){
+    const skills = await getModeles.selectSkills()
+    return res.status(200).json(skills)
+}
 
 module.exports = {
     getAll,
+    getSkills,
     getSkill,
+    getClasse,
     getNames,
     getSkillRank,
     getCharacterStatus,
@@ -103,10 +123,12 @@ module.exports = {
     getCharacterSkills,
     getCharacterEquipsSlot,
     getCharacterArmo,
+    getClasses,
     getCharacterHands,
     getItens,
     getTypedItens,
     getCharacterInventarySorted,
     getCharacterEffects,
     getEffect,
+    getRace,
 }

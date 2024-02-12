@@ -3,6 +3,7 @@ from discord.ext import commands
 from commands.tests.attributes import rollAttr
 from commands.tests.rollDice import rollDice
 from commands.tests.rollSkill import rollSkill
+from commands.character.createCharacter import createCharacter
 dotenv.load_dotenv
 TOKEN = os.getenv("BOT_TOKEN")
 
@@ -25,7 +26,9 @@ async def on_ready():
     print(f"Synced {len(synced)} command(s)")
     print(f"Client was started like: {client.user}")
 
-
+@client.command(name="create")
+async def create(ctx):
+    await createCharacter(ctx, client)
 
 
 #   #############

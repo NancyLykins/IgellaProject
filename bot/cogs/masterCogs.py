@@ -15,6 +15,11 @@ class masterCogs(commands.Cog):
     async def give(self, interaction: discord.Interaction, player: discord.Member, item: str, amount: int):
         await giveItem(interaction, player, item, amount)
         
+    @app_commands.command(name="summon")
+    @app_commands.default_permissions(administrator=True)
+    @app_commands.describe(monster="Qual criatura deseja invocar")
+    async def summon(self, interaction, monster: str):
+        print(monster)
 
 async def setup(client: discord.Client) -> None:
     await client.add_cog(masterCogs(client))

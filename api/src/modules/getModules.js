@@ -115,9 +115,31 @@ async function selectCharacterSkill(id, skill){
     return await query.execute(sql)
 }
 
+async function selectRaces(){
+    let sql = "SELECT * FROM races"
+    return await query.execute(sql) 
+}
+
+async function selectClasses(){
+    let sql = "SELECT * FROM classes"
+    return await query.execute(sql)
+}
+
+async function selectClasse(className){
+    let sql = `SELECT * FROM classes WHERE name = '${className}'`
+    return await query.execute(sql)
+}
+
+async function selectSkills(){
+    sql = "SELECT * FROM skills"
+    return await query.execute(sql)
+}
+
 module.exports = {
   selectCharacter,
+  selectSkills,
   selectSkill,
+  selectClasse,
   selectCharacterAbilitys,
   selectCharacterStatus,
   selectSkillRank,
@@ -135,4 +157,6 @@ module.exports = {
   selectNames,
   selectTypedItens,
   selectEffect,
+  selectRaces,
+  selectClasses,
 }

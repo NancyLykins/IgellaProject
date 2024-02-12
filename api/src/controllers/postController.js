@@ -17,8 +17,14 @@ async function postCharacterSkill(req, res){
     return res.status(200).json({"status": "200"})
 }
 
+async function postCharacter(req, res){
+    await postModeles.insertCharacter(req.body)
+    return res.status(200).json(req.body)
+}
+
 module.exports = {
     postCharacterEffect,
+    postCharacter,
     postInventaryIten,
     postCharacterSkill,
 }

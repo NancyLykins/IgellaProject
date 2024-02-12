@@ -30,6 +30,10 @@ router.get("/effects/:id", getController.getEffect)
 router.get("/skills/rank/:id", getController.getSkillRank)
 router.get("/skills/:skillName", getController.getSkill)
 
+router.get("/races", getController.getRace)
+router.get("/classes", getController.getClasses)
+router.get("/classes/:name", getController.getClasse)
+router.get("/skills", getController.getSkills)
 
 router.patch("/characters/:id", patchController.patchCharacter)
 router.patch("/characters/:id/inventary/:item", patchController.patchCharacterInventary)
@@ -42,7 +46,7 @@ router.delete("/characters/:id/hands/:slot/:itemId", deleteController.deleteHand
 router.delete("/characters/:id/inventary/:item", deleteController.deleteInventaryItem)
 router.delete("/characters/:id/effects/:effectId", deleteController.deleteCharacterEffect)
 
-
+router.post("/characters", postController.postCharacter)
 router.post("/characters/:id/skills", postController.postCharacterSkill)
 router.post("/characters/:id/inventary/:itemId", postController.postInventaryIten)
 router.post("/characters/:id/effects", postController.postCharacterEffect)

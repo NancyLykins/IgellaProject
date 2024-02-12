@@ -38,8 +38,31 @@ async function insertCharacterSkill(id, data){
     return await query.execute(sql)
 }
 
+async function insertCharacter(data){
+    let agilidade, agilidadeBuff, forca, forcaBuff, inteligencia, inteligenciaBuff, presenca, presencaBuff, vigor, vigorBuff, sql
+    agilidade = data.attributes["Agilidade"]
+    forca = data.attributes["Força"]
+    inteligencia = data.attributes["Inteligencia"]
+    presenca = data.attributes["Presença"]
+    vigor = data.attributes["Vigor"]
+    
+    agilidadeBuff = data.buffs["agilidadeBuff"]
+    forcaBuff = data.buffs["forcaBuff"]
+    inteligenciaBuff = data.buffs["inteligenciaBuff"]
+    presencaBuff = data.buffs["presencaBuff"]
+    vigorBuff = data.buffs["vigorBuff"]
+    sql = `
+    INSERT INTO character
+    (id, nome, idade, genero, raca, magia, classe, maxHP, hp, maxMp, mp, agilidade, agilidadeBuff, forca, forcaBuff, inteligencia, inteligenciaBuff, presenca, presencaBuff, vigor, vigorBuff)
+    VALUES
+    ('${data.id}', '${data.name}', '${data.age}', '${data.gender}', '${data.race}', '${data.magic}', '${data.classe}', '${data.hp}', '${data.hp}', '${data.mana}', '${data.mana}', '${agilidade}', '${agilidadeBuff}', '${forca}', '${forcaBuff}', '${inteligencia}', '${inteligenciaBuff}', '${presenca}', '${presencaBuff}', '${vigor}', '${vigorBuff}')
+    `
+    return await query.execute(sql)
+}
+
 module.exports = {
     insertCharacterEffect,
     insertInventaryItem,
+    insertCharacter,
     insertCharacterSkill,
 }
