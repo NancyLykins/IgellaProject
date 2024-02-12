@@ -7,8 +7,9 @@ async function postCharacterEffect(req, res){
 }
 
 async function postInventaryIten(req, res){
-    await postModeles.insertInventaryItem(req.params.id, req.params.itemId)
-    return res.status(200).json({"status": "200"})
+    let status
+    status = await postModeles.insertInventaryItem(req.params.id, req.params.itemId, req.body)
+    return res.status(status).json({"status":status})
 }
 
 async function postCharacterSkill(req, res){

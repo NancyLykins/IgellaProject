@@ -17,7 +17,7 @@ class utilsCogs(commands.Cog):
     @app_commands.describe(title="Titulo do texto")
     @app_commands.describe(message="Mensagem do texto")
     @app_commands.describe(footer="Rodapé do texto")
-    async def sayText(interaction: discord.Interaction, title: str, message: str, footer: str):
+    async def sayText(self, interaction: discord.Interaction, title: str, message: str, footer: str):
         await sayText(interaction, title, message, footer)
 
       
