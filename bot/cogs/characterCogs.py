@@ -4,6 +4,7 @@ from discord import app_commands
 
 from commands.status.showStatus import showStatus
 from commands.character.healCharacter import healCharacter
+from commands.character.damageCharacter import damageCharacter
 
 class characterCogs(commands.Cog):
     def __init__(self, client: discord.client):
@@ -18,6 +19,12 @@ class characterCogs(commands.Cog):
     @app_commands.describe(life="Quanto de vida deve ser restaurado?")
     async def heal(self, interaction, player: discord.Member, life: int):
         await healCharacter(interaction, player, life)
+        
+    @app_commands.command(name="heal", description="Causa uma ccerta quantidade de dano a um personagem")
+    @app_commands.describe(player="Quem deve receber dano?")
+    @app_commands.describe(life="Quanto de vida deve removida?")
+    async def damage(self, interaction, player: discord.Member, life: int):
+        await damageCharacter(interaction, player, life)
         
 async def setup(client: discord.Client) -> None:
     await client.add_cog(characterCogs(client))
