@@ -135,10 +135,16 @@ async function selectSkills(){
     return await query.execute(sql)
 }
 
+async function selectMonster(monster){
+    sql = `SELECT * FROM monster WHERE name = '${monster}'`
+    return await query.execute(sql)
+}
+
 module.exports = {
   selectCharacter,
   selectSkills,
   selectSkill,
+  selectMonster,
   selectClasse,
   selectCharacterAbilitys,
   selectCharacterStatus,

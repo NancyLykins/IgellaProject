@@ -21,7 +21,7 @@ class characterCogs(commands.Cog):
     async def heal(self, interaction, player: discord.Member, life: int):
         await characterLife(interaction, player, life, "+")
         
-    @app_commands.command(name="heal", description="Causa uma certa quantidade de dano a um personagem")
+    @app_commands.command(name="damage", description="Causa uma certa quantidade de dano a um personagem")
     @app_commands.describe(player="Quem deve receber dano?")
     @app_commands.describe(life="Quanto de vida deve removida?")
     async def damage(self, interaction, player: discord.Member, life: int):

@@ -2,6 +2,7 @@ import discord
 from discord import app_commands
 from discord.ext import commands
 from commands.character.giveItem import giveItem
+from commands.monster.summonMonster import summonMonster
 
 class masterCogs(commands.Cog):
     def __init__(self, client: discord.client):
@@ -19,7 +20,7 @@ class masterCogs(commands.Cog):
     @app_commands.default_permissions(administrator=True)
     @app_commands.describe(monster="Qual criatura deseja invocar")
     async def summon(self, interaction, monster: str):
-        print(monster)
+        await summonMonster(interaction, self.client, monster)
 
 async def setup(client: discord.Client) -> None:
     await client.add_cog(masterCogs(client))

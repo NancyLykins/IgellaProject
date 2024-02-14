@@ -30,11 +30,13 @@ router.get("/effects/:id", getController.getEffect)
 router.get("/skills/rank/:id", getController.getSkillRank)
 router.get("/skills/:skillName", getController.getSkill)
 
+router.get("/monsters/:name", getController.getMonster)
 router.get("/races", getController.getRace)
 router.get("/classes", getController.getClasses)
 router.get("/classes/:name", getController.getClasse)
 router.get("/skills", getController.getSkills)
 
+router.patch("/monsters/:name", patchController.patchMonster)
 router.patch("/characters/:id", patchController.patchCharacter)
 router.patch("/characters/:id/inventary/:item", patchController.patchCharacterInventary)
 router.patch("/characters/:id/hands/:itemId", patchController.patchCharacterHands)

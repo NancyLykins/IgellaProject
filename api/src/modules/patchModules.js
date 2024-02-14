@@ -9,7 +9,7 @@ const buildUpdateSql = (id, data, table) =>{
             sql += ` ${key} = ${value},` 
         }
     }
-    return sql.substring(0, sql.length - 1) + ` WHERE id=${id}`
+    return sql.substring(0, sql.length - 1) + ` WHERE id='${id}'`
 }
 
 
@@ -54,9 +54,15 @@ async function updateCharacterSkills(id, data){
     return await query.execute(sql)
 }
 
+async function updateMonster(monster, data){
+    let sql = buildUpdateSql(monster, data, "monster").replace("id", "name")
+    await query.execute(sql) 
+}
+
 module.exports = {
     updateCharacter,
     updateCharacterSkills,
+    updateMonster,
     updateCharacterInventary,
     updateCharacterHands,
     updateCharacterEquips,

@@ -1,7 +1,7 @@
 from commands.tests.calcAdvantage import calcAdvantage
 from commands.tests.dices import d20
 
-async def rollForNonPlayer(interaction, attr):
+async def rollNoPlayer(interaction, attr):
     advantage = calcAdvantage(attr)
     diceResult = d20()
     sum = diceResult + advantage

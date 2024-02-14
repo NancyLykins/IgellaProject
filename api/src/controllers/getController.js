@@ -107,10 +107,16 @@ async function getSkills(req, res){
     return res.status(200).json(skills)
 }
 
+async function getMonster(req, res){
+    const monster = await getModeles.selectMonster(req.params.name)
+    return res.status(200).json(monster)
+}
+
 module.exports = {
     getAll,
     getSkills,
     getSkill,
+    getMonster,
     getClasse,
     getNames,
     getSkillRank,
