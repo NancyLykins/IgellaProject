@@ -1,5 +1,6 @@
 import discord, os, dotenv
 from discord.ext import commands
+from commands.setCommands import setCommands
 from commands.tests.attributes import rollAttr
 from commands.tests.rollDice import rollDice
 from commands.tests.rollSkill import rollSkill
@@ -19,6 +20,8 @@ async def setup_hook():
 
 @client.event
 async def on_ready():
+    print("Creating dinamic commands")
+    await setCommands()
     print("Starting to load cogs")
     await setup_hook()
     print("All cogs was loaded")
