@@ -6,8 +6,8 @@ from commands.tests.rollDice import rollDice
 from commands.character.createCharacter import createCharacter
 dotenv.load_dotenv
 TOKEN = os.getenv("BOT_TOKEN")
-
 client = commands.Bot(command_prefix=".", intents=discord.Intents.all())
+DICERE = r"\d*d\d+(?:[\/\*\-\+\s]*\d+|\s*[\/\*\-\+\s]*\d*d\d+)*"
 
 async def setup_hook():
     for root, dirs, files in os.walk("cogs"):
@@ -30,8 +30,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    diceRe = r"\d*d\d+(?:[\/\*\-\+\s]*\d+|\s*[\/\*\-\+\s]*\d*d\d+)*"
-    if re.fullmatch(diceRe, message.content):
+  
+    if re.fullmatch(DICERE, message.content):
         await rollDice(message)
     else:
         await client.process_commands(message)
