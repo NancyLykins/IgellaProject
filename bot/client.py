@@ -1,9 +1,8 @@
-import discord, os, dotenv
+import discord, os, dotenv, re
 from discord.ext import commands
 from commands.setCommands import setCommands
 
 from commands.tests.rollDice import rollDice
-
 from commands.character.createCharacter import createCharacter
 dotenv.load_dotenv
 TOKEN = os.getenv("BOT_TOKEN")
@@ -29,17 +28,16 @@ async def on_ready():
     print(f"Synced {len(synced)} command(s)")
     print(f"Client was started like: {client.user}")
 
+@client.event
+async def on_message(message):
+    diceRe = r"\d*d\d+(?:[\/\*\-\+\s]*\d+|\s*[\/\*\-\+\s]*\d*d\d+)*"
+    if re.fullmatch(diceRe, message.content):
+        await rollDice(message)
+    else:
+        await client.process_commands(message)
+
 @client.command(name="create")
 async def create(ctx):
     await createCharacter(ctx, client)
-
-
-#   #############
-#   #   TESTS   #
-#   #############
-
-@client.command()
-async def roll(ctx):
-    await rollDice(ctx)
 
 client.run(TOKEN)

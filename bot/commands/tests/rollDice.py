@@ -2,10 +2,9 @@ import re
 from commands.tests.dices import d
 
 
-async def rollDice(ctx):
-    msg = ctx.message.content
-    msg = re.split(r'\s*([+\-*/]|\.roll)\s*', msg)
-    
+async def rollDice(message):
+    msg = message.content
+    msg = msg.split(' ')
     diceResult = 0
     positiveDiceResult = 0
     eachDiceResult = []
@@ -43,7 +42,7 @@ async def rollDice(ctx):
                         other += str(diceSum)
                     
                     else:
-                        await ctx.send(f"{ctx.author.mention}```Tá quendo explodir meu pc FDP???```")
+                        await message.channel.send(f"{message.author.mention}```Tá quendo explodir meu pc FDP???```")
                         return False
                 
             else:
@@ -52,13 +51,15 @@ async def rollDice(ctx):
                     if(isinstance(partInt, int)):
                         trigget = 1 
                 except:
-                    none = ""
+                    pass
 
                 other += part
         
         if(trigget == 1):  
-            trigget = 0      
+            trigget = 0
+            print(f"Thisssss: {other}")
             result = eval(other)
+            print(f"Thosssss: {result}")
             other = result - positiveDiceResult
             
             if(other >= 0):
@@ -67,11 +68,12 @@ async def rollDice(ctx):
                 other = str(other)
                 other = f"{other[0]} {other[1:]}"
 
-            await ctx.message.reply(f"` {result} ` <-- {eachDiceResult} {other}")
+            await message.reply(f"` {result} ` <-- {eachDiceResult} {other}")
             
         else:
+            print(other)
             result = eval(other)
-            await ctx.message.reply(f"` {result} ` <-- {eachDiceResult}")
+            await message.reply(f"` {result} ` <-- {eachDiceResult}")
 
     except:
-        await ctx.send(">>> Formato de dado incorreto")
+        await message.channel.send(">>> Formato de dado incorreto")
