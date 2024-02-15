@@ -76,7 +76,7 @@ body{
     min-width: 250px;
     width: 20%;
     max-width: 500px;
-    z-index: 2;
+    z-index: 10;
     background-color: #000;
 }
 
@@ -102,6 +102,8 @@ body{
     justify-content: center;
     flex-wrap: wrap;
     align-content: start;
+    position: relative;
+    z-index: 10;
 }
 
 #characterName{
@@ -211,7 +213,7 @@ body{
 
 #characterOptions{
     position: absolute;
-    z-index: 1;
+    z-index: 0;
     height: 100%;
     width: 50px;
     left: -40px;
@@ -226,6 +228,8 @@ body{
     background-color: rgb(86, 40, 40);
     border-color: rgb(56, 29, 29);
     margin-block: 5px;
+    position: relative;
+    z-index: 0;
 }
 .optionButton > button{
     cursor: pointer;
