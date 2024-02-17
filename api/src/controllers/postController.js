@@ -22,9 +22,15 @@ async function postCharacter(req, res){
     return res.status(200).json(req.body)
 }
 
+async function postExperience(req, res){
+    await postModules.insertCharacterExperience(req.params.id, req.params.xp)
+    return res.status(200).json(req.params.xp)
+}
+
 module.exports = {
     postCharacterEffect,
     postCharacter,
+    postExperience,
     postInventaryIten,
     postCharacterSkill,
 }
