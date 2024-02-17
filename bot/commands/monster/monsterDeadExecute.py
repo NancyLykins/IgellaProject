@@ -26,14 +26,10 @@ async def monsterDeadExecute(interaction, client, monster):
     view = discord.ui.View()
     async def giveXpForMonsterDeth(interaction: discord.Interaction):
         memberName = interaction.data["custom_id"]
-
-        body = {
-            "xpAtual": f"+{xpPerPleyer}"
-        }
         async with aiohttp.ClientSession() as session:
             member = discord.utils.get(interaction.guild.members, name=memberName)
             id = member.id
-            async with session.patch(f"{url}/characters/{id}", json=body, headers=header) as response:
+            async with session.post(f"{url}/characters/{id}/{xpPerPleyer}") as response:
                 pass
             
         for button in view.children:

@@ -60,8 +60,8 @@ async function insertCharacter(data){
     return await query.execute(sql)
 }
 
-async function insertCharacterExperience(id, xp){
-    character = await fetch(`http://localhost:5050/characters/${id}`)
+async function insertCharacterExperience(name, xp){
+    character = await fetch(`http://localhost:5050/characters/${name}`)
     character = (await character.json())[0]
     let xpNextLvl = parseInt(character["xpNextLvl"])
     let xpSum = parseInt(xp) + parseInt(character["xpAtual"])
@@ -73,7 +73,7 @@ async function insertCharacterExperience(id, xp){
         xpSum -= xpNextLvl
         xpNextLvl += 5
     }
-    let sql = `UPDATE character SET level = '${level}', pontosRestantes = '${points}', xpAtual='${xpSum}', xpNextLvl = '${xpNextLvl}' WHERE id='${id}'`
+    let sql = `UPDATE character SET level = '${level}', pontosRestantes = '${points}', xpAtual='${xpSum}', xpNextLvl = '${xpNextLvl}' WHERE nome LIKE '%${name}%'`
     await query.execute(sql)
 }
 
