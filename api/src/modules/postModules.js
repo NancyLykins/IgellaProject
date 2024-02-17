@@ -60,8 +60,25 @@ async function insertCharacter(data){
     return await query.execute(sql)
 }
 
+async function insertCharacterExperience(id, xp){
+    character = fetch(`http://localhost:5050/characters/${id}`)
+    character = await JSON.stringify(character)
+    let xpNextLvl = character["xpNextLvl"]
+    let xpSum = xp + character["xpAtual"]
+    let level = character["level"]
+    let points = character["pontosRestantes"]
+    while(xpSum >= xpNextLvl)
+        level += 1
+        points += 1
+        xpSum -= xpNextLvl
+        xpNextLvl += 5
+    let sql = `UPDATE CARACTER SET level = ${level}, pontosRestantes = ${points}, xpNextLvl = ${xpNextLvl} WHERE id=${id}`
+    await query.execute(sql)
+}
+
 module.exports = {
     insertCharacterEffect,
+    insertCharacterExperience,
     insertInventaryItem,
     insertCharacter,
     insertCharacterSkill,
