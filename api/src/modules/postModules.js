@@ -72,7 +72,7 @@ async function insertCharacterExperience(id, xp){
         points += 1
         xpSum -= xpNextLvl
         xpNextLvl += 5
-    let sql = `UPDATE CARACTER SET level = ${level}, pontosRestantes = ${points}, xpNextLvl = ${xpNextLvl} WHERE id=${id}`
+    let sql = `UPDATE character SET level = ${level}, pontosRestantes = ${points}, xpNextLvl = ${xpNextLvl} WHERE id=${id}`
     await query.execute(sql)
 }
 
