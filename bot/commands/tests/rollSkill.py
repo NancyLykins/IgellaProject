@@ -54,5 +54,5 @@ async def rollSkill(ctx, skill):
         f"{'+ ' + str(skillBuff) if skillBuff > 0 else '' if skillBuff == 0 else ' ' + str(skillBuff)}"
         f"{' ' if (buff == '') else '+ ' + str(buff) if (buff > 0) else str(buff)}"
     )
-    if(total >= difficultoToUp):
+    if(diceResult >= difficultoToUp):
         await calculateSkillUses(ctx, skill)
