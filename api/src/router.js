@@ -52,5 +52,5 @@ router.post("/characters", postController.postCharacter)
 router.post("/characters/:id/skills", postController.postCharacterSkill)
 router.post("/characters/:id/inventary/:itemId", postController.postInventaryIten)
 router.post("/characters/:id/effects", postController.postCharacterEffect)
-router.post("/characters/:id", postController.postExperience)
+router.post("/characters/:id/:xp", postController.postExperience)
 module.exports = router
