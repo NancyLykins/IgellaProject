@@ -23,7 +23,7 @@ async function postCharacter(req, res){
 }
 
 async function postExperience(req, res){
-    await postModules.insertCharacterExperience(req.params.id, req.params.xp)
+    await postModeles.insertCharacterExperience(req.params.id, req.params.xp)
     return res.status(200).json(req.params.xp)
 }
 
