@@ -13,6 +13,13 @@ class utilsCogs(commands.Cog):
     async def clear(self, interaction: discord.Interaction, limit: str):
         await clear(interaction, limit)
 
+    @app_commands.command(name="say")
+    @app_commands.describe(message="Mensagem")
+    @app_commands.default_permissions(administrator=True)
+    async def say(self, interaction: discord.Interaction, message: str):
+        await interaction.channel.send(message)
+        await interaction.response.send_message("Mensagem enviada com sucesso" ,ephemeral=True)
+        
     @app_commands.command(name="say_text")
     @app_commands.describe(title="Titulo do texto")
     @app_commands.describe(message="Mensagem do texto")

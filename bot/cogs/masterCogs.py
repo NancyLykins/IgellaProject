@@ -27,7 +27,7 @@ class masterCogs(commands.Cog):
     @app_commands.default_permissions(administrator=True)
     @app_commands.describe(player="Qual o personagem deve receber o xp?")
     @app_commands.describe(amount="Quanto de xp ele ira receber?")
-    async def give(self, interaction: discord.Interaction, player: discord.Member, amount: int):
+    async def giveXp(self, interaction: discord.Interaction, player: discord.Member, amount: int):
         await giveXp(interaction, player, amount)
 
 async def setup(client: discord.Client) -> None:

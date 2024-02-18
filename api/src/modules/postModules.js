@@ -8,6 +8,7 @@ async function insertCharacterEffect(id, data){
 async function insertInventaryItem(id, item, body){
     let itemId = null
     let amount
+    item = item.toLowerCase()
     if(Object.keys(body).length === 0){
         amount = 1
     } else{
@@ -15,7 +16,8 @@ async function insertInventaryItem(id, item, body){
     }
     itemId = parseInt(item)
     if(isNaN(itemId)){
-        itemId = (await query.execute(`SELECT rowId FROM itens WHERE name = '${item}'`))[0]
+        itemId = (await query.execute(`SELECT rowId FROM itens WHERE name = '${item}'`))
+        itemId = itemId[0]
         if(itemId == ""){
             return 404
         }
