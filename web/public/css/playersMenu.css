@@ -1,0 +1,257 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/*
+    Page Layout
+*/
+
+#screen{
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    background-image: url(https://png.pngtree.com/back_origin_pic/04/31/59/ab9b71ce2cfa59aad4c5ec66bb2daa71.jpg);
+}
+
+.screenPart{
+    height: 90%;
+    width: 25%;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 5px;
+}
+.partTitle{
+    width: 100%;
+    height: 30px;
+    background: black;
+    color: white;
+} .partTitle > p{
+    font-size: 25px;
+    text-align: center;
+}
+
+/*
+    Status search menu
+*/
+
+#menuStatus{
+    height: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    background: #555;
+}
+#searchMenu{
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+#searchBar{
+    height: 70%;
+    width: 40%;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    padding-left: 10px;
+    transform: translateY(-50%);
+    border: 0;
+} #searchBar:focus{
+    outline: none;
+}
+
+/*
+    Status Menu //Mid Part
+*/
+
+#characterStatus{
+    display: inline-flex;
+    margin-top: 0;
+    height: calc(100% - 30px);
+    min-width: 250px;
+    width: 100%;
+    background: #555;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: start;
+    position: relative;
+}
+
+.characterName{
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 18px;
+    width: fit-content;
+    margin-block: 10px;
+    height: 100%;
+    background-color: #000;
+    border: 0;
+} .characterName:hover{
+    text-decoration: underline;
+}
+
+#characterInfos{
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+    height: 100dvh;
+    min-width: 250px;
+    width: 20%;
+    max-width: 500px;
+    z-index: 10;
+    background-color: #000;
+}
+
+#imgContainer{
+    margin-top: 10%;
+    width: 150px;
+    height: 150px;
+    background-color: #fff;
+}
+
+#characterImg{
+   width: 100%;
+   height: 100%;
+}
+
+#characterName{
+    text-align: center;    
+    width: 100%;
+    height: 30px;
+    border: 0;
+    color: rgb(255, 255, 255);
+    font-size: 25px;
+    font-family: Arial;
+}
+
+#statusBars{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.statusBar{
+    width: 80%;
+    height: 15px;
+    margin-top: 10px;
+    background-color: gray;
+    border-radius: 25px;
+    position: relative;
+    display: flex;
+}
+
+#hpValues, #manaValues, #xpValues{
+    width: 100%;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    z-index: 2;
+}
+
+.barFill{
+    border-radius: 25px;
+    justify-self: left; 
+    height: 100%;
+    position: absolute;
+}
+
+#manaValues{
+    color: black;
+}
+
+#xpValues{
+    color: black;
+}
+
+#restMana{
+    width: 70%;
+    background-color: lightblue;
+}
+#restHp{
+    width: 49%;
+    background-color: red;
+}
+
+#totalXp{
+    width: 50%;
+    background-color: yellowgreen;
+}
+
+.stts{
+    color: #fff;
+    margin-top: 10px;
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+
+#attributes{
+    height: fit-content;
+    margin-top: 15px;
+    padding-left: 10px;
+    width: 90%;
+    color: #fff;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-evenly;
+} #attributes > li{
+    font-size: 18px;
+    display: flex;
+    align-content: center;
+    padding-inline: 15px;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.attrValue{
+    font-size: 16px;
+    margin-left: 5px;
+    padding: 3px 5px;
+    background-color: #444;
+    border-radius: 5px;
+    min-width: 75px;
+    width: 10%;
+    text-align: center;
+    max-width: 100px;
+    translate: 0 -1px;
+}
+
+/*
+    Invetary Part
+*/
+
+#inventarySlots{
+    background: #555;
+    width: calc(100% - 20px);
+    height: calc(100% - 50px);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(8, 1fr); 
+    display: grid;
+    padding: 10px;
+    justify-items: center;
+    align-items: center;
+}
+
+.slot {
+    width: 4vw;
+    height: 4vw;
+    border: 4px;
+    background: rgba(156, 101, 101, 0.68);
+    border-color: #000;
+    border-style: outset;
+}
+
