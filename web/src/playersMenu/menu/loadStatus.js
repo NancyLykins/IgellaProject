@@ -1,6 +1,5 @@
-export default function loadCharacter(data){
+export default function loadStatus(data){
     data = data[0]
-    document.getElementById("characterInfos").style.display = "flex"
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])
     mpBar(data["mp"], data["maxMp"])

@@ -1,12 +1,19 @@
 import links from "../../config.js";
+import loadStatus from "./loadStatus.js";
 const searchResults = document.getElementById("searchResults")
 async function loadPlayers(){
     let api = links["api"]
-    let data = await fetch(`${api}/characters/names`)
-    let result = await data.json()
-    for(let i = 0; i<result.length; i++){
+    let response = await fetch(`${api}/characters/names`)
+    let data = await response.json()
+    for(let i = 0; i<data.length; i++){
         let div = document.createElement("div")
-        div.innerText = result[i]["nome"]
+        let name = data[i]["nome"]
+        div.innerText = name
+        div.onclick = async() => {
+            let response = await fetch(`${links["api"]}/characters/${name}`)
+            let data = await response.json()
+            loadStatus(data)
+        }
         div.setAttribute("class", "palyer")
         searchResults.appendChild(div)     
     }
