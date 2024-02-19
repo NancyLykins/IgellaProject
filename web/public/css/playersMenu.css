@@ -279,7 +279,7 @@
     Invetary Part
 */
 
-#inventarySlots{
+.slotsContainer{
     background: #555;
     width: calc(100% - 20px);
     height: calc(100% - 50px);
