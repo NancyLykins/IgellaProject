@@ -1,4 +1,5 @@
 import links from "../../config.js";
+import loadInventary from "./loadInventary.js";
 import loadStatus from "./loadStatus.js";
 const searchResults = document.getElementById("searchResults")
 async function loadPlayers(){
@@ -11,8 +12,10 @@ async function loadPlayers(){
         div.innerText = name
         div.onclick = async() => {
             let response = await fetch(`${links["api"]}/characters/${name}`)
-            let data = await response.json()
+            let data = (await response.json())[0]
             loadStatus(data)
+            console.log(data["id"])
+            loadInventary(data["id"])
         }
         div.setAttribute("class", "palyer")
         searchResults.appendChild(div)     
