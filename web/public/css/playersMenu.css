@@ -54,6 +54,33 @@
     position: relative;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
+} #searchMenu > nav{
+    width: 100%;
+    height: calc(100% + 5px);
+    display: inline-flex;
+    align-content: center;
+    flex-wrap: wrap;
+    transform: translateY(3px);
+} #searchMenu > nav > ul{
+    list-style: none;
+    display: inline-flex;
+    width: 50%;
+    height: 100%;
+    padding-inline: 15px;
+} #searchMenu > nav > ul > li{
+    width: fit-content;
+    height: 100%;
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+} .menuButtons{
+    background: #00000000;
+    border: 1px solid #000;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.5s ease-in-out;
+} .menuButtons:hover{
+    background: #444;
 }
 #searchBar{
     height: 70%;
