@@ -1,4 +1,5 @@
 import links from "../config.js";
+import createItemForm from "./createItemForm.js";
 const searchResults = document.getElementById("searchResults")
 async function loadItens(){
     let item, div, itemDiv, itemImg, itemQuant
@@ -30,7 +31,7 @@ async function loadItens(){
     </svg>
     `
     div.onclick = () =>{
-        console.log("Adding")
+        createItemForm()
     }
     itensContainer.appendChild(div)
     searchResults.appendChild(itensContainer)
