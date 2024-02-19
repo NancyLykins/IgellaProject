@@ -14,7 +14,6 @@ async function loadPlayers(){
             let response = await fetch(`${links["api"]}/characters/${name}`)
             let data = (await response.json())[0]
             loadStatus(data)
-            console.log(data["id"])
             loadInventary(data["id"])
         }
         div.setAttribute("class", "palyer")
