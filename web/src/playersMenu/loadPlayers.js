@@ -1,4 +1,4 @@
-import links from "../../config.js";
+import links from "../config.js";
 import loadInventary from "./loadInventary.js";
 import loadStatus from "./loadStatus.js";
 const searchResults = document.getElementById("searchResults")

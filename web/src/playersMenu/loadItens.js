@@ -1,4 +1,4 @@
-import links from "../../config.js";
+import links from "../config.js";
 const searchResults = document.getElementById("searchResults")
 async function loadItens(){
     let item, div, itemDiv, itemImg, itemQuant

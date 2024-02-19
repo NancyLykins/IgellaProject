@@ -1,4 +1,4 @@
-import links from "../../config.js"
+import links from "../config.js"
 const inventarySlots = document.getElementById("inventarySlots")
 
 async function loadInventary(id){
