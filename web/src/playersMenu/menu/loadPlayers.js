@@ -6,6 +6,7 @@ async function loadPlayers(){
     let api = links["api"]
     let response = await fetch(`${api}/characters/names`)
     let data = await response.json()
+    searchResults.innerHTML = ""
     for(let i = 0; i<data.length; i++){
         let div = document.createElement("div")
         let name = data[i]["nome"]
