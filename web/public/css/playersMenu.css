@@ -43,6 +43,7 @@
     height: calc(100% - 30px);
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     background: #555;
 }
 #searchMenu{
@@ -93,6 +94,23 @@
     border: 0;
 } #searchBar:focus{
     outline: none;
+}
+
+#searchResults{
+    width: 100%;
+    height: calc(100% - 50px);
+}
+
+.palyer{
+    width: calc(100% - 10px);
+    height: 30px;
+    padding-block: 5px;
+    padding-left: 10px;
+    border: 1px black solid;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 
 /*
