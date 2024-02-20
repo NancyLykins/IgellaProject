@@ -1,5 +1,5 @@
 section .data
-    prog db "~/../usr/bin/python", 0 ; program to execute
+    prog db "/usr/bin/python", 0 ; program to execute
     arg1 db "python", 0 ; argv[0]
     arg2 db "bot/client.py", 0 ; argv[1]
     argv dq arg1, arg2, 0 ; argument vector
