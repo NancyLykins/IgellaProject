@@ -34,6 +34,7 @@ function createItemForm(){
             <label for="itemImage" id="itemImageLabel">Adicionar imagem do item</label>
             <input type="file" name="image" id="itemImage" accept=".png, .jpeg, .jpg" required>
         </div>
+        <textarea name="desc" id="itemDesc"></textarea>
         <button type="submit" id="createItemButton">Criar Item</button>
     </form>
     `

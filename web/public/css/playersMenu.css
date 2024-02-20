@@ -64,6 +64,18 @@ input[type=number]{
     background: #555;
     border-radius: 15px;
 }
+
+#itemDesc{
+    height: 25%;
+    width: 80%;
+    padding-left: 10px;
+    margin-top: 20px;
+    border: 1px solid black;
+    resize: none; 
+}
+#itemDesc:focus{
+    outline: 0;
+}
 /*
     Status search menu
 */
@@ -213,7 +225,7 @@ input[type=number]{
 }
 #createItemButton{
     width: 50%;
-    margin-top: 20px;
+    margin-top: 10px;
     height: 30px;
     border: 1px solid black;
     background: gray;
