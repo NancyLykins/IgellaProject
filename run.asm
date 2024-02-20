@@ -15,5 +15,4 @@ _start:
     mov rsi, argv ; second argument: arguments array
     mov rdx, envp ; third argument: environment array
 
-    ; make the system call
-    syscall
+    int 0x80
