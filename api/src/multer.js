@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, callback) => {
         const time = new Date().getTime();
-        callback(null, `${time}_${file.originalname}`);
+        callback(null, `${file.originalname}_${time}`);
     },
 });
 module.exports = storage
