@@ -27,6 +27,10 @@ async function postExperience(req, res){
     return res.status(200).json(req.params.xp)
 }
 
+async function postItem(req, res){
+    const body = await postModules.insertItem(req.body)
+    return res.status(200).json(response || req.body)
+}
 
 module.exports = {
     postCharacterEffect,
@@ -34,4 +38,5 @@ module.exports = {
     postExperience,
     postInventaryIten,
     postCharacterSkill,
+    postItem,
 }
