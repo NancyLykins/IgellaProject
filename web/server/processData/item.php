@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "unity" => $unity,
         "type" => $type,
         "desc" => $desc,
+        "path" => "/itens",
         "image" => new CURLFile($file_path, "", $file_name)
     ]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
