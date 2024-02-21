@@ -45,6 +45,12 @@ function createItemForm(){
     modal.setAttribute("id", "m154112")
     modal.appendChild(formContainer)
     screen.append(background, modal)
+
+    let itemType = document.getElementById("itemType")
+    itemType.addEventListener("onchange", ()=>{
+        let value = itemType.value
+        itemType.style.width = "none"
+    })
 }
 
 export default createItemForm
