@@ -79,10 +79,15 @@ async function insertCharacterExperience(id, xp){
     await query.execute(sql)
 }
 
+async function insertItem(data){
+
+}
+
 module.exports = {
     insertCharacterEffect,
     insertCharacterExperience,
     insertInventaryItem,
     insertCharacter,
     insertCharacterSkill,
+    insertItem,
 }

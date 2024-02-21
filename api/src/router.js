@@ -3,6 +3,7 @@ const getController = require("./controllers/getController")
 const patchController = require("./controllers/patchController")
 const deleteController = require("./controllers/deleteController")
 const postController = require("./controllers/postController")
+const storage = require('./multer')
 const router =  express.Router()
 
 router.get("/characters", getController.getAll)
@@ -53,6 +54,6 @@ router.post("/characters/:id/inventary/:itemId", postController.postInventaryIte
 router.post("/characters/:id/effects", postController.postCharacterEffect)
 router.post("/characters/:id/:xp", postController.postExperience)
 
-router.post("/item", postController.postItem)
+router.post("/item", storage, postController.postItem)
 
 module.exports = router
