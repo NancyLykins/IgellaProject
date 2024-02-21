@@ -7,7 +7,7 @@ $unity = $_POST["unity"];
 $type = $_POST["type"];
 $desc = $_POST["desc"];
 $file = $_FILES["image"];
-$url = url."/";
+$url = url."/test";
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $name);
