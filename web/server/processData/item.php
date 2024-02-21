@@ -1,7 +1,7 @@
 <?php
 include("../apiConnection.php");
 $file = $_FILES["image"];
-$url = API_URL."/test";
+$url = API_URL."/item";
 
 $data = array(
     "name" => $_POST["name"],
