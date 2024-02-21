@@ -1,3 +1,3 @@
 <?php
-    define("api", "http://localhost:5000");
+    define("url", "http://localhost:5000");
 ?>
