@@ -3,8 +3,8 @@ const path = require("path")
 
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-        let path = `public/${req.body.path}`
-        callback(null, path.resolve("path"));
+        let filePath = `public/${req.body.path}`
+        callback(null, path.resolve("filePath"));
     },
     filename: (req, file, callback) => {
         const time = new Date().getTime();
