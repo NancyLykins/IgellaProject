@@ -1,3 +1,3 @@
 <?php
-    define("url", "http://localhost:5050");
+    define("API_URL", "http://localhost:5050");
 ?>
