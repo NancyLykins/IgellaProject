@@ -28,8 +28,8 @@ async function postExperience(req, res){
 }
 
 async function postItem(req, res){
-    const response = await postModules.insertItem(req.body)
-    return res.status(200).json(response || req.file.name)
+    const response = await postModeles.insertItem(req.body)
+    return res.status(200).json(response || req.file)
 }
 
 module.exports = {
