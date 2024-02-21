@@ -15,7 +15,7 @@ int main(int argc, char *args[]){
             printf("Starting web server");
             system("(cd web && php -S localhost:5000)");
         } else{
-            printf("The parmn %s is not valid", *parm);
+            printf("The parmn %c is not valid", *parm);
         }
     }
 }
