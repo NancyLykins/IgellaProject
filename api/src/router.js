@@ -5,11 +5,6 @@ const deleteController = require("./controllers/deleteController")
 const postController = require("./controllers/postController")
 const router =  express.Router()
 
-router.post("/test",(req, res) =>{
-   console.log(req.body)
-   res.status(200).json(req.body)
-})
-
 router.get("/characters", getController.getAll)
 router.get("/characters/names", getController.getNames)
 
@@ -57,4 +52,7 @@ router.post("/characters/:id/skills", postController.postCharacterSkill)
 router.post("/characters/:id/inventary/:itemId", postController.postInventaryIten)
 router.post("/characters/:id/effects", postController.postCharacterEffect)
 router.post("/characters/:id/:xp", postController.postExperience)
+
+router.post("/item", postController.postItem)
+
 module.exports = router
