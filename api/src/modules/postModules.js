@@ -79,9 +79,13 @@ async function insertCharacterExperience(id, xp){
     await query.execute(sql)
 }
 
-async function insertItem(data){
-    console.log(data.file)
-    return data.file
+async function insertItem(data, file){
+    let item = {
+        "data": data,
+        "image": file
+    }
+    console.log(item)
+    return item
 }
 
 module.exports = {
