@@ -1,10 +1,12 @@
-const express = require('express')
+const express = require("express")
+const multer = require("multer")
 const getController = require("./controllers/getController")
 const patchController = require("./controllers/patchController")
 const deleteController = require("./controllers/deleteController")
 const postController = require("./controllers/postController")
-const storage = require('./multer')
+const storage = require("./multer")
 const router =  express.Router()
+const upload = multer({storage: storage})
 
 router.get("/characters", getController.getAll)
 router.get("/characters/names", getController.getNames)
@@ -54,6 +56,6 @@ router.post("/characters/:id/inventary/:itemId", postController.postInventaryIte
 router.post("/characters/:id/effects", postController.postCharacterEffect)
 router.post("/characters/:id/:xp", postController.postExperience)
 
-router.post("/item", storage, postController.postItem)
+router.post("/item", upload.single("file"), postController.postItem)
 
 module.exports = router

@@ -80,7 +80,7 @@ async function insertCharacterExperience(id, xp){
 }
 
 async function insertItem(data){
-
+    return data.file.name
 }
 
 module.exports = {
