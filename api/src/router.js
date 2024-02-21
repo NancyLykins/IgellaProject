@@ -56,6 +56,6 @@ router.post("/characters/:id/inventary/:itemId", postController.postInventaryIte
 router.post("/characters/:id/effects", postController.postCharacterEffect)
 router.post("/characters/:id/:xp", postController.postExperience)
 
-router.post("/item", upload.single("file"), postController.postItem)
+router.post("/item", upload.single("image"), postController.postItem)
 
 module.exports = router

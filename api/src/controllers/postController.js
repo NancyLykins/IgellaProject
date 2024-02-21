@@ -27,7 +27,7 @@ async function postExperience(req, res){
     return res.status(200).json(req.params.xp)
 }
 
-async function postItem(req, res){
+async function postItem(req, res, next){
     const response = await postModeles.insertItem(req.body)
     return res.status(200).json(response || req.file)
 }
