@@ -80,13 +80,22 @@ async function insertCharacterExperience(id, xp){
 }
 
 async function insertItem(data, file){
-    let item = {
+    let item, sql, name, weight, unity, type, desc, path
+    name = data["name"]
+    weight = data["weight"]
+    unity = data["unity"]
+    type = data["type"]
+    desc = data["desc"]
+    path = `${data["path"]}/${file["originalname"]}`
+    item = {
         "data": data,
         "image": file
     }
-    console.log(item)
+    sql = `INSEER INTO itens (name, emoji, desc, type, action, time, slot) VALUES(${name}, ${path}, ${desc}, ${type}, Null, 0, Null)`
+    await query.execute(sql)
     return item
 }
+
 
 module.exports = {
     insertCharacterEffect,
