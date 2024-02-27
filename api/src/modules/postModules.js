@@ -91,7 +91,7 @@ async function insertItem(data, file){
         "data": data,
         "image": file
     }
-    sql = `INSEER INTO itens (name, emoji, desc, type, action, time, slot) VALUES(${name}, ${path}, ${desc}, ${type}, Null, 0, Null)`
+    sql = `INSERT INTO itens (name, imagePath, emoji, weight, unity, desc, type, action, time, slot) VALUES('${name}', '${path}', '${emoji}', '${weight}', '${unity}', '${desc}', '${type}', '${action}', '${time}', '${slot}')`
     await query.execute(sql)
     return item
 }
