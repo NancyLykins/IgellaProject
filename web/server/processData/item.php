@@ -12,6 +12,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_path = $_FILES["image"]["tmp_name"];
     $file_name = $_FILES["image"]["name"];
 
+    isset($_POST["action"])? $action = $_POST["action"]: $action = NULL;
+    isset($_POST["slot"])? $slot = $_POST["slot"]: $slot = NULL;
+    isset($_POST["time"])? $time = $_POST["time"]: $time = NULL;
+
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, 1);
@@ -22,6 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "type" => $type,
         "desc" => $desc,
         "path" => "/itens",
+        "emoji" => "🛡️",
+        "action" => $action,
+        "time" => $time,
+        "slot" => $slot,
         "image" => new CURLFile($file_path, "", $file_name)
     ]);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
