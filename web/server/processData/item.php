@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         "unity" => $unity,
         "type" => $type,
         "desc" => $desc,
-        "path" => "/itens",
+        "path" => "itens",
         "emoji" => "🛡️",
         "action" => $action,
         "time" => $time,

@@ -80,7 +80,7 @@ async function insertCharacterExperience(id, xp){
 async function insertItem(data, file){
     let item, sql, name, weight, unity, type, desc, path, emoji, time, action
     name = data["name"]
-    path = `${data["path"]}/${file["originalname"]}`
+    path = `${data["path"]}/${file["filename"]}`
     emoji = data["data"]
     weight = data["weight"]
     unity = data["unity"]
@@ -97,7 +97,6 @@ async function insertItem(data, file){
     (name, imagePath, emoji, weight, unity, desc, type, action, time, slot)
     VALUES('${name}', '${path}', '${emoji}', '${weight}', '${unity}', '${desc}', '${type}', '${action}', '${time}', '${slot}')`
     await query.execute(sql)
-    return item
 }
 
 
