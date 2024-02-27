@@ -9,12 +9,14 @@ async function loadInventary(id){
         let div = document.createElement("div")
         div.setAttribute("class", "slot")
         let item = document.createElement("div")
+        item.setAttribute("class", "itemDiv")
         let itemImg = document.createElement("img")
-        //itemImg.setAttribute("data", data[i]["img "])
+        itemImg.setAttribute("src", `${links["api"]}/${data[i]["imagePath"]}`)
         let itemQuant = document.createElement("span")
         itemQuant.innerText = data[i]["quant"]
         itemImg.setAttribute("class", "itemImg")
         itemQuant.setAttribute("class", "itemQuant")
+        itemQuant.style.zIndex = "5"
         item.append(itemImg, itemQuant)
         div.appendChild(item)
         inventarySlots.appendChild(div)
