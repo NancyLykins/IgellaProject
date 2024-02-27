@@ -10,15 +10,17 @@ async function loadItens(){
     itensContainer.setAttribute("class", "slotsContainer")
     for(let i=0; i < data.length; i++){
         item = data[i]
+        console.log(item)
         div = document.createElement("div")
         div.setAttribute("class", "slot")
         itemDiv = document.createElement("div")
         itemImg = document.createElement("img")
-        //itemImg.setAttribute("data", data[i]["img "])
+        itemImg.setAttribute("src", `${links["api"]}/${item["imagePath"]}`)
         itemQuant = document.createElement("span")
         itemQuant.innerText = item["rowId"]
         itemImg.setAttribute("class", "itemImg")
         itemQuant.setAttribute("class", "itemQuant")
+        itemDiv.setAttribute("class", "itemDiv")
         itemDiv.append(itemImg, itemQuant)
         div.appendChild(itemDiv)
         itensContainer.appendChild(div)
