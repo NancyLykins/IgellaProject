@@ -18,7 +18,6 @@ int main(int argc, char *args[]){
         }
         return 0;
     }
-    printf("%s '%s'\n", args[1], args[2]);
     for(int i = 1; i < argc; i++){
         char *parm = args[i];
         if(strcmp(parm, "api") == 0){

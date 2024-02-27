@@ -55,10 +55,10 @@ function createItemForm(){
         complement.innerHTML = ""
         switch(value){
             case "item":
-                modal.style.height = "32%"
+                modal.style.height = "35%"
                 break
             case "usable":
-                modal.style.height = "32%"
+                modal.style.height = "35%"
                 break
             case "equipable":
                 modal.style.height = "50%"
