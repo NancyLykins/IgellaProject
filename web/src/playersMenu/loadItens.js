@@ -13,6 +13,7 @@ async function loadItens(){
         console.log(item)
         div = document.createElement("div")
         div.setAttribute("class", "slot")
+        div.setAttribute("title", item["name"].charAt(0).toUpperCase() + item["name"].slice(1))
         itemDiv = document.createElement("div")
         itemImg = document.createElement("img")
         itemImg.setAttribute("src", `${links["api"]}/${item["imagePath"]}`)

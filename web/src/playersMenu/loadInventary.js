@@ -8,6 +8,7 @@ async function loadInventary(id){
     for(let i=0; i < data.length; i++){
         let div = document.createElement("div")
         div.setAttribute("class", "slot")
+        div.setAttribute("title", data[i]["name"].charAt(0).toUpperCase() + data[i]["name"].slice(1))
         let item = document.createElement("div")
         item.setAttribute("class", "itemDiv")
         let itemImg = document.createElement("img")
