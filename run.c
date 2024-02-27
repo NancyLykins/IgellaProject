@@ -3,6 +3,22 @@
 #include <string.h>
 
 int main(int argc, char *args[]){
+    char *point = args[1];
+    char conf[1];
+    if(strcmp(args[1], "git") == 0){
+        system("git branch");
+        printf("Confirmar branch y/n: ");
+        scanf("%s", &conf);
+        if(strcmp(conf, "y") == 0){
+            system("git add .");
+            char commit[] = "git commit -m '";
+            strcat(commit, args[2]);
+            strcat(commit, "'");
+            system(commit);
+        }
+        return 0;
+    }
+    printf("%s '%s'\n", args[1], args[2]);
     for(int i = 1; i < argc; i++){
         char *parm = args[i];
         if(strcmp(parm, "api") == 0){
