@@ -30,6 +30,7 @@ function createItemForm(){
                 <option value="equipable">Equipavel</option>
             </select>
         </div>
+        <div id="complement"></div>
         <div class="formItem labeledInput" id="imageInput">
             <label for="itemImage" id="itemImageLabel">Adicionar imagem do item</label>
             <input type="file" name="image" id="itemImage" accept=".png, .jpeg, .jpg" required>
@@ -47,9 +48,35 @@ function createItemForm(){
     screen.append(background, modal)
 
     let itemType = document.getElementById("itemType")
-    itemType.addEventListener("onchange", ()=>{
+    itemType.addEventListener("change", ()=>{
         let value = itemType.value
-        itemType.style.width = "none"
+        let modal = document.getElementById("m154112")
+        let complement = document.getElementById("complement")
+        complement.innerHTML = ""
+        switch(value){
+            case "item":
+                modal.style.height = "32%"
+                break
+            case "usable":
+                modal.style.height = "32%"
+                break
+            case "equipable":
+                modal.style.height = "50%"
+                complement.innerHTML = `
+                <div id=bodySlots>
+                <label>Selecione o slot que o equipamento fica</label>
+                <span>Cabeça</span>
+                <input type="radio" name="bodySlot" value="head">
+                <span>Peito</span>
+                <input type="radio" name="bodySlot" value="chest">
+                <span>Pernas</span>
+                <input type="radio" name="bodySlot" value="legs">
+                <span>Pés</span>
+                <input type="radio" name="bodySlot" value="feets">
+                </div>
+                `
+                break
+        }
     })
 }
 

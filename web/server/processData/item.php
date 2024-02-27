@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $file_name = $_FILES["image"]["name"];
 
     isset($_POST["action"])? $action = $_POST["action"]: $action = NULL;
-    isset($_POST["slot"])? $slot = $_POST["slot"]: $slot = NULL;
+    isset($_POST["bodySlot"])? $slot = $_POST["bodySlot"]: $slot = NULL;
     isset($_POST["time"])? $time = $_POST["time"]: $time = NULL;
 
     $ch = curl_init();
