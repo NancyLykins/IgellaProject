@@ -15,9 +15,13 @@ async function loadInventary(id){
         itemImg.setAttribute("src", `${links["api"]}/${data[i]["imagePath"]}`)
         let itemQuant = document.createElement("span")
         itemQuant.innerText = data[i]["quant"]
-        itemImg.setAttribute("class", "itemImg")
+        itemImg.setAttribute("class", "item itemImg")
+        itemImg.setAttribute("draggable", "True")
+        itemImg.style.cursor = "Move"
+        itemImg.setAttribute("id", data[i]["name"].replace(/ /g, "_"))
         itemQuant.setAttribute("class", "itemQuant")
         itemQuant.style.zIndex = "5"
+        itemQuant.style.height = "fit-content"
         item.append(itemImg, itemQuant)
         div.appendChild(item)
         inventarySlots.appendChild(div)

@@ -10,7 +10,6 @@ async function loadItens(){
     itensContainer.setAttribute("class", "slotsContainer")
     for(let i=0; i < data.length; i++){
         item = data[i]
-        console.log(item)
         div = document.createElement("div")
         div.setAttribute("class", "slot")
         div.setAttribute("title", item["name"].charAt(0).toUpperCase() + item["name"].slice(1))
@@ -19,9 +18,10 @@ async function loadItens(){
         itemImg.setAttribute("src", `${links["api"]}/${item["imagePath"]}`)
         itemImg.setAttribute("draggable", "True")
         itemImg.style.cursor = "Move"
+        itemImg.setAttribute("id", item["name"].replace(/ /g, "_"))
+        itemImg.setAttribute("class", "item itemImg")
         itemQuant = document.createElement("span")
         itemQuant.innerText = item["rowId"]
-        itemImg.setAttribute("class", "itemImg")
         itemQuant.setAttribute("class", "itemQuant")
         itemDiv.setAttribute("class", "itemDiv")
         itemDiv.append(itemImg, itemQuant)
