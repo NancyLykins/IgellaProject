@@ -17,6 +17,8 @@ async function loadItens(){
         itemDiv = document.createElement("div")
         itemImg = document.createElement("img")
         itemImg.setAttribute("src", `${links["api"]}/${item["imagePath"]}`)
+        itemImg.setAttribute("draggable", "True")
+        itemImg.style.cursor = "Move"
         itemQuant = document.createElement("span")
         itemQuant.innerText = item["rowId"]
         itemImg.setAttribute("class", "itemImg")
