@@ -3,7 +3,6 @@ const inventary = document.getElementById("inventarySlots")
 document.addEventListener("dragstart", (e)=>{
     if(e.target.classList[0] == "item"){
         e.dataTransfer.setData("Text", e.target.id)
-        console.log(e.target)
     }
 })
 document.addEventListener("dragover", (e)=>{
@@ -23,8 +22,6 @@ document.addEventListener("drop", (e)=>{
             }
         }
         let itemId = e.dataTransfer.getData("Text")
-        console.log(itemId)
-        console.log(itens)
         if(itens.includes(itemId.toLowerCase())){
             let item = document.querySelectorAll(`#${itemId}`)
             item = item[item.length-1]
