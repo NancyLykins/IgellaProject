@@ -19,8 +19,10 @@ async function updateCharacter(id, data){
 }
 
 async function updateCharacterInventary(id, item, data){
+    console.log(data)
     let sql = buildUpdateSql(id, data, "inventary").replace('id', 'characterId') + ` AND itemId='${item}'`
-    return await query.execute(sql)
+    console.log(sql)
+    //return await query.execute(sql)
 }
 
 async function updateCharacterHands(id, itemId){

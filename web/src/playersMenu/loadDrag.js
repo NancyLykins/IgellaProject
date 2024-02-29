@@ -9,18 +9,16 @@ document.addEventListener("dragstart", (e)=>{
 })
 document.addEventListener("dragover", (e)=>{
     e.preventDefault();
-});
-
+})
 document.addEventListener("drop", (e)=>{
     e.preventDefault();
     if(e.target.id == "inventarySlots"){
-        let itemId, item, quant, name
+        let itemId, item, quant, name, id
         let itens = []
         for(let i=1; i < inventary.childNodes.length; i++){
             itens.push(inventary.childNodes[i].title.toLowerCase().replace(/ /g, "_"))
         }
-        if(!itens.includes("moeda") && inventary.childNodes.length > 1 && inventary.childNodes[0].data != "\n        "){
-            console.log(inventary.childNodes)
+        if(!itens.includes("moeda") && inventary.childNodes[0].data != "\n        "){
             if(inventary.childNodes[0].title.toLowerCase() == "moeda"){
                 itens.push("moeda")
             }
@@ -40,12 +38,11 @@ document.addEventListener("drop", (e)=>{
             item.lastChild.firstChild.draggable = "false"
             e.target.appendChild(item)
         }
-        console.log(name, quant)
         fetch(`${links["server"]}/server/processData/giveItens.php`,{
             method: "post",
             body: JSON.stringify({
                 "item": {
-                    "name": name,
+                    "name": name.toLowerCase().replace(/ /g, "+"),
                     "quant": quant
                 }
             }),
@@ -53,8 +50,5 @@ document.addEventListener("drop", (e)=>{
                 "Content-type": "application/json"
             }
         })
-        .then((response) => response.json())
-        .then((data)=> console.log(data))
     }
 })
-

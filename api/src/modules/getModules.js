@@ -52,6 +52,7 @@ async function selectItens(id){
 }
 
 async function selectTypedItens(id){
+    id = id.replace(/\+/g, " ")
     let sql = `SELECT * FROM itens WHERE type='${id}' or rowId='${id}' or name='${id}'`
     return await query.execute(sql)
 }

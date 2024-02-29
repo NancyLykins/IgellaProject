@@ -16,6 +16,15 @@ async function loadPlayers(){
             let data = (await response.json())[0]
             loadStatus(data)
             loadInventary(data["id"])
+            fetch(`${links["server"]}/server/session.php`, {
+                method: "post",
+                body: JSON.stringify({
+                    "playerId": data["id"] 
+                }),
+                headers: {
+                    "Content-type": "application/json"
+                }
+            })
         }
         div.setAttribute("class", "palyer")
         searchResults.appendChild(div)     
