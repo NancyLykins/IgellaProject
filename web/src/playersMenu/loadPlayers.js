@@ -1,5 +1,5 @@
 import links from "../config.js";
-import loadInventary from "./loadInventary.js";
+import loadInventary from "./inventary/loadInventary.js";
 import loadStatus from "./loadStatus.js";
 const searchResults = document.getElementById("searchResults")
 async function loadPlayers(){

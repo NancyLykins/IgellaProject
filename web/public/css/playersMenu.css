@@ -448,12 +448,28 @@ input[type=number]{
     align-items: center;
 }
 
-.slot {
+.slot{
     width: 4vw;
     height: 4vw;
     border: 4px;
     background: rgba(156, 101, 101, 0.68);
     border-color: #000;
     border-style: outset;
+    position: relative;
+}
+#inventarySlots > .slot:hover > span{
+    display: flex;
+}
+#inventarySlots > .slot > span{
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
 }
 
+.itemQuant{
+    z-index: 5;
+    height: fit-content;
+    cursor: default;
+}
