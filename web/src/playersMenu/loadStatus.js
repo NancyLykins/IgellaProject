@@ -16,6 +16,8 @@ export default function loadStatus(data){
     document.getElementById("vig").innerText = `${data['vigor']} + ${data['vigorBuff']}`
     document.getElementById("armo").innerText = data['armo']
     document.getElementById("points").innerText = data['pontosRestantes']
+    document.getElementById("playerId").innerText = `ID: ${data["id"]}`
+
 }
 
 

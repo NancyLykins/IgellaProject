@@ -24,6 +24,9 @@ async function loadInventary(id){
         itemQuant.style.height = "fit-content"
         item.append(itemImg, itemQuant)
         div.appendChild(item)
+        div.onclick = () => {
+            
+        }
         inventarySlots.appendChild(div)
     }
 }
