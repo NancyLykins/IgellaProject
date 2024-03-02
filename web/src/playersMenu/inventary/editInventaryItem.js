@@ -51,7 +51,7 @@ export default function editInventaryItem(data){
         if(!parseInt(quant)){
             console.log(quant)
             if(quant == "0"){
-                fetch(`${links["api"]}/processData/inventary/deleteItem.php`,{
+                fetch(`${links["server"]}/server/processData/deleteItem.php`,{
                     method: "post",
                     body: JSON.stringify({
                         "itemId": data["rowId"]
@@ -59,9 +59,14 @@ export default function editInventaryItem(data){
                     headers:{
                         "Content-type": "application/json"
                     }
+                }).then((response)=>{
+                    if(response.status == 200){
+                        loadInventary(data["characterId"])
+                    }
                 })
+            } else{
+                console.error(`${quant} is NaN\nThis value is'n valid for the quant`)
             }
-            console.error(`${quant} is NaN\nThis value is'n valid for the quant`)
             return 0
         }
         fetch(`${links["server"]}/server/processData/editItemQuant.php`, {
