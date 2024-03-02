@@ -13,12 +13,13 @@
     $response = (json_decode($response))[0];
     $rowId = $response->rowId;
     $invItem = [
-        $rowId=>$item["quant"]
+        $rowId=>1,
     ];
     $ch = curl_init();
     $url = API_URL . "/characters/".$_SESSION["playerId"]."/inventary/".$rowId;
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $invItem);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($invItem));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
     curl_exec($ch);
 ?>

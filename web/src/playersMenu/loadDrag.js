@@ -18,7 +18,7 @@ document.addEventListener("drop", (e)=>{
         for(let i=1; i < inventary.childNodes.length; i++){
             itens.push(inventary.childNodes[i].title.toLowerCase().replace(/ /g, "_"))
         }
-        if(!itens.includes("moeda") && inventary.childNodes[0].data != "\n        "){
+        if(!itens.includes("moeda") && inventary.firstChild && inventary.childNodes[0].data != "\n        "){
             if(inventary.childNodes[0].title.toLowerCase() == "moeda"){
                 itens.push("moeda")
             }

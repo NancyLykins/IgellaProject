@@ -20,6 +20,7 @@ async function loadInventary(id){
         itemImg.setAttribute("class", "item itemImg")
         itemImg.setAttribute("draggable", "True")
         itemImg.setAttribute("id", data[i]["name"].replace(/ /g, "_"))
+        itemImg.setAttribute("draggable", "false")
         itemQuant.setAttribute("class", "itemQuant")
         item.append(itemImg, itemQuant)
         itemEdit = document.createElement("span")
