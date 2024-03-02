@@ -10,3 +10,7 @@ runPython.py
 run
 **.env
 **/itens/**
+**character.db
+api/public/itens/**
+api/public/players/**
+api/public/npc/**

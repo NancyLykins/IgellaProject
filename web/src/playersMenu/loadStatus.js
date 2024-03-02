@@ -2,7 +2,7 @@ export default function loadStatus(data){
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])
     mpBar(data["mp"], data["maxMp"])
-    xpBar(data["xpAtual"], data["level"]*10)
+    xpBar(data["xpAtual"], data["xpNextLvl"])
     document.getElementById("level").innerText = `Level: ${data['level']}`
     document.getElementById("power").innerText = `Magia: ${data['magia']}`
     document.getElementById("age").innerText = `Idade: ${data['idade']}`
