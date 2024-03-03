@@ -25,6 +25,7 @@ document.addEventListener("drop", (e)=>{
         }
         itemId = e.dataTransfer.getData("Text")
         if(itens.includes(itemId.toLowerCase())){
+            console.log(itemId)
             item = document.querySelectorAll(`#${itemId}`)
             item = item[item.length-1]
             name = item.parentElement.parentElement.title
