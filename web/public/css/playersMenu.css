@@ -222,9 +222,10 @@ input[type=number]{
     margin-left: 5px;
     border-bottom: 1px solid black;
 }
-.labeledInput > input[type=file]{
+input[type=file]{
     display: none;
 }
+
 .labeledInput > input:focus{
     outline: 0;
 }
@@ -248,13 +249,21 @@ input[type=number]{
     background: #00000000;
 }
 #imageInput{
+    margin-top: 30px;
     border: 1px solid black;
     padding-block: 5px;
 }
 #itemImageLabel{
-    width: 100%;
-    transform: translate(5px, 5px);
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    display: flex;
     cursor: pointer;
+}
+#itemImageLabel > p{
+    text-transform: capitalize;
+}
+#itemImageInfo{
+    margin-right: 5px;
 }
 #createItemButton{
     width: 50%;
@@ -268,6 +277,21 @@ input[type=number]{
 #createItemButton:hover{
     background: darkgreen;
 }
+
+.optionComplement{
+    border: 0;
+    width: fit-content;
+    max-width: 110px;
+    background: none;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 100%;
+}
+
+.optionComplement:focus{
+    outline: 0;
+}
+
 /*
     Status Menu //Mid Part
 */
@@ -503,7 +527,6 @@ input[type=number]{
 
 #itemName{
     text-transform: capitalize;
-    text-decoration: underline;
     text-justify: distribute;
 }
 

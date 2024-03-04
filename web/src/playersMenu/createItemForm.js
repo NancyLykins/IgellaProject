@@ -3,7 +3,7 @@ import links from "../config.js"
 const screen = document.getElementById("screen")
 
 function createItemForm(){
-    let background, modal, formContainer, itemType
+    let background, modal, formContainer, itemType, itemImage
     background = document.createElement("div")
     background.setAttribute("class", "modal")
     modal = document.createElement("div")
@@ -15,7 +15,15 @@ function createItemForm(){
     formContainer = createBase()
     modal.appendChild(formContainer)
     screen.append(background, modal)
-     
+    itemImage=document.getElementById("itemImage")
+    itemImage.addEventListener("change", ()=>{
+        let fileName = itemImage.value
+        fileName = fileName.split("\\")[2].split(".")
+        let p = document.createElement("p")
+        p.innerText = fileName[0]
+        document.getElementById("itemImageInfo").innerText = "Image Name:"
+        document.getElementById("itemImageLabel").append(p)
+    })
     itemType = document.getElementById("itemType")
     itemType.addEventListener("change", ()=>controlOptions())
 }
@@ -53,6 +61,7 @@ function createEquipableOptions(optionsComplement){
     selectTypes = document.createElement("select")
     selectTypes.setAttribute("name", "typeComplement")
     selectTypes.setAttribute("id", "typeComplement")
+    selectTypes.setAttribute("class", "optionComplement")
     for(let key in equipableTypes){
         let element = document.createElement("option")
         element.setAttribute("value", key)
@@ -95,6 +104,7 @@ function createEquipableOptions(optionsComplement){
         baublesSlots = document.createElement("select")
         baublesSlots.setAttribute("name", "baublesSlots")
         baublesSlots.setAttribute("id", "baublesSlots")
+        baublesSlots.setAttribute("class", "optionComplement")
         for(let key in baubles){
             let option = document.createElement("option")
             option.setAttribute("value", key)
@@ -115,6 +125,7 @@ function createEquipableOptions(optionsComplement){
         handsOptions = document.createElement("select")
         handsOptions.setAttribute("name", "handsOptions")
         handsOptions.setAttribute("id", "handsOptions")
+        handsOptions.setAttribute("class", "optionComplement")
         for(let key in hands){
             let option = document.createElement("option")
             option.setAttribute("value", key)
@@ -136,6 +147,7 @@ function createEquipableOptions(optionsComplement){
         bodyParts = document.createElement("select")
         bodyParts.setAttribute("name", "bodyPart")
         bodyParts.setAttribute("id", "bodyPart")
+        bodyParts.setAttribute("class", "optionComplement")
         for(let key in parts){
             let option = document.createElement("option")
             option.setAttribute("value", key)
@@ -173,8 +185,10 @@ function createBase(){
             <div id="optionsComplement"></div>
         </div>
         <div class="formItem labeledInput" id="imageInput">
-            <label for="itemImage" id="itemImageLabel">Adicionar imagem do item</label>
-            <input type="file" name="image" id="itemImage" accept=".png, .jpeg, .jpg" required>
+            <label for="itemImage" id="itemImageLabel">
+                <spam id="itemImageInfo">Adicionar imagem do item</spam>
+                <input type="file" name="image" id="itemImage" accept=".png, .jpeg, .jpg" required>
+            </label>
         </div>
         <textarea name="desc" id="itemDesc"></textarea>
         <button type="submit" id="createItemButton">Criar Item</button>
