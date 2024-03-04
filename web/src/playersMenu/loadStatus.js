@@ -1,3 +1,5 @@
+import links from "../config.js"
+
 export default function loadStatus(data){
     document.getElementById("characterName").innerText = data["nome"]
     hpBar(data["hp"], data["maxHP"])
@@ -17,7 +19,7 @@ export default function loadStatus(data){
     document.getElementById("armo").innerText = data['armo']
     document.getElementById("points").innerText = data['pontosRestantes']
     document.getElementById("playerId").innerText = `ID: ${data["id"]}`
-
+    document.getElementById("characterImg").setAttribute("src", `${links["api"]}/${data["imgPath"]}`)
 }
 
 

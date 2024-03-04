@@ -14,3 +14,4 @@ run
 api/public/itens/**
 api/public/players/**
 api/public/npc/**
+**/character.db

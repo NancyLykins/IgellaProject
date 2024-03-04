@@ -185,7 +185,7 @@ input[type=number]{
     Item Form
 */
 
-#complement{
+#typeOptions{
     width: 100%;
     margin-top: 10px;
     text-align: center;
@@ -508,10 +508,12 @@ input[type=number]{
 }
 
 #itemDiv > div{
-    width: fit-content;
+    width: 100%;
     display: flex;
+    justify-content: center;
     margin-top: 10px;
 }
+
 #itemDiv > div > p{
     font-size: 14px;
     width: fit-content;
