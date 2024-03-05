@@ -456,6 +456,25 @@ input[type=file]{
     translate: 0 -1px;
 }
 
+.atributesLine{
+    position: relative;
+}
+
+.upgradeStatus{
+    background: green;
+    border-radius: 8px;
+    border: 1px solid black;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 25px;
+    position: absolute;
+    right: -15px;
+    top: 0;
+    width: 25px;
+    z-index: 10;
+    cursor: pointer;
+}
+
 /*
     Invetary Part
 */
