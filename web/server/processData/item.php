@@ -4,14 +4,14 @@
     $url = API_URL . "/item";
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST["name"];
-        $weight = $_POST["weight"];
-        $unity = $_POST["unity"];
-        $type = $_POST["type"];
-        $desc = $_POST["desc"];
+        $name = (string) $_POST["name"];
+        $weight = (integer) $_POST["weight"];
+        $unity = (string) $_POST["unity"];
+        $type = (string) $_POST["type"];
+        $desc = (string) $_POST["desc"];
 
-        $file_path = $_FILES["image"]["tmp_name"];
-        $file_name = $_FILES["image"]["name"];
+        $file_path = (string) $_FILES["image"]["tmp_name"];
+        $file_name = (string) $_FILES["image"]["name"];
 
         isset($_POST["action"])? $action = $_POST["action"]: $action = NULL;
         isset($_POST["bodySlot"])? $slot = $_POST["bodySlot"]: $slot = NULL;

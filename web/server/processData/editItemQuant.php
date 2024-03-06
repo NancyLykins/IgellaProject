@@ -4,8 +4,8 @@
     session_start();
     $data = json_decode(file_get_contents("php://input", true));
     $ch = curl_init();
-    $url = API_URL . "/characters/".$_SESSION["playerId"]."/inventary/".$data->itemId;
-    $item = ["quant"=>$data->quant];
+    $url = (string) API_URL . "/characters/".$_SESSION["playerId"]."/inventary/".$data->itemId;
+    $item = (array) ["quant"=>$data->quant];
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item));
