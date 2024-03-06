@@ -2,7 +2,7 @@ import links from "../config.js"
 import loadPlayers from "./loadPlayers.js"
 
 export default function loadStatus(data){
-    let pontosRestantes, agiElement, forElement, intElement, preElement, vigElement, attrElements
+    let pontosRestantes, agiElement, forElement, intElement, preElement, vigElement, attrElements, attributesLine
     attrElements = ["agilidade", "forca", "inteligencia", "presenca", "vigor"]
     pontosRestantes = data["pontosRestantes"]
     agiElement = document.getElementById("agi")
@@ -30,7 +30,8 @@ export default function loadStatus(data){
     document.getElementById("playerId").innerText = `ID: ${data["id"]}`
     document.getElementById("characterImg").setAttribute("src", `${links["api"]}/${data["imgPath"]}`)
     
-    if(pontosRestantes > 0 && document.getElementsByClassName("atributesLine")[0].childElementCount < 2){
+    attributesLine = document.getElementsByClassName("atributesLine")
+    if(pontosRestantes > 0 && attributesLine[0].childElementCount < 2){
         for(let i=0; i < attrElements.length; i++){
             let button, attr
             attr = attrElements[i]
@@ -45,6 +46,11 @@ export default function loadStatus(data){
             </svg>
             `
             document.getElementById(`${attr.substring(0, 3)}Attr`).appendChild(button)
+        }
+    }
+    if(pontosRestantes <= 0 && attributesLine[0].childElementCount >= 2){
+        for(let i = 0; i < attributesLine.length; i++){
+            attributesLine[i].removeChild(attributesLine[i].lastChild)
         }
     }
 }
