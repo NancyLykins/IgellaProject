@@ -309,6 +309,24 @@ input[type=file]{
     position: relative;
 }
 
+#statusNav{
+    display: grid;
+    height: 5%;
+    width: 100%;
+    gap: 0;
+    grid-template-columns: auto auto auto;
+}
+
+#statusNav > button{
+    grid-row: 1;
+    border: 1px solid black;
+    cursor: pointer;
+    background: transparent;
+}
+#statusNav > button:hover{
+    background: #444;
+}
+
 .characterName{
     padding: 5px 10px;
     cursor: pointer;
