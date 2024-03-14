@@ -38,6 +38,8 @@ router.get("/classes", getController.getClasses)
 router.get("/classes/:name", getController.getClasse)
 router.get("/skills", getController.getSkills)
 
+router.get("/missions/:missionQuant", getController.getMissions)
+
 router.patch("/monsters/:name", patchController.patchMonster)
 router.patch("/characters/:id", patchController.patchCharacter)
 router.patch("/characters/:id/inventary/:item", patchController.patchCharacterInventary)

@@ -112,6 +112,11 @@ async function getMonster(req, res){
     return res.status(200).json(monster)
 }
 
+async function getMissions(req, res){
+    const missions = await getModeles.selectMissions(req.params.missionQuant)
+    return res.status(200).json(missions)
+}
+
 module.exports = {
     getAll,
     getSkills,
@@ -137,4 +142,5 @@ module.exports = {
     getCharacterEffects,
     getEffect,
     getRace,
+    getMissions,
 }

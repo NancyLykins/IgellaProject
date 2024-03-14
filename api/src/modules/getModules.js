@@ -141,6 +141,120 @@ async function selectMonster(monster){
     return await query.execute(sql)
 }
 
+async function selectMissions(missionQuant){
+    let missions = ["Test"]
+    let mission = {}
+    let missionExemple = {
+        "nomeMissao1": {
+            "rank": "D",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        },
+        "nomeMissao2": {
+            "rank": "C",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        },
+        "nomeMissao3": {
+            "rank": "B",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        },
+        "nomeMissao4": {
+            "rank": "A",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        },
+        "nomeMissao5": {
+            "rank": "S",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        },
+        "nomeMissao6": {
+            "rank": "E",
+            "desc": "",
+            "local": "",
+            "descOpc": "",
+            "grupo": "",
+            "contratante": "",
+            "recompensa": ""
+        }
+    }
+    let randomRanks = []
+    for(let i = 0; i < missionQuant; i++){
+        let  ranks = [
+            "S",
+            "A", "A",
+            "B", "B", "B",
+            "C", "C", "C", "C",
+            "D", "D", "D", "D", "D",
+            "E", "E", "E", "E", "E", "E",
+            "F", "F", "F", "F", "F", "F", "F",
+        ]
+        randomRanks.push(ranks[Math.floor(Math.random() * ranks.length)])
+    }
+    let rand, missionKey, j = 0
+    for(let i = 0; i < missionQuant; i++){
+        let cache = [], j = 0
+        while(true){
+            let k = 0
+            console.log(`Tentativa ${j}`)
+            rand = Math.floor(Math.random() * Object.keys(missionExemple).length)
+            if(cache.includes(rand)){
+                console.log(`${rand} alreary is in cache:\n{${cache}}\ntrying to find other`)
+                while(cache.includes(rand)){
+                    rand = Math.floor(Math.random() * Object.keys(missionExemple).length)
+                    k += 1
+                    if(!(cache.includes(rand))) {
+                        cache.push(rand)
+                        console.log(`The new rand is: ${rand}`)
+                    }
+                    if(k >= Object.keys(missionExemple).length) break
+                }
+            } else {
+                cache.push(rand)
+            }         
+            missionKey = Object.keys(missionExemple)
+            missionKey = missionKey[rand]
+            console.log(`Random rank: ${randomRanks}\nFiding pattern:`)
+            console.log(missionExemple[missionKey].rank)
+            console.log("MIR: "+ randomRanks.includes(missionExemple[missionKey].rank))
+            if(randomRanks.includes(missionExemple[missionKey].rank)){
+                let position
+                missions.push(missionExemple[missionKey])
+                position = randomRanks.lastIndexOf(missionExemple[missionKey].rank)
+                console.log(`Position: ${position}`)
+                randomRanks = randomRanks.splice(randomRanks, randomRanks+1)
+                break
+            }
+            j += 1
+            console.log("\n\n")
+            if(cache.length >= Object.keys(missionExemple).length) break
+        }
+    }
+    return missions
+}
+
 module.exports = {
   selectCharacter,
   selectSkills,
@@ -166,4 +280,5 @@ module.exports = {
   selectEffect,
   selectRaces,
   selectClasses,
+  selectMissions
 }
