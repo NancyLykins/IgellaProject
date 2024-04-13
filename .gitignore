@@ -1,13 +1,6 @@
 **/__pycache__
 **/node_modules
-Cache
-**/botOld
-databases
-runTests.py
-runPython.py
-**notes
 **uploads
-run
 **.env
 **/itens/**
 **character.db
@@ -16,3 +9,4 @@ api/public/players/**
 api/public/npc/**
 **/character.db
 Igella.png
+igella

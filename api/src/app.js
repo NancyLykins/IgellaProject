@@ -5,10 +5,11 @@ const router = require("./router")
 const { storage } = require('./multer')
 const app = express()
 const upload = multer({storage: storage})
+require("dotenv").config()
 
 app.use(
     cors({
-        origin: 'http://localhost:5000',
+        origin: process.env.WEB_URL,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true,
     })

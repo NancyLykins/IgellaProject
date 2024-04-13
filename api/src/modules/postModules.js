@@ -1,5 +1,5 @@
 const query = require("./query")
-
+require("dotenv").config()
 async function insertCharacterEffect(id, data){
     sql = `INSERT INTO characterEffects ('characterId', 'effectId', 'time') VALUES("${id}", "${data['effectId']}", "${data['time']}")`
     return await query.execute(sql)
@@ -63,7 +63,7 @@ async function insertCharacter(data){
 }
 
 async function insertCharacterExperience(id, xp){
-    character = await fetch(`http://localhost:5050/characters/${id}`)
+    character = await fetch(`${process.env.API_URL}/characters/${id}`)
     character = (await character.json())[0]
     let xpNextLvl = parseInt(character["xpNextLvl"])
     let xpSum = parseInt(xp) + parseInt(character["xpAtual"])
