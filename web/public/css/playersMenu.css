@@ -42,6 +42,7 @@ input[type=number]{
     border-style: solid;
     border-radius: 5px;
     position: relative;
+    min-width: 200px;
 }
 .partTitle{
     width: 100%;
@@ -90,57 +91,42 @@ input[type=number]{
 }
 #searchMenu{
     width: 100%;
-    height: 30px;
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    padding-bottom: 5px;
-    border-bottom: 1px solid black;
 } #searchMenu > nav{
     width: 100%;
-    height: calc(100% + 5px);
-    display: inline-flex;
-    align-content: center;
-    flex-wrap: wrap;
-    transform: translateY(3px);
-} #searchMenu > nav > ul{
-    list-style: none;
-    display: inline-flex;
-    width: 50%;
     height: 100%;
-    padding-inline: 15px;
-} #searchMenu > nav > ul > li{
-    width: fit-content;
-    height: 100%;
-    display: flex;
-    align-content: center;
-    flex-wrap: wrap;
-} .menuButtons{
+}  .menuButtons{
     background: #00000000;
     border: 1px solid #000;
     cursor: pointer;
-    padding: 5px 10px;
-    transition: 0.5s ease-in-out;
+    height: 27px;
+    transition: 0.3s ease-in-out;
 } .menuButtons:hover{
     background: #444;
 }
+
+
 #searchBar{
-    height: 70%;
-    width: 40%;
-    position: absolute;
-    right: 10px;
-    top: 50%;
     padding-left: 10px;
-    transform: translateY(-50%);
-    border: 0;
-} #searchBar:focus{
+    height: 25px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+#searchBar:focus{
     outline: none;
+}
+
+#searchBar button{
+    background-color: #00000000;
+    border: 0;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
 }
 
 #searchResults{
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 40px);
 }
 
 .palyer{
@@ -300,7 +286,6 @@ input[type=file]{
     display: inline-flex;
     margin-top: 0;
     height: calc(100% - 30px);
-    min-width: 250px;
     width: 100%;
     background: #555;
     justify-content: center;
@@ -310,18 +295,27 @@ input[type=file]{
 }
 
 #statusNav{
-    display: grid;
-    height: 5%;
+    display: flex;
     width: 100%;
-    gap: 0;
-    grid-template-columns: auto auto auto;
+    flex-wrap: wrap;
+}
+
+#navMenu{
+    display: flex;
+    flex-wrap: wrap;
+}
+#navMenu *{
+    flex: 1;
+    flex-basis: 100px;
 }
 
 #statusNav > button{
-    grid-row: 1;
+    flex-grow: 1;
     border: 1px solid black;
     cursor: pointer;
     background: transparent;
+    flex-basis: 50px;
+    height: 25px;
 }
 #statusNav > button:hover{
     background: #444;
@@ -499,14 +493,13 @@ input[type=file]{
 
 .slotsContainer{
     background: #555;
-    width: calc(100% - 20px);
-    height: calc(100% - 50px);
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(8, 1fr); 
+    grid-template-rows: repeat(9, 1fr);
     display: grid;
-    padding: 10px;
     justify-items: center;
-    align-items: center;
+    padding-top: 5px;
+    height: 95%;
+    overflow-y: scroll;
 }
 
 .slot{
@@ -518,6 +511,11 @@ input[type=file]{
     border-style: outset;
     position: relative;
 }
+#inventarySlots{
+    height: calc(100% - 35px);
+    background-color: #555;
+}
+
 #inventarySlots > .slot:hover > span{
     display: flex;
 }
@@ -530,9 +528,12 @@ input[type=file]{
 }
 
 .itemQuant{
-    z-index: 5;
+    z-index: 100;
     height: fit-content;
     cursor: default;
+    overflow: hidden;
+    font-family: Arial;
+    width: 100%;
 }
 
 #itemMenu{
@@ -593,6 +594,7 @@ input[type=file]{
     outline: 0;
 }
 
+
 #saveItem{
     margin-top: 15px;
     background: green;
@@ -600,4 +602,74 @@ input[type=file]{
     border: 1px solid black;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+@media (max-width: 750px) {
+    .slot{
+        width: 38px;
+        height: 38px;
+    }
+    .slotsContainer{
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-height: 1000px){
+    .slotsContainer{
+        grid-template-rows: repeat(16, 1fr); 
+    }
+}
+
+@media (max-height: 850px){
+    #attributes{
+        display: none;
+    }
+    .stts{
+        display: inline-block;
+        text-align: center;
+    } .stts > :first-child{
+        margin-bottom: 10px;
+    } #statusBars{
+        margin-block: 10px;
+        padding-block: 20px 30px;
+        border-block: 1px solid black;
+    }
+}
+
+@media (max-height: 680px){
+    .stts{
+        flex: 1;
+        margin-inline: 5px;
+        height: 80px;
+    }
+    #playerId{
+        display: none;
+    }
+}
+
+@media (max-height: 620px){
+    #race, #class{
+        display: none;
+    }
+}
+
+@media (max-height: 550px){
+    #personalInfos{
+        display: none;
+    }
+    #sttsStr{
+        height: fit-content;
+        margin-top: 0;
+    }
+}
+
+@media (max-height: 520px){
+    .stts{
+        display: none;
+    }
+    #statusBars{
+        margin-block: 0;
+        padding-block: 0;
+        border-block: 0;
+    }
 }

@@ -26,12 +26,12 @@ int main(int argc, char *args[]){
             system("(cd bot && python client.py)");
         
         } else if(strcmp(parm, "web") == 0){
-            char start_web_command[50] = "(cd web/server && php -S ";
+            char start_web_command[50] = "(cd web && php -S ";
             strcat(start_web_command, LOCAL_IP);
             strcat(start_web_command, ")");
             system(start_web_command);
             
-        }else if(strcmp(parm, "init") == 0){
+        } else if(strcmp(parm, "init") == 0){
             printf("Confign all");
             system("(cd api && npm install)");
             system("(cd web/server && npm install)");
