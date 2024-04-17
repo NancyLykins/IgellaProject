@@ -51,7 +51,7 @@ int main(int argc, char *args[]){
 
         
         } else{
-            printf("The parmn %s is not valid", *parm);
+            printf("The parmn %c is not valid", *parm);
         }
     }
 }
