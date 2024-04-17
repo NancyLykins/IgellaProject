@@ -4,12 +4,48 @@
 
 #define conf ".igella.conf" //Config file name 
 
+int edit_file(char *file_path, char *key, char *value){
+    char env_line[1000];
+    long position;
+    FILE *dot_env;
+    dot_env = fopen(file_path, "r+");
+    if (dot_env == NULL) {
+        printf("Error opening file %s\n", file_path);
+        return 1;
+    }
+    while(fgets(env_line, 100, dot_env) != NULL){
+        if(strncmp(env_line, key, strlen(key)) == 0){
+            char *new_conf = (char *) malloc(sizeof(char) * (strlen(key) + strlen(value) + 4));
+            int line_length = strlen(env_line);
+            int diference = 0;
+            sprintf(new_conf, "%s = %s", key, value);
+            int new_line_length = strlen(new_conf);
+            position = ftell(dot_env);
+            fseek(dot_env, -strlen(env_line), SEEK_CUR);
+            diference = line_length - strlen(new_conf);
+            int i = 0;
+            new_conf = (char *) realloc(new_conf, strlen(new_conf) + diference);
+            while(i < diference){
+                strcat(new_conf, " ");
+                i++;
+            }
+            strcat(new_conf, "\n");
+            fputs(new_conf, dot_env);
+            fseek(dot_env, position, SEEK_SET);
+        }
+    }
+    fclose(dot_env);
+    return 0;
+}
+
+
 int main(){
     char line[1000];
-    char env_line[1000];
+    
     char *api_env_path = NULL;
     char *web_env_path = NULL;
     char *bot_env_path = NULL;
+    
 
     FILE *config_file;
     
@@ -35,22 +71,9 @@ int main(){
                 web_env_path = (char *) realloc(web_env_path, strlen(value) + 1);
                 strcpy(web_env_path, value);
             } else if(strcmp(key, "API_URL") == 0){
-                FILE *dot_env;
-                dot_env = fopen(api_env_path, "r");
-                if (dot_env == NULL) {
-                    printf("Error opening file %s\n", api_env_path);
-                    return 1;
-                }
-                while(fgets(env_line, 100, dot_env) != NULL){
-                    char *nl = strchr(env_line, '\n');
-                    if(nl != NULL) *nl = '\0';
-                    printf("%s\n", env_line);
-                    if(strncmp(env_line, key, sizeof(key))){
-                        printf("Access");
-                        fprintf(dot_env, "%s", key);
-                    }
-                }
-                fclose(dot_env);
+                edit_file(api_env_path, key, value);
+            } else if(strcmp(key, "WEB_URL") == 0){
+                edit_file(api_env_path, key, value);
             }
         }
     }

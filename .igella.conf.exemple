@@ -1,0 +1,21 @@
+# Use '#' to comment and ignore the line
+#
+# This first part is to set the path for the files that you want to change
+# The file paths is pre seted just change if you change the .env position
+#
+###############################################################################
+#                                  DOTENV PATHS
+api_env_path = ./api/.env
+web_env_path = ./web/src/config.js
+bot_env_path = ./bot/.env
+#
+###############################################################################
+#
+# Now this part is to set the URL and some config the server will use
+# like IP and PORT for the servers, just discomment if you will need to change
+# the URL
+# 
+#API_URL =  http://localhost:5050
+#PORT = 5050
+#WEB_URL = http://localhost:8080
+#BOT_TOKEN = ''
