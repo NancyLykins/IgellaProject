@@ -6,6 +6,7 @@
 
 int edit_file(char *file_path, char *key, char *value){
     char env_line[1000];
+    char *lf = "\n";
     long position;
     FILE *dot_env;
     dot_env = fopen(file_path, "r+");
@@ -22,15 +23,15 @@ int edit_file(char *file_path, char *key, char *value){
             int new_line_length = strlen(new_conf);
             position = ftell(dot_env);
             fseek(dot_env, -strlen(env_line), SEEK_CUR);
-            diference = line_length - strlen(new_conf);
+            diference = line_length - new_line_length - 1;
             int i = 0;
-            new_conf = (char *) realloc(new_conf, strlen(new_conf) + diference);
+            new_conf = (char *) realloc(new_conf, new_line_length + diference);
             while(i < diference){
                 strcat(new_conf, " ");
                 i++;
             }
-            strcat(new_conf, "\n");
             fputs(new_conf, dot_env);
+            fputs(lf, dot_env);
             fseek(dot_env, position, SEEK_SET);
         }
     }
@@ -72,7 +73,10 @@ int main(){
                 strcpy(web_env_path, value);
             } else if(strcmp(key, "API_URL") == 0){
                 edit_file(api_env_path, key, value);
+                edit_file(bot_env_path, key, value);
             } else if(strcmp(key, "WEB_URL") == 0){
+                edit_file(api_env_path, key, value);
+            } else if(strcmp(key, "PORT") == 0){
                 edit_file(api_env_path, key, value);
             }
         }
