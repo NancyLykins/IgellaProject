@@ -71,13 +71,17 @@ int main(){
             } else if(strcmp(key, "web_env_path") == 0){
                 web_env_path = (char *) realloc(web_env_path, strlen(value) + 1);
                 strcpy(web_env_path, value);
-            } else if(strcmp(key, "API_URL") == 0){
+            } 
+            
+            if(strcmp(key, "API_URL") == 0){
                 edit_file(api_env_path, key, value);
                 edit_file(bot_env_path, key, value);
             } else if(strcmp(key, "WEB_URL") == 0){
                 edit_file(api_env_path, key, value);
             } else if(strcmp(key, "PORT") == 0){
                 edit_file(api_env_path, key, value);
+            } else if(strcmp(key, "BOT_TOKEN") == 0){
+                edit_file(bot_env_path, key, value);
             }
         }
     }
