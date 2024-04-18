@@ -10,9 +10,8 @@ int main(int argc, char *args[]){
 
     if(strcmp(args[1], "git") == 0){
         system("git add .");
-        char commit[] = "git commit -m '";
-        strcat(commit, args[2]);
-        strcat(commit, "'");
+        char *commit;
+        sprintf(commit, "git commit -m '%s'", args[2]);
         system(commit);
         return 0;
     }
@@ -26,15 +25,13 @@ int main(int argc, char *args[]){
             system("(cd bot && python client.py)");
         
         } else if(strcmp(parm, "web") == 0){
-            char start_web_command[50] = "(cd web && php -S ";
-            strcat(start_web_command, LOCAL_IP);
-            strcat(start_web_command, ")");
+            char *start_web_command;
+            sprintf(start_web_command, "(cd web && php -S %s)", LOCAL_IP);
             system(start_web_command);
             
         } else if(strcmp(parm, "init") == 0){
             printf("Confign all");
             system("(cd api && npm install)");
-            system("(cd web/server && npm install)");
             char option[3] = "no";
             do{
                 printf("Your OS is based in debian? (y|yes / n|no)");
@@ -51,7 +48,8 @@ int main(int argc, char *args[]){
 
         
         } else{
-            printf("The parmn %c is not valid", *parm);
+            printf("The parmn %s is not valid", parm);
         }
     }
+    return 0;
 }
