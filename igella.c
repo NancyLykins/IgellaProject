@@ -102,6 +102,7 @@ int main(int argc, char *args[]){
         char *commit = (char *) malloc(strlen(args[2]) + 20);
         sprintf(commit, "git commit -m '%s'", args[2]);
         system(commit);
+        system("git push origin master");
         return 0;
     }
 
