@@ -3,7 +3,7 @@
 #include <string.h>
 
 #define CONF_FILE ".igella.conf" //Config file name 
-#define LOCAL_IP "192.168.0.9:8080"
+#define LOCAL_IP "localhost:8080"
 
 int edit_file(char *file_path, char *key, char *value){
     char env_line[1000];
