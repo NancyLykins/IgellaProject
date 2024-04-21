@@ -42,12 +42,12 @@ int edit_file(char *file_path, char *key, char *value){
 }
 
 int conf_igella(){
-    char line[1000];   
+    char line[1000];
     char *api_env_path = NULL;
     char *web_env_path = NULL;
     char *bot_env_path = NULL;
-    
-    FILE *config_file;    
+
+    FILE *config_file;
     config_file = fopen(CONF_FILE, "r");
 
     if(config_file == NULL){
@@ -61,8 +61,6 @@ int conf_igella(){
             char *value = strtok(NULL, " = ");
             char *nl = strchr(value, '\n');
             if(nl != NULL) *nl = '\0';
-            free(nl);
-
             if(strcmp(key, "api_env_path") == 0){
                 api_env_path = (char *) realloc(api_env_path, strlen(value) + 1);
                 strcpy(api_env_path, value);
@@ -72,8 +70,8 @@ int conf_igella(){
             } else if(strcmp(key, "web_env_path") == 0){
                 web_env_path = (char *) realloc(web_env_path, strlen(value) + 1);
                 strcpy(web_env_path, value);
-            } 
-            
+            }
+
             if(strcmp(key, "API_URL") == 0){
                 edit_file(api_env_path, key, value);
                 edit_file(bot_env_path, key, value);
@@ -84,15 +82,10 @@ int conf_igella(){
             } else if(strcmp(key, "BOT_TOKEN") == 0){
                 edit_file(bot_env_path, key, value);
             }
-            free(key);
-            free(value);
         }
     }
     printf("\n");
     fclose(config_file);
-    free(api_env_path);
-    free(web_env_path);
-    free(bot_env_path);
     return 0;
 }
 
@@ -110,15 +103,14 @@ int main(int argc, char *args[]){
         char *parm = args[i];
         if(strcmp(parm, "api") == 0){
             system("(cd api && npm run dev)");
-        
         } else if(strcmp(parm, "bot") == 0){
             system("(cd bot && python client.py)");
-        
+
         } else if(strcmp(parm, "web") == 0){
             char *start_web_command = (char *) malloc(sizeof(char) * 50);
             sprintf(start_web_command, "(cd web && php -S %s)", LOCAL_IP);
             system(start_web_command);
-            
+
         } else if(strcmp(parm, "init") == 0){
             printf("Confign all");
             system("(cd api && npm install)");
@@ -126,7 +118,7 @@ int main(int argc, char *args[]){
             do{
                 printf("Your OS is based in debian? (y|yes / n|no)");
                 scanf("%s", option);
-                if(option[0] == 'y'){                   
+                if(option[0] == 'y'){
                     printf("\n\nUncomment ;extension=curl to it works correctly"); 
                     system("sudo apt install php-curl");
                     return 0;
@@ -135,12 +127,10 @@ int main(int argc, char *args[]){
                     return 400;
                 }
             } while(option[0] != 'y');
-
-        
         } else if(strcmp(parm, "conf") == 0){
             conf_igella();
         } else{
-            printf("The parmn %s is not valid", parm);
+            printf("The parmn %s is not valid\n", parm);
         }
     }
     return 0;
