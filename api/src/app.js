@@ -6,10 +6,10 @@ const { storage } = require('./multer')
 const app = express()
 const upload = multer({storage: storage})
 require("dotenv").config()
-
+let web_link = (process.env.WEB_URL.split(":")[1] == 80)? process.env.WEB_URL.split(":")[0]: process.env.WEB_URL
 app.use(
     cors({
-        origin: process.env.WEB_URL,
+        origin: `http://${web_link}`,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true,
     })

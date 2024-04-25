@@ -1,5 +1,5 @@
 const links = {
-    "server": "http://179.233.198.44:8080",
-    "api": "http://179.233.198.44:5050"
+    "server": "http://192.168.0.13:80",
+    "api": "http://192.168.0.13:5050"
 }
 export default links
