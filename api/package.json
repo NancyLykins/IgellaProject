@@ -11,14 +11,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.12.7",
     "cors": "^2.8.5",
     "dotenv": "^16.3.2",
     "express": "^4.18.2",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.2",
     "multer": "^1.4.5-lts.1",
-    "sqlite3": "^5.1.7"
+    "pg": "^8.11.5",
+    "sequelizer": "^1.1.4",
+    "sqlite3": "^5.1.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "eslint": "^8.56.0",
     "nodemon": "^3.0.3"
   },
   "description": ""
