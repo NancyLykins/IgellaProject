@@ -30,6 +30,8 @@ create table maps(
 
 create table elements(
     id serial primary key,
+    name varchar(45) not null,
+    description text,
     img varchar(255) not null,
     public bool default false,
     creator int not null references accounts(id)
