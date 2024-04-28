@@ -1,11 +1,14 @@
-const express = require('express')
-const cors = require("cors")
-const multer = require("multer")
-const router = require("./router")
-const { storage } = require('./multer')
+import express from 'express'
+import cors from "cors"
+import multer from "multer"
+//import router from "./router.js"
+//import storage from "./multer.js"
+import Router from "./routers/index.js"
+import 'dotenv/config'
+
 const app = express()
-const upload = multer({storage: storage})
-require("dotenv").config()
+//const upload = multer({storage: storage})
+
 let web_link = (process.env.WEB_URL.split(":")[1] == 80)? process.env.WEB_URL.split(":")[0]: process.env.WEB_URL
 app.use(
     cors({
@@ -16,5 +19,7 @@ app.use(
 )
 app.use(express.static("public"))
 app.use(express.json())
-app.use(router)
-module.exports = app
+Router(app)
+//app.use(router)
+
+export default app

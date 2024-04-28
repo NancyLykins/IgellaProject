@@ -11,4 +11,5 @@ const storage = multer.diskStorage({
         callback(null, `${time}_${file.originalname}`);
     },
 });
-module.exports = storage
+
+export default storage
