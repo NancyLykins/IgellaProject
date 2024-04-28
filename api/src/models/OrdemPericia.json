@@ -1,0 +1,13 @@
+{
+    "nome": "string",
+    "atributoBase": "string",
+    "descrição": "text",
+    "treinamento": {
+        "grau": "string",
+        "bonus": "int"
+    },
+    "requisitos": {
+        "carga": "bool",
+        "kit": "bool"
+    }
+}

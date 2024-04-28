@@ -1,0 +1,11 @@
+{
+    "nome": "string",
+    "descrição": "text",
+    "requerimento": [
+        {
+            "nex": "int",
+            "nome": "string",
+            "descrição": "text"
+        }
+    ]
+}
