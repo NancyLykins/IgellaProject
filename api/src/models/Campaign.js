@@ -42,3 +42,5 @@ Campaign.belongsTo(Account, {
         allowNull: false,
     },
 });
+
+export default Campaign
