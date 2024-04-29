@@ -57,3 +57,6 @@ create table characters(
     campaigns_id int not null references campaigns(id),
     owner_id int not null references accounts(id)
 );
+
+
+insert into accounts(name, email, password) values('admin', 'admin@admin.com', 'admin');

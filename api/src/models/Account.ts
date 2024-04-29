@@ -1,46 +1,53 @@
+import { DataTypes, Model, Optional } from 'sequelize'
 import { sequelize } from "../config/index";
 
-import {
-    Table,
-    Column,
-    Model,
-    DataType,
-} from "sequelize-typescript";
-
-@Table({
-    timestamps: false,
-    tableName: "accounts",
-    modelName: "Account"
-})
-class Account extends Model {
-    @Column({
-        primaryKey: true,
-        type: DataType.INTEGER,
-        autoIncrement: true,
-    }) declare id: number;
-
-    @Column({
-        type: DataType.STRING(45),
-        allowNull: false,
-        unique: true
-    }) declare name: string;
-
-    @Column({
-        type: DataType.STRING(255),
-        allowNull: false,
-        unique: true
-    }) declare email: string;
-        
-    @Column({
-        type: DataType.STRING(255),
-        allowNull: false
-    }) declare password: string;
-
-    @Column({
-        type: DataType.STRING(255)
-    }) declare id_discord: string;
+interface AccountModel{
+  id: number;
+  name: string;
+  email: string;
+  password: string;
+  id_discord: string;
 }
 
-sequelize.addModels([Account])
+export interface AccountInput extends Optional<AccountModel, "id"> {}
+export interface AccountOutput extends Required<AccountModel> {} 
 
-export default Account;
+class Account extends Model<AccountModel, AccountInput> implements AccountModel {
+  public id!: number;
+  public name!: string;
+  public email!: string;
+  public password!: string;
+  public id_discord!: string;
+}
+
+Account.init({
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true  
+  },
+  name: {
+    type: new DataTypes.STRING(128),
+    allowNull: false
+  },
+  email: {
+    type: new DataTypes.STRING(128),
+    allowNull: false
+  },
+  password: {
+    type: new DataTypes.STRING(128),
+    allowNull: false
+  },
+  id_discord: {
+    type: new DataTypes.STRING(128),
+    allowNull: false
+  }
+},
+{
+  sequelize,
+  tableName: "accounts",
+  timestamps: false,
+  freezeTableName: true
+})
+
+export default Account

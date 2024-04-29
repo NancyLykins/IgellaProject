@@ -1,6 +1,6 @@
 import { sequelize } from "../config/index.js";
 import pkg from 'sequelize';
-import Account from "./Account.js";
+import Account from "./Accounts.exemple/index.js";
 const { DataTypes } = pkg;
 
 const Element = sequelize.define(
