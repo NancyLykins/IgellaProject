@@ -1,43 +1,34 @@
-// import express from 'express'
-// import cors from 'cors'
 // import multer from 'multer'
 // import router from "./router.js"
 // import storage from "./multer.js"
-// import Router from "./routers/index.js"
-// import 'dotenv/config'
-
-// const app = express()
 // const upload = multer({storage: storage})
-
-// let web_link = (process.env.WEB_URL.split(":")[1] == 80)? process.env.WEB_URL.split(":")[0]: process.env.WEB_URL
-// app.use(
-//     cors({
-//         origin: `http://${web_link}`,
-//         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//         credentials: true,
-//     })
-// )
-// app.use(express.static("public"))
-// app.use(express.json())
-// Router(app)
-// app.use(router)
-
-// export default app
-
 import express from "express";
+import cors from "cors";
 import Router from "./routers";
 
 export class App{
     public server: express.Application;
     
-    constructor(){
+    constructor(allowed: string){
         this.server = express();
         this.middleware();
-        this.router()
+        this.setCors(allowed);
+        this.router();
     }
 
     private middleware(){
         this.server.use(express.json());
+        this.server.use(express.static("public"));
+    }
+
+    private setCors(allowed: string){
+        this.server.use(
+            cors({
+                origin: `http://${allowed}`,
+                methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+                credentials: true,
+            })
+        )
     }
 
     public router(){

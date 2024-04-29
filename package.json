@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/sequelize": "^4.28.20",
+    "sequelize-typescript": "^2.1.6"
+  }
+}
