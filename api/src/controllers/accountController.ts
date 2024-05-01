@@ -1,7 +1,5 @@
 import {Request, Response} from "express"
 import Account from "../models/Account"
-import { error } from "console";
-import { ValidationError } from "sequelize";
 
 async function get(req: Request, res: Response){
     try {
