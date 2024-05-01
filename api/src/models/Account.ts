@@ -6,7 +6,7 @@ class Account extends Model<AccountModel, AccountInput> implements AccountModel 
   public name!: string;
   public email!: string;
   public password!: string;
-  public id_discord!: string;
+  public discord_id!: string | null;
 }
 
 Account.init({
@@ -27,9 +27,8 @@ Account.init({
     type: new DataTypes.STRING(128),
     allowNull: false
   },
-  id_discord: {
+  discord_id: {
     type: new DataTypes.STRING(128),
-    allowNull: false
   }
 },
 {

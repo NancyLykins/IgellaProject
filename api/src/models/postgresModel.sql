@@ -1,11 +1,19 @@
 create database igella;
 
+drop table characters;
+drop table map_elements;
+drop table elements;
+drop table maps;
+drop table campaigns;
+drop table accounts;
+
+
 create table accounts(
     id serial primary key,
     name varchar(45) not null unique,
     email varchar(255) not null unique,
     password varchar(255) not null,
-    id_discord varchar(255)
+    discord_id varchar(255)
 );
 
 
