@@ -8,7 +8,7 @@ class Campaign extends Model<CampaignModel, CampaignInput> implements CampaignMo
     public title!: string;
     public description!: string;
     public sistem!: string;
-    public started!: DataView;
+    public started!: DataView | Date;
     public master!: number;
 }
 
@@ -32,7 +32,6 @@ Campaign.init(
         },
         started: {
             type: DataTypes.DATE,
-            allowNull: false
         },
         master: {
             type: DataTypes.INTEGER,

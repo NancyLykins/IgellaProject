@@ -1,26 +1,27 @@
+import moment from "moment"
 import {Request, Response} from "express"
-import Account from "../models/Account"
+import Campaign from "../models/Campaign"
 
 async function get(req: Request, res: Response){
     try {
         let data: any;
         if(req.params.id == undefined){
-            data = await Account.findAll()
+            data = await Campaign.findAll()
         } else {
-            data = await Account.findOne({ where: {id: req.params.id}})
+            data = await Campaign.findOne({ where: {id: req.params.id}})
         }
         if(data === null){
             return res.status(404).send(
                 {
                     type: "not found",
-                    message: `The user with the id '${req.params.id}' was not found`
+                    message: `The campaign with the id '${req.params.id}' was not found`
                 }
             )
         }
         return res.status(200).send(
             { 
                 type: "success",
-                message: "User found",
+                message: "Campaign found",
                 data 
             }
         )
@@ -36,14 +37,14 @@ async function get(req: Request, res: Response){
 
 async function post(req: Request, res: Response){
     try {
-        const accountNotNull: string[] = ["name", "email", "password"]
+        const CampaignNotNull: string[] = ["title", "sistem", "master"]
         const body: any = req.body
         let missedParameters: string[] = []
-        for(let i = 0; i <= accountNotNull.length; i++){
-            if(!accountNotNull.includes(Object.keys(body)[i]) && i < accountNotNull.length){
+        for(let i = 0; i <= CampaignNotNull.length; i++){
+            if(!CampaignNotNull.includes(Object.keys(body)[i]) && i < CampaignNotNull.length){
                 missedParameters.push(Object.keys(body)[i])
             }
-            if(accountNotNull.length == i && missedParameters.length > 0){
+            if(CampaignNotNull.length == i && missedParameters.length > 0){
                 return res.status(400).send(
                     {
                         error: "Bad Request",
@@ -53,17 +54,19 @@ async function post(req: Request, res: Response){
                 )
             }
         }
-        const account = await Account.create({
-            name: body.name,
-            email: body.email,
-            password: body.password,
-            discord_id: body?.discord_id 
+        console.log(missedParameters)
+        const campaign = await Campaign.create({
+            title: body.title,
+            description: body?.description,
+            sistem: body.sistem,
+            started: moment().toDate(),
+            master: body.master
         })
         return res.status(201).send(
             {
                 type: "created",
-                message: "Account created",
-                account
+                message: "Campaign created",
+                campaign
             }
         )
     } catch (error: any) {
@@ -82,12 +85,12 @@ async function post(req: Request, res: Response){
 
 async function destroy(req: Request, res: Response){
     try {
-        const accountId = req.params.id
-        await Account.destroy({ where: {"id": accountId}})
+        const campaignId = req.params.id
+        await Campaign.destroy({ where: {"id": campaignId}})
         return res.status(200).send(
             {
                 type: "ok",
-                message: `The account with the id ${req.params.id} was successfully deleted`,              
+                message: `The campaign with the id ${req.params.id} was successfully deleted`,              
             }
         )
     } catch (error: any) {
@@ -100,7 +103,7 @@ async function destroy(req: Request, res: Response){
 
 async function update(req: Request, res: Response){
     try {
-        const accountColumns: string[] = ["id", "name", "email", "password", "discord_id"]
+        const campaignColumns: string[] = ["id", "title", "description", "sistem", "started","master"]
         const data: Object = req.body
         if(Object.keys(data).length <= 0){
             return res.status(400).send(
@@ -111,7 +114,7 @@ async function update(req: Request, res: Response){
             )
         }
         for(let key of Object.keys(data)){
-            if(!accountColumns.includes(key)){
+            if(!campaignColumns.includes(key)){
                 return res.status(400).send(
                     {
                         error: "Bad Request",
@@ -120,7 +123,7 @@ async function update(req: Request, res: Response){
                 )
             }
         }
-        const rowsUpdated = await Account.update(
+        const rowsUpdated = await Campaign.update(
             data,
             {
                 where: {
@@ -132,14 +135,14 @@ async function update(req: Request, res: Response){
             return res.status(404).send(
                 {
                     type: "not funded",
-                    message: `the account with the id ${req.params.id} canno't be founded`
+                    message: `the campaign with the id ${req.params.id} canno't be founded`
                 }
             )
         }
         return res.status(200).send(
             {
                 type: "ok",
-                message: `The account with the id ${req.params.id} was successfully updated`,
+                message: `The campaign with the id ${req.params.id} was successfully updated`,
             }
         )
     } catch (error: any) {

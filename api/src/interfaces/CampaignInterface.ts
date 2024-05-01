@@ -5,7 +5,7 @@ export interface CampaignModel{
     title: string,
     description: string,
     sistem: string,
-    started: DataView,
+    started: DataView | Date,
     master: number
 }
 

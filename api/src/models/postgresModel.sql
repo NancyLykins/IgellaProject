@@ -22,7 +22,7 @@ create table campaigns(
     title varchar(45) not null,
     description text,
     sistem varchar(45) not null,
-    started date not null,
+    started date default Now(),
     master int not null references accounts(id)
 );
 
