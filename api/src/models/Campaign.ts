@@ -1,10 +1,18 @@
-import { sequelize } from "../config/index.js";
-import pkg from 'sequelize';
-import Account from "./Accounts.exemple/index.js";
-const { DataTypes } = pkg;
+import { DataTypes, Model } from 'sequelize'
+import { sequelize } from "../config/index";
+import { CampaignInput, CampaignModel } from '../interfaces/CampaignInterface';
+import Account from './Account';
 
-const Campaign = sequelize.define(
-    "campaigns",
+class Campaign extends Model<CampaignModel, CampaignInput> implements CampaignModel {
+    public id!: number;
+    public title!: string;
+    public description!: string;
+    public sistem!: string;
+    public started!: DataView;
+    public master!: number;
+}
+
+Campaign.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -25,9 +33,15 @@ const Campaign = sequelize.define(
         started: {
             type: DataTypes.DATE,
             allowNull: false
+        },
+        master: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
+        sequelize,
+        tableName: "campaigns",
         freezeTableName: true,
         timestamps: false
     }

@@ -1,11 +1,17 @@
-import { sequelize } from "../config/index.js"
-import pkg from 'sequelize'
-import Campaign from "./Campaign.js"
-const { DataTypes } = pkg
+import { sequelize } from "../config/index"
+import { DataTypes, Model } from 'sequelize'
+import { MapInput, MapModel } from "../interfaces/MapInterface.js"
+import Campaign from "./Campaign.js";
 
+class Map extends Model<MapModel, MapInput> implements MapModel{
+    public id!: number;
+    public name!: string;
+    public description!: string;
+    public cover!: string;
+    public campaignId!: number;
+}
 
-const Map = sequelize.define(
-    "maps",
+Map.init(
     {
         id: {
             type: DataTypes.INTEGER ,
@@ -21,16 +27,22 @@ const Map = sequelize.define(
         },
         cover: {
             type: DataTypes.STRING(255)
+        },
+        campaignId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
+        sequelize,
+        tableName: "maps",
         freezeTableName: true,
         timestamps: false
     }
 )
 
 Map.belongsTo(Campaign, {
-    as: Campaign,
+    as: "Campaign",
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
     foreignKey: {

@@ -1,10 +1,18 @@
-import { sequelize } from "../config/index.js";
-import pkg from 'sequelize';
-import Account from "./Accounts.exemple/index.js";
-const { DataTypes } = pkg;
+import { sequelize } from "../config/index";
+import { DataTypes, Model } from 'sequelize'
+import { ElementInput, ElementModel } from "../interfaces/ElementInterface.js";
+import Account from "./Account.js";
 
-const Element = sequelize.define(
-    "elements",
+class Element extends Model<ElementModel, ElementInput> implements ElementModel{
+    public id!: number;
+    public name!: string;
+    public description!: string;
+    public img!: string;
+    public public!: boolean;
+    public creator!: number;
+}
+
+Element.init(
     {
         id: {
             type: DataTypes.INTEGER ,
@@ -25,9 +33,15 @@ const Element = sequelize.define(
         public: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
+        },
+        creator: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
+        sequelize,
+        tableName: "elements",
         freezeTableName: true,
         timestamps: false
     }

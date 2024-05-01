@@ -1,24 +1,39 @@
-import { sequelize } from "../config/index.js";
-import pkg from 'sequelize';
-import Campaign from "./Campaign.js"
-import Account from "./Accounts.exemple/index.js";
-const { DataTypes } = pkg;
+import { DataTypes, Model } from 'sequelize'
+import { sequelize } from "../config/index";
+import { CharacterModel, CharacterInput} from "../interfaces/CharacterInterface"
+import Account from './Account';
+import Campaign from './Campaign';
 
-const Character = sequelize.define(
-    "characters", 
+class Character extends Model<CharacterModel, CharacterInput> implements CharacterModel{
+    public id!: number;
+    public sheetId!: string;
+    public campaignId!: number;
+    public owner!: number;
+}
+Character.init(
     {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        sheet_id: {
+        sheetId: {
             type: DataTypes.STRING(255),
             allowNull: false,
             unique: true
+        },
+        campaignId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+        owner: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     },
     {
+        sequelize,
+        tableName: "characters",
         freezeTableName: true,
         timestamps: false
     }
