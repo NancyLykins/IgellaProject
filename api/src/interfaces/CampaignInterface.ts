@@ -6,6 +6,7 @@ export interface CampaignModel{
     description: string,
     sistem: string,
     started: DataView | Date,
+    server_id: string | null,
     master: number
 }
 
