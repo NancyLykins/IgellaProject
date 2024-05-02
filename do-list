@@ -8,8 +8,6 @@ campanhas
 criaturas
 npcs
 
-#mapElementsControllers.ts
 
 #create mongoose constrollers/models/routers
-
 #charactersControllers.ts
