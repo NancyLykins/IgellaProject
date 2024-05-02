@@ -3,8 +3,8 @@ export interface MapModel{
     id: number,
     name: string,
     description: string,
-    cover: string,
-    campaignId: number,
+    cover: string | undefined,
+    campaign_id: number,
 }
 
 export interface MapInput extends Optional<MapModel, "id"> {}
