@@ -52,10 +52,10 @@ create table map_elements(
     positionY int not null,
     width int not null,
     heigth int not null,
-    z_index int not null,
+    z_index int default 0,
     rotate int default 0,
     element_id int not null references elements(id),
-    map_id int null references maps(id)
+    map_id int not null references maps(id)
 );
 
 
