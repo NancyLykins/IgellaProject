@@ -1,5 +1,5 @@
-import moment from "moment"
-import {Request, Response} from "express"
+import fs from "fs"
+import {Request, Response, response} from "express"
 import Element from "../models/Element";
 
 async function get(req: Request, res: Response){
@@ -37,28 +37,24 @@ async function get(req: Request, res: Response){
 
 async function post(req: Request, res: Response){
     try {
-        const ElementNotNull: string[] = ["name", "img", "creator"]
         const body: any = req.body
         let missedParameters: string[] = []
-        for(let i = 0; i <= ElementNotNull.length; i++){
-            if(!ElementNotNull.includes(Object.keys(body)[i]) && i < ElementNotNull.length){
-                missedParameters.push(Object.keys(body)[i])
-            }
-            if(ElementNotNull.length == i && missedParameters.length > 0){
-                return res.status(400).send(
-                    {
-                        error: "Bad Request",
-                        message: "One or more required parameters wasn't passed",
-                        missed: missedParameters
-                    }        
-                )
-            }
+        if(body.name === undefined) missedParameters.push("name")
+        if(body.creator === undefined) missedParameters.push("creator")
+        if(req.file?.filename === undefined) missedParameters.push("img")
+        if(missedParameters.length > 0){
+            return res.status(400).send(
+                {
+                    error: "Bad Request",
+                    message: "One or more required parameters wasn't passed",
+                    missed: missedParameters
+                }        
+            )
         }
-        console.log(missedParameters)
         const element = await Element.create({
             name: body.name,
             description: body?.description,
-            img: body.img,
+            img: req.file?.filename,
             public: body?.public,
             creator: body.creator
         })
@@ -86,6 +82,11 @@ async function post(req: Request, res: Response){
 async function destroy(req: Request, res: Response){
     try {
         const elementId = req.params.id
+        let imgName: any = await Element.findOne({where: {id: elementId}})
+        imgName = imgName?.img
+        fs.unlink(`public/${imgName}` , (err: any)=>{
+            console.log(err)
+        })
         await Element.destroy({ where: {"id": elementId}})
         return res.status(200).send(
             {
@@ -104,12 +105,12 @@ async function destroy(req: Request, res: Response){
 async function update(req: Request, res: Response){
     try {
         const elementColumns: string[] = ["id", "name", "description", "img", "public", "creator"]
-        const data: Object = req.body
-        if(Object.keys(data).length <= 0){
+        let data: Object = req.body
+        if(Object.keys(data).length <= 0 && req.file?.filename === undefined){
             return res.status(400).send(
                 {
                     error: "Bad Request",
-                    message: "Need to pass at leas one parameter to update"
+                    message: "Need to pass at least one parameter to update"
                 }     
             )
         }
@@ -121,6 +122,17 @@ async function update(req: Request, res: Response){
                         message: "One or more parameters passed is incorrected",
                     }        
                 )
+            }
+        }
+        if(req.file?.filename !== undefined){
+            let imgName: any = await Element.findOne({where: {id: req.params.id}})
+            imgName = imgName?.img
+            fs.unlink(`public/${imgName}` , (err: any)=>{
+                console.log(err)
+            })
+            data = {
+                ...data,
+                img: req.file?.filename
             }
         }
         const rowsUpdated = await Element.update(

@@ -6,7 +6,7 @@ export default {
         destination: path.resolve(__dirname, "..", "..", "public"),
         filename(req, file, callback){
             const time = new Date().getTime();
-            callback(null, `${file.originalname}_${time}`);
+            callback(null, `${time}_${file.originalname}`);
         },
     })
 }

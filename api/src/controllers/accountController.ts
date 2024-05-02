@@ -1,5 +1,6 @@
 import {Request, Response} from "express"
 import Account from "../models/Account"
+import { EmptyStatement } from "typescript";
 
 async function get(req: Request, res: Response){
     try {
@@ -36,23 +37,21 @@ async function get(req: Request, res: Response){
 
 async function post(req: Request, res: Response){
     try {
-        const accountNotNull: string[] = ["name", "email", "password"]
         const body: any = req.body
         let missedParameters: string[] = []
-        for(let i = 0; i <= accountNotNull.length; i++){
-            if(!accountNotNull.includes(Object.keys(body)[i]) && i < accountNotNull.length){
-                missedParameters.push(Object.keys(body)[i])
-            }
-            if(accountNotNull.length == i && missedParameters.length > 0){
-                return res.status(400).send(
-                    {
-                        error: "Bad Request",
-                        message: "One or more required parameters wasn't passed",
-                        missed: missedParameters
-                    }        
-                )
-            }
+        if(body.name === undefined) missedParameters.push("name")
+        if(body.email === undefined) missedParameters.push("email")
+        if(body.password == undefined) missedParameters.push("password")
+        if(missedParameters.length > 0){
+            return res.status(400).send(
+                {
+                    error: "Bad Request",
+                    message: "One or more required parameters wasn't passed",
+                    missed: missedParameters
+                }        
+            )
         }
+
         const account = await Account.create({
             name: body.name,
             email: body.email,

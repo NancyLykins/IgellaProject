@@ -1,13 +1,13 @@
 import { sequelize } from "../config/index";
 import { DataTypes, Model } from 'sequelize'
-import { ElementInput, ElementModel } from "../interfaces/ElementInterface.js";
-import Account from "./Account.js";
+import { ElementInput, ElementModel } from "../interfaces/ElementInterface";
+import Account from "./Account";
 
 class Element extends Model<ElementModel, ElementInput> implements ElementModel{
     public id!: number;
     public name!: string;
     public description!: string;
-    public img!: string;
+    public img!: string | undefined;
     public public!: boolean;
     public creator!: number;
 }

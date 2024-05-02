@@ -37,22 +37,19 @@ async function get(req: Request, res: Response){
 
 async function post(req: Request, res: Response){
     try {
-        const CampaignNotNull: string[] = ["title", "sistem", "master"]
         const body: any = req.body
         let missedParameters: string[] = []
-        for(let i = 0; i <= CampaignNotNull.length; i++){
-            if(!CampaignNotNull.includes(Object.keys(body)[i]) && i < CampaignNotNull.length){
-                missedParameters.push(Object.keys(body)[i])
-            }
-            if(CampaignNotNull.length == i && missedParameters.length > 0){
-                return res.status(400).send(
-                    {
-                        error: "Bad Request",
-                        message: "One or more required parameters wasn't passed",
-                        missed: missedParameters
-                    }        
-                )
-            }
+        if(body.title === undefined) missedParameters.push("title")
+        if(body.sistem === undefined) missedParameters.push("sistem")
+        if(body.master == undefined) missedParameters.push("master")
+        if(missedParameters.length > 0){
+            return res.status(400).send(
+                {
+                    error: "Bad Request",
+                    message: "One or more required parameters wasn't passed",
+                    missed: missedParameters
+                }        
+            )
         }
         const campaign = await Campaign.create({
             title: body.title,

@@ -3,7 +3,7 @@ export interface ElementModel{
     id: number,
     name: string,
     description: string,
-    img: string,
+    img: string | undefined,
     public: boolean,
     creator: number,
 }
