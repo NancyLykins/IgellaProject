@@ -12,7 +12,7 @@ create table accounts(
     id serial primary key,
     name varchar(45) not null unique,
     email varchar(255) not null unique,
-    password varchar(255) not null,
+    password text not null,
     discord_id varchar(255)
 );
 
@@ -23,6 +23,7 @@ create table campaigns(
     description text,
     sistem varchar(45) not null,
     started date default Now(),
+    server_id varchar(255),
     master int not null references accounts(id)
 );
 
