@@ -41,7 +41,6 @@ MapElement.init(
         },
         z_index: {
             type: DataTypes.INTEGER,
-            allowNull: false
         },
         rotate: {
             type: DataTypes.INTEGER,
