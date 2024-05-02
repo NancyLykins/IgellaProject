@@ -56,6 +56,7 @@ async function post(req: Request, res: Response){
             description: body?.description,
             sistem: body.sistem,
             started: moment().toDate(),
+            server_id: body?.server_id,
             master: body.master
         })
         return res.status(201).send(
@@ -99,7 +100,7 @@ async function destroy(req: Request, res: Response){
 
 async function update(req: Request, res: Response){
     try {
-        const campaignColumns: string[] = ["id", "title", "description", "sistem", "started","master"]
+        const campaignColumns: string[] = ["id", "title", "description", "sistem", "started", "server_id", "master"]
         const data: Object = req.body
         if(Object.keys(data).length <= 0){
             return res.status(400).send(
