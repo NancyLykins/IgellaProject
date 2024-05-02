@@ -7,8 +7,8 @@ export interface MapElementModel{
     heigth: number,
     z_index: number,
     rotate: number,
-    elementId: number,
-    mapId: number
+    element_id: number,
+    map_id: number
 }
 
 export interface MapElementInput extends Optional<MapElementModel, "id"> {}

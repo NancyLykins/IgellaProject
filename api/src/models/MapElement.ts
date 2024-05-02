@@ -12,8 +12,8 @@ class MapElement extends Model<MapElementModel, MapElementInput> implements MapE
     public heigth!: number;
     public z_index!: number;
     public rotate!: number;
-    public elementId!: number;
-    public mapId!: number;
+    public element_id!: number;
+    public map_id!: number;
 }
 
 MapElement.init(
@@ -47,11 +47,11 @@ MapElement.init(
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        elementId: {
+        element_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        mapId: {
+        map_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         }
@@ -81,7 +81,7 @@ MapElement.belongsTo(Map, {
     onUpdate: "NO ACTION",
     foreignKey: {
         field: "map_id",
-        name: "mapId",
+        name: "map_id",
         allowNull: false
     }
 })
