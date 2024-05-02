@@ -54,7 +54,6 @@ async function post(req: Request, res: Response){
                 )
             }
         }
-        console.log(missedParameters)
         const campaign = await Campaign.create({
             title: body.title,
             description: body?.description,
