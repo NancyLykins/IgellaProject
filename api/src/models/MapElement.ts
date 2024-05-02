@@ -6,8 +6,8 @@ import Map from "./Map";
 
 class MapElement extends Model<MapElementModel, MapElementInput> implements MapElementModel{
     public id!: number;
-    public positionX!: number;
-    public positionY!: number;
+    public positionx!: number;
+    public positiony!: number;
     public width!: number;
     public heigth!: number;
     public z_index!: number;
@@ -23,11 +23,11 @@ MapElement.init(
             autoIncrement: true,
             primaryKey: true
         },
-        positionX: {
+        positionx: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        positionY: {
+        positiony: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -69,7 +69,7 @@ MapElement.belongsTo(Element, {
     onUpdate: "NO ACTION",
     foreignKey: {
         field: "element_id",
-        name: "elementId",
+        name: "element_id",
         allowNull: false
     }
 })

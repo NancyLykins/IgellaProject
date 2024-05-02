@@ -14,7 +14,7 @@ async function get(req: Request, res: Response){
             return res.status(404).send(
                 {
                     type: "not found",
-                    message: `The element with the id '${req.params.id}' was not found`
+                    message: `The map with the id '${req.params.id}' was not found`
                 }
             )
         }
@@ -51,7 +51,7 @@ async function post(req: Request, res: Response){
                 }        
             )
         }
-        const element = await Map.create({
+        const map = await Map.create({
             name: body.name,
             description: body?.description,
             cover: req.file?.filename,
@@ -61,7 +61,7 @@ async function post(req: Request, res: Response){
             {
                 type: "created",
                 message: "Map created",
-                element
+                map
             }
         )
     } catch (error: any) {
@@ -80,17 +80,17 @@ async function post(req: Request, res: Response){
 
 async function destroy(req: Request, res: Response){
     try {
-        const elementId = req.params.id
-        let imgName: any = await Map.findOne({where: {id: elementId}})
+        const mapId = req.params.id
+        let imgName: any = await Map.findOne({where: {id: mapId}})
         imgName = imgName?.cover
         fs.unlink(`public/${imgName}` , (err: any)=>{
             console.log(err)
         })
-        await Map.destroy({ where: {"id": elementId}})
+        await Map.destroy({ where: {"id": mapId}})
         return res.status(200).send(
             {
                 type: "ok",
-                message: `The element with the id ${req.params.id} was successfully deleted`,              
+                message: `The map with the id ${req.params.id} was successfully deleted`,              
             }
         )
     } catch (error: any) {
@@ -103,7 +103,7 @@ async function destroy(req: Request, res: Response){
 
 async function update(req: Request, res: Response){
     try {
-        const elementColumns: string[] = ["id", "name", "description", "cover", "campaign_id"]
+        const mapColumns: string[] = ["id", "name", "description", "cover", "campaign_id"]
         let data: Object = req.body
         if(Object.keys(data).length <= 0 && req.file?.filename === undefined){
             return res.status(400).send(
@@ -114,7 +114,7 @@ async function update(req: Request, res: Response){
             )
         }
         for(let key of Object.keys(data)){
-            if(!elementColumns.includes(key)){
+            if(!mapColumns.includes(key)){
                 return res.status(400).send(
                     {
                         error: "Bad Request",
@@ -146,14 +146,14 @@ async function update(req: Request, res: Response){
             return res.status(404).send(
                 {
                     type: "not funded",
-                    message: `the element with the id ${req.params.id} canno't be founded`
+                    message: `the map with the id ${req.params.id} canno't be founded`
                 }
             )
         }
         return res.status(200).send(
             {
                 type: "ok",
-                message: `The element with the id ${req.params.id} was successfully updated`,
+                message: `The map with the id ${req.params.id} was successfully updated`,
             }
         )
     } catch (error: any) {

@@ -1,8 +1,8 @@
 import { Optional } from "sequelize";
 export interface MapElementModel{
     id: number,
-    positionX: number,
-    positionY: number,
+    positionx: number,
+    positiony: number,
     width: number,
     heigth: number,
     z_index: number,

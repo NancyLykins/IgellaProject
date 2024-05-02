@@ -58,8 +58,8 @@ async function post(req: Request, res: Response){
         }
 
         const mapElement = await MapElement.create({
-            positionX: body.positionX,
-            positionY: body.positionY,
+            positionx: body.positionX,
+            positiony: body.positionY,
             width: body.width,
             heigth: body.heigth,
             z_index: body.z_index,
