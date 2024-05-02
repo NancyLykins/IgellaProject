@@ -1,7 +1,3 @@
-// import multer from 'multer'
-// import router from "./router.js"
-// import storage from "./multer.js"
-// const upload = multer({storage: storage})
 import express from "express";
 import cors from "cors";
 import Router from "./routers";
