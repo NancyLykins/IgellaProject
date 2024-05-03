@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 const { Schema } = mongoose
 
 export const OrdemSheetSchema = new Schema({
+    sistem: String,
     nome: String,
     origem: String,
     patente: String,
@@ -35,5 +36,5 @@ export const OrdemSheetSchema = new Schema({
     pericias: [Object] 
 })
 
-const OrdemSheetModel = mongoose.model('Ordem Sheets', OrdemSheetSchema)
+const OrdemSheetModel = mongoose.model('sheets', OrdemSheetSchema)
 export default OrdemSheetModel

@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import Router from "./routers";
+import { connectMongo } from "./config";
 
 export class App{
     public server: express.Application;
@@ -15,6 +16,7 @@ export class App{
     private middleware(){
         this.server.use(express.json());
         this.server.use(express.static("public"));
+        connectMongo()
     }
 
     private setCors(allowed: string){

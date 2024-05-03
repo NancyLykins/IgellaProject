@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 const { Schema } = mongoose
 
 export const OrdemTrackAbilitySchema = new Schema({
+    sistem: String,
     nome: String,
     descrição: String,
     requerimento: [
@@ -13,5 +14,5 @@ export const OrdemTrackAbilitySchema = new Schema({
     ]
 })
 
-const OrdemTrackAbilityModel = mongoose.model('Ordem Track Abilitys', OrdemTrackAbilitySchema)
+const OrdemTrackAbilityModel = mongoose.model('track_abilitys', OrdemTrackAbilitySchema)
 export default OrdemTrackAbilityModel

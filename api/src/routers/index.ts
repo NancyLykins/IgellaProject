@@ -4,6 +4,7 @@ import { campaignRouter } from "./campaignRouter";
 import { elementRouter } from "./elementRouter";
 import { mapRouter } from "./mapRouter";
 import { mapElementRouter } from "./mapElementRouter";
+import { sheetRouter } from "./sheetRouter";
 
 export default function Router(app: express.Application){
     accountRouter(app)
@@ -11,4 +12,5 @@ export default function Router(app: express.Application){
     elementRouter(app)
     mapElementRouter(app)
     mapRouter(app)
+    sheetRouter(app)
 }

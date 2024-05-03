@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 const { Schema } = mongoose
 
 export const OrdemSkillSchema = new Schema({
+    sistem: String,
     nome: String,
     atributoBase: String,
     descrição: String,
@@ -15,5 +16,5 @@ export const OrdemSkillSchema = new Schema({
     }
 })
 
-const OrdemSkillModel = mongoose.model('Ordem Skills', OrdemSkillSchema)
+const OrdemSkillModel = mongoose.model('skills', OrdemSkillSchema)
 export default OrdemSkillModel
