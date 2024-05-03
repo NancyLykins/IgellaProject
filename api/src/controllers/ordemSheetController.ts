@@ -87,7 +87,10 @@ async function post(req: Request, res: Response){
                 vigor
             }
         })
-        newSheet.save()
+        // newSheet.save()
+        const sheetId = newSheet["_id"].toString()
+
+
         return res.status(201).send({
             newSheet
         })
