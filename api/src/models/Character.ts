@@ -60,3 +60,5 @@ Character.belongsTo(Account, {
         allowNull: false
     }
 })
+
+export default Character
