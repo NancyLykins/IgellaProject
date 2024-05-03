@@ -108,7 +108,7 @@ async function destroy(req: Request, res: Response){
 
 async function update(req: Request, res: Response){
     try {
-        const mapElementColumns: string[] = ["id", "positionX", "positionY", "width", "heigth", "z_index", "rotate", "element_id", "map_id"]
+        const mapElementColumns: string[] = ["id", "positionx", "positiony", "width", "heigth", "z_index", "rotate", "element_id", "map_id"]
         const data: Object = req.body
         if(Object.keys(data).length <= 0){
             return res.status(400).send(
@@ -132,7 +132,7 @@ async function update(req: Request, res: Response){
             data,
             {
                 where: {
-                    "id": Number(req.params.id)
+                    "id": req.params.id
                 }
             }
         )

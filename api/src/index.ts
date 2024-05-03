@@ -8,5 +8,5 @@ if(Number(web_link.split(":")[1]) == 80){
 }
 
 new App(web_link).server.listen(process.env.PORT, ()=>{
-    console.log(`Servidor TS rodando na porta ${process.env.PORT}`);
+    console.log(`Server running in the port: ${process.env.PORT}`);
 })
