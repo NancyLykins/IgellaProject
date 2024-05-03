@@ -33,7 +33,9 @@ export const OrdemSheetSchema = new Schema({
             habilidades_trilha: [Object]
         }
     },
-    pericias: [Object] 
+    pericias: [Object],
+    campaign: Number,
+    owner: Number
 })
 
 const OrdemSheetModel = mongoose.model('sheets', OrdemSheetSchema)
