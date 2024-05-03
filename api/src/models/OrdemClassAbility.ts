@@ -6,6 +6,5 @@ export const OrdemClassAbilitySchema = new Schema({
     descrição: String
 })
 
-const Model = mongoose.model('Ordem Class Abilitys', OrdemClassAbilitySchema)
-const OrdemClassAbilityModel = new Model()
+const OrdemClassAbilityModel = mongoose.model('Ordem Class Abilitys', OrdemClassAbilitySchema)
 export default OrdemClassAbilityModel

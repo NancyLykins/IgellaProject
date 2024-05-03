@@ -13,6 +13,5 @@ export const OrdemTrackAbilitySchema = new Schema({
     ]
 })
 
-const Model = mongoose.model('Ordem Track Abilitys', OrdemTrackAbilitySchema)
-const OrdemTrackAbilityModel = new Model()
+const OrdemTrackAbilityModel = mongoose.model('Ordem Track Abilitys', OrdemTrackAbilitySchema)
 export default OrdemTrackAbilityModel

@@ -15,6 +15,5 @@ export const OrdemSkillSchema = new Schema({
     }
 })
 
-const Model = mongoose.model('Ordem Skills', OrdemSkillSchema)
-const OrdemSkillModel = new Model()
+const OrdemSkillModel = mongoose.model('Ordem Skills', OrdemSkillSchema)
 export default OrdemSkillModel

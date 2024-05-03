@@ -35,6 +35,5 @@ export const OrdemSheetSchema = new Schema({
     pericias: [Object] 
 })
 
-const Model = mongoose.model('Ordem Sheets', OrdemSheetSchema)
-const OrdemSheetModel = new Model()
+const OrdemSheetModel = mongoose.model('Ordem Sheets', OrdemSheetSchema)
 export default OrdemSheetModel
