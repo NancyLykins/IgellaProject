@@ -27,8 +27,8 @@
     "mongoose": "^8.3.2",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.11.5",
+    "sequelize": "^6.37.3",
     "sequelize-typescript": "^2.1.6",
-    "sequelizer": "^1.1.4",
     "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
