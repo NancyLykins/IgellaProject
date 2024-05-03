@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import OrdemSheetModel from "../models/OrdemSheetModel";
+import Character from "../models/Character";
 
 
 async function get(req: Request, res: Response){
@@ -10,6 +11,8 @@ async function post(req: Request, res: Response){
         let missedParameters: Array<String | Object> = []
         let missedAttributes: Array<String> = []
         
+        if(req.body.owner === undefined) missedParameters.push("owner")
+        if(req.body.campaign === undefined) missedParameters.push("campaign")
 
         if(req.body.name === undefined) missedParameters.push("name")
         if(req.body.origin === undefined) missedParameters.push("origin")
@@ -20,6 +23,7 @@ async function post(req: Request, res: Response){
         if(req.body.sanity === undefined) missedParameters.push("sanity")
         if(req.body.pe === undefined) missedParameters.push("pe")
         if(req.body.defense === undefined) missedParameters.push("defense")
+        
         if(req.body.attributes === undefined){
             missedParameters.push("attributes")
         } else {
@@ -90,6 +94,7 @@ async function post(req: Request, res: Response){
         // newSheet.save()
         const sheetId = newSheet["_id"].toString()
 
+        Character.
 
         return res.status(201).send({
             newSheet
