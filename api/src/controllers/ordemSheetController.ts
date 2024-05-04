@@ -1,6 +1,8 @@
 import { Request, Response } from "express"
 import OrdemSheetModel from "../models/OrdemSheetModel";
 import Character from "../models/Character";
+import Account from "../models/Account";
+import Campaign from "../models/Campaign";
 
 
 async function get(req: Request, res: Response){
@@ -63,7 +65,8 @@ async function post(req: Request, res: Response){
             inteligence,
             presence,
             vigor,
-
+            campaign,
+            owner
         } = req.body
 
         const newSheet = new OrdemSheetModel({
@@ -89,17 +92,45 @@ async function post(req: Request, res: Response){
                 inteligence,
                 presence,
                 vigor
-            }
+            },
+            campaign,
+            owner
         })
-        // newSheet.save()
         const sheetId = newSheet["_id"].toString()
+        
+        const accountCount = await Account.count(
+            {where: {"id": req.body.owner}}
+        )
+        if(accountCount < 1){
+            return res.status(400).send({
+                type: "bad request",
+                message: "the account passed is invalid"
+            })
+        }
 
-        Character.
+        const campaignCount = await Campaign.count(
+            {where: {"id": req.body.campaign}}
+        )
+        
+        if(campaignCount < 1){
+            return res.status(400).send({
+                type: "bad request",
+                message: "the campaign passed is invalid"
+            })
+        }
+
+        await Character.create({
+            sheetId,
+            campaignId: req.body.campaign,
+            ownerId: req.body.owner,
+        })
+        newSheet.save()
 
         return res.status(201).send({
             newSheet
         })
     } catch (error: any) {
+        
         return res.status(500).send({
             type: "error",
             error: error.message

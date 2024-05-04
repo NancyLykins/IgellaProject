@@ -8,7 +8,7 @@ class Character extends Model<CharacterModel, CharacterInput> implements Charact
     public id!: number;
     public sheetId!: string;
     public campaignId!: number;
-    public owner!: number;
+    public ownerId!: number;
 }
 Character.init(
     {
@@ -19,15 +19,18 @@ Character.init(
         },
         sheetId: {
             type: DataTypes.STRING(255),
+            field: "sheet_id",
             allowNull: false,
             unique: true
         },
         campaignId: {
             type: DataTypes.INTEGER,
+            field: "campaigns_id",
             allowNull: false
         },
-        owner: {
+        ownerId: {
             type: DataTypes.INTEGER,
+            field: "owner_id",
             allowNull: false
         }
     },

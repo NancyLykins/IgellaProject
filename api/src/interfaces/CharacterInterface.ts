@@ -3,7 +3,7 @@ export interface CharacterModel{
     id: number,
     sheetId: string,
     campaignId: number,
-    owner: number,
+    ownerId: number,
 }
 
 export interface CharacterInput extends Optional<CharacterModel, "id"> {}
