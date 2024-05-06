@@ -158,7 +158,6 @@ async function getSheets(req: Request, res: Response){
             where: {id: campaignId},
             attributes: ['sistem']
         })
-        console.log(system)
         const url = `http://${process.env.API_URL}/sheets/${system?.sistem}/${campaignId}`
         const data = await fetch(url)
         const response = await data.json()
