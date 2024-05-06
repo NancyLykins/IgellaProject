@@ -151,15 +151,15 @@ async function update(req: Request, res: Response){
     }
 }
 
-
 async function getSheets(req: Request, res: Response){
     try {
         const campaignId = req.params.campaignId
         const system = await Campaign.findOne({
             where: {id: campaignId},
-            attributes: ["sistem"]
+            attributes: ['sistem']
         })
-        const url = `http://${process.env.API_URL}/sheets/${system}/${campaignId}`
+        console.log(system)
+        const url = `http://${process.env.API_URL}/sheets/${system?.sistem}/${campaignId}`
         const data = await fetch(url)
         const response = await data.json()
         return res.status(200).send({response})
