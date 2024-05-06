@@ -3,9 +3,11 @@ import { sequelize } from "../config/index";
 import { CharacterModel, CharacterInput} from "../interfaces/CharacterInterface"
 import Account from './Account';
 import Campaign from './Campaign';
+import { AllowNull } from 'sequelize-typescript';
 
 class Character extends Model<CharacterModel, CharacterInput> implements CharacterModel{
     public id!: number;
+    public characterName!: string;
     public sheetId!: string;
     public campaignId!: number;
     public ownerId!: number;
@@ -16,6 +18,11 @@ Character.init(
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true
+        },
+        characterName: {
+            type: DataTypes.STRING(45),
+            field: "character_name",
+            allowNull: false
         },
         sheetId: {
             type: DataTypes.STRING(255),

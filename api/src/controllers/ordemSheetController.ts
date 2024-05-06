@@ -6,6 +6,23 @@ import Campaign from "../models/Campaign";
 
 
 async function get(req: Request, res: Response){
+    try {
+        const campaignId: string = req.params.campaignId
+        const sheet = await OrdemSheetModel.find({"campaign": campaignId})
+        if(sheet === null){
+            return res.status(400).send({
+                type: "bad request",
+                message: "the character with the given id don't exist"
+            })
+        }
+        return res.status(200).send({sheet})
+
+    } catch (error: any) {
+        return res.status(500).send({
+            type: "error",
+            error: error.message
+        })
+    }
 }
 
 async function post(req: Request, res: Response){
@@ -69,13 +86,15 @@ async function post(req: Request, res: Response){
             owner
         } = req.body
 
+        console.log(name)
+
         const newSheet = new OrdemSheetModel({
             sistem: "Ordem Paranormal",
-            name,
-            origin,
-            rank,
+            name: name,
+            origin: origin,
+            rank: rank,
             NEX: nex,
-            moviment,
+            moviment: moviment,
             hp: {
                 max: hp,
                 atual: hp
@@ -85,7 +104,7 @@ async function post(req: Request, res: Response){
                 atual: sanity
             },
             PE: pe,
-            defense,
+            defense: defense,
             attributes: {
                 agility,
                 strength,
@@ -93,8 +112,8 @@ async function post(req: Request, res: Response){
                 presence,
                 vigor
             },
-            campaign,
-            owner
+            campaign: campaign,
+            owner: owner
         })
         const sheetId = newSheet["_id"].toString()
         
@@ -121,6 +140,7 @@ async function post(req: Request, res: Response){
 
         await Character.create({
             sheetId,
+            characterName: name,
             campaignId: req.body.campaign,
             ownerId: req.body.owner,
         })
@@ -130,7 +150,6 @@ async function post(req: Request, res: Response){
             newSheet
         })
     } catch (error: any) {
-        
         return res.status(500).send({
             type: "error",
             error: error.message

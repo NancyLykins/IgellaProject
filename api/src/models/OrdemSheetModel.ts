@@ -3,37 +3,37 @@ const { Schema } = mongoose
 
 export const OrdemSheetSchema = new Schema({
     sistem: String,
-    nome: String,
-    origem: String,
-    patente: String,
+    name: String,
+    origen: String,
+    rank: String,
     NEX: Number,
-    deslocamento: Number,
+    moviment: Number,
     hp: {
         max: Number,
         atual: Number
     },
-    sanidade: {
+    sanity: {
         max: Number,
         atual: Number
     },
     PE: Number,
-    defesa: Number,
-    atributos: {
-        agilidade: Number,
-        força:Number,
-      Numberlecto: Number,
-        presença: Number,
+    defense: Number,
+    attributes: {
+        agility: Number,
+        strength: Number,
+        inteligence: Number,
+        presence: Number,
         vigor: Number
     },
     classe: {
-        nome: String,
-        habilidades_classe: [Object],
-        trilha: {
-            nome: String,
-            habilidades_trilha: [Object]
+        name: String,
+        class_ability: [Object],
+        track: {
+            name: String,
+            track_ability: [Object]
         }
     },
-    pericias: [Object],
+    skills: [Object],
     campaign: Number,
     owner: Number
 })
