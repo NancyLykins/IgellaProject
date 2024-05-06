@@ -1,8 +1,8 @@
 import { Request, Response } from "express"
-import OrdemSheetModel from "../models/OrdemSheetModel";
-import Character from "../models/Character";
-import Account from "../models/Account";
-import Campaign from "../models/Campaign";
+import OrdemSheetModel from "../../models/OrdemSheetModel";
+import Character from "../../models/Character";
+import Account from "../../models/Account";
+import Campaign from "../../models/Campaign";
 
 
 async function get(req: Request, res: Response){
